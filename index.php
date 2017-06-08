@@ -62,7 +62,7 @@
 		/*
 			deletes entries that have their boxes checked
 		*/
-		$("#delete_btn").click(fucntion() {
+		$("#delete_btn").click(function() {
 
 		});
 	});
