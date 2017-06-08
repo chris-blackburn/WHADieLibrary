@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 
 This is the Database class. It is used to create a new database object which has various functions
 	that allow it to manage an sql database through php. It is meant to make commonly used functions 
@@ -6,9 +7,7 @@ This is the Database class. It is used to create a new database object which has
 	an sql server (this script has only been tested on MySQL, for other SQL servers, you may need
 	to adjust SQL syntax).
 
--->
-
-<?php
+*/
 	class Database {
 		protected $conn;
 
@@ -26,7 +25,7 @@ This is the Database class. It is used to create a new database object which has
 			$this->db = $db;
 		}
 
-		// setEcho() and disp() are used to control output by the database object
+		// setEcho() and disp() are used to control output by the database object (pass 1 for on, 0 for off)
 		public function setEcho($bool) {
 			$this->echo_off = !$bool;
 		}

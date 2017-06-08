@@ -16,5 +16,5 @@
 	$db->insert($table, $values, $cols);
 	$db->disconnect();
 
-	header("Location: index.php");
+	//header("Location: index.php");
 ?>

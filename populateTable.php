@@ -11,7 +11,7 @@
 
 	while ($row = $result->fetch_assoc()) {
 		echo "	<tr>
-					<td><input id=\"check" . $row['id'] . "\"type=\"checkbox\"></td>
+					<td class=\"checkboxes\"><input id=\"" . $row['id'] . "\" type=\"checkbox\"></td>
 					<td>" . $row['job_num'] . "</td>
 					<td>" . $row['csr_name'] . "</td>
 					<td>" . $row['date'] . "</td>
