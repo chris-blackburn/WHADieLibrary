@@ -48,7 +48,8 @@
 		});
 
 		/*
-			Handles the form submit event, sends a post request to newEntry.php with the data in the form and refreshes the table
+			Handles the form submit event, sends a post request to newEntry.php with 
+				the data in the form and refreshes the table
 		*/
 		$("#insert_form").submit(function(event) {
 			event.preventDefault();
@@ -92,9 +93,11 @@
 </script>
 
 <body>
-	<div id="dieLibrary_div" class="dieLibrary_div">
+	<button id="table_refresh">Refresh Table</button>
+
+	<div id="table_container" class="table_container">
 		<table>
-				<caption>WHA Die Library<br><button id="table_refresh">Refresh Table</button></caption>
+				<caption>WHA Die Library</caption>
 				<thead>
 					<tr>
 						<th id="check">Select</th>
@@ -104,14 +107,14 @@
 					</tr>
 				</thead>
 				<tbody id="table_body">
-
+					<!-- This gets populated by populateTable.php -->
 				</tbody>
 		</table>
-
-		<button id="insert_btn">New Entry</button>
-		<button id="delete_btn">Delete Selected</button>
-		<button id="update_btn">Update Selected</button>
 	</div>
+
+	<button id="insert_btn">New Entry</button>
+	<button id="delete_btn">Delete Selected</button>
+	<button id="update_btn">Update Selected</button>
 
 	<div hidden class="insert_form">
 		<h3>Create New Entry</h3>
