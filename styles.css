@@ -1,0 +1,7 @@
+table {
+	width: 100%;
+}
+
+.dieLibrary_div table, th, td {
+	border: 1px solid black;
+}
