@@ -15,7 +15,8 @@
 		Create new database object, setEcho on for error messages, connect to it,
 			insert using the prepped variables, and disconnect once we have the data
 	*/
-	$db = new Database('localhost', 'monty', 'some_pass', 'testDB'); $db->setEcho(1);
+	$db = new Database('localhost', 'monty', 'some_pass', 'testDB'); 
+	$db->setEcho(1);
 	$db->connect();
 	$db->insert($table, $values, $cols);
 	$db->disconnect();

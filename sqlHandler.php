@@ -101,10 +101,12 @@ This is the Database class. It is used to create a new database object which has
 			Resulting SQL code:
 				DELETE FROM [table] WHERE [condition]
 		*/
-		public function delete($table, $where = null) {
+		public function delete($table, $where = null, $in = null) {
 			$sql = "DELETE FROM " . $table;
 			if ($where != NULL)
 				$sql .= " WHERE " . $where;
+			if ($in != NULL)
+				$sql .= " IN " . $in;
 			
 			$this->query($sql);
 		}
