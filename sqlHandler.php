@@ -59,12 +59,16 @@ This is the Database class. It is used to create a new database object which has
 			Resulting SQL code:
 				SELECT [column1, column2, ...] FROM [table] WHERE [condition] ORDER BY [column]
 		*/
-		public function select($table, $cols = '*', $where = null, $order = null) {
+		public function select($table, $cols = '*', $where = null, $order = null, $asc_desc = null) {
 			$sql = "SELECT " . $cols . " FROM " . $table;
 			if ($where != NULL) 
 				$sql .= " WHERE " . $where;
-			if ($order != NULL)
+			if ($order != NULL) {
 				$sql .= " ORDER BY " . $order;
+				if ($asc_desc == "desc")
+					$sql .= " DESC";
+			}
+
 
 			$result = $this->conn->query($sql);
 
@@ -99,7 +103,7 @@ This is the Database class. It is used to create a new database object which has
 
 		/*
 			Resulting SQL code:
-				DELETE FROM [table] WHERE [condition]
+				DELETE FROM [table] WHERE [condition] IN ([value1], [value2], ...)
 		*/
 		public function delete($table, $where = null, $in = null) {
 			$sql = "DELETE FROM " . $table;
@@ -111,7 +115,13 @@ This is the Database class. It is used to create a new database object which has
 			$this->query($sql);
 		}
 
-		public function update() {}
+		/*
+			Resulting SQL code:
+				UPDATE [table] SET [column1] = [value1], [column2] = [value2], ... WHERE [condition] IN ([value1], [value2], ...)
+		*/
+		public function update($table) {
+			$sql = "UPDATE " . $table . " SET";
+		}
 
 
 	}

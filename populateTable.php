@@ -1,16 +1,23 @@
 <?php
 	require 'sqlHandler.php';
 
+	// Prepare the arguments
+	$table = "DieLibrary";
+	$cols = '*';
+	$where = NULL;
+	$order = $_POST["order"];
+	$asc_desc = $_POST["asc_desc"];
+
 	// create a new database object and connect
 	$db = new Database('localhost', 'monty', 'some_pass', 'testDB');
 	$db->connect();
 
-	/*
-		by sending only the table argument to select(), it returns every entry in that table 
-			which we store into the variable 'result'
-	*/
-	$table = "DieLibrary";
-	$result = $db->select($table);
+	// if there is an order, submit different arguments
+	if ($order == NULL)
+		$result = $db->select($table);
+	else
+		$result = $db->select($table, $cols, $where, $order, $asc_desc);
+
 
 	// disconnect from the sql server, we already have the data we need
 	$db->disconnect();

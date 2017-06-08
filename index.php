@@ -18,26 +18,36 @@
 		This function access populateTable.php and grabs the data. It proceeds to parse it into
 			the table body with id 'table_body'
 	*/
-	function populateTable() {
-		$.ajax({
-			type: "GET",
-			url: "populateTable.php",
-			data: null,
-			success: function(data) { $("#table_body").html(data); }
-		})
+	function populateTable(arg, arg2) {
+		
+		if (arg == null) {
+			$.ajax({
+				type: "POST",
+				url: "populateTable.php",
+				data: { order: null, asc_desc: null },
+				success: function(data) { $("#table_body").html(data); }
+			})
+		} else {
+			$.ajax({
+				type: "POST",
+				url: "populateTable.php",
+				data: { order: arg, asc_desc: arg2},
+				success: function(data) { $("#table_body").html(data); }
+			})
+		}
 	}
 
 	/*
 		This runs when the webpage is loaded, it sets up triggers and populates the table on startup
 	*/
 	$(document).ready(function() {
-		populateTable();
+		populateTable(null);
 
 		/*
 			on click, run populateTable()
 		*/
 		$("#table_refresh").click(function() {
-			populateTable();
+			populateTable(null);
 		});
 
 		/*
@@ -62,7 +72,7 @@
 				data: { job_num: $("#job_num").val(), csr_name: $("#csr_name").val() },
 				success: function(data, status) {
 					console.log("Data: " + data + "\nPost Status: " + status);
-					populateTable();
+					populateTable(null);
 				}
 			})
 		});
@@ -77,17 +87,50 @@
 				selected.push($(this).attr("id"));
 			});
 
+			if (selected.length != 0) {
 			// send POST data to deleteSelected.php containing the array of checked boxes
-			$.ajax({
-				type: "POST",
-				url: "deleteSelected.php",
-				data: { checks: selected },
-				success: function(data, status) {
-					console.log("Data: " + data + "\nPost Status: " + status);
-					populateTable();
-				}
-			})
+				$.ajax({
+					type: "POST",
+					url: "deleteSelected.php",
+					data: { checks: selected },
+					success: function(data, status) {
+						console.log("Data: " + data + "\nPost Status: " + status);
+						populateTable(null);
+					}
+				})
+			} else {
+				console.log("Delete: Nothing is Selected");
+			}
 		});
+
+		/*
+			used for ordering the table when clicking on the headers
+		*/
+		function populateTableByOrder(headerID, order) {
+			asc_desc = $(headerID).attr("value");
+
+			populateTable(order, asc_desc);
+
+			if (asc_desc == "asc")
+				$(headerID).attr("value", "desc");
+			else if (asc_desc == "desc")
+				$(headerID).attr("value", "asc");
+		}
+
+		$("#jb_header").click(function() {
+			populateTableByOrder($(this), "job_num");
+		});
+
+		$("#csr_header").click(function() {
+			populateTableByOrder($(this), "csr_name");
+		});
+
+		$("#dt_header").click(function() {
+			populateTableByOrder($(this), "date");
+		});
+		/*
+			bring up form for update entry wen double click entry
+		*/
 	});
 
 </script>
@@ -101,9 +144,9 @@
 				<thead>
 					<tr>
 						<th id="check">Select</th>
-						<th id="jb_header">Job Number</th>
-						<th id="csr_header">CSR Name</th>
-						<th id="dt_header">Date</th>
+						<th id="jb_header" value="asc">Job Number</th>
+						<th id="csr_header" value="asc">CSR Name</th>
+						<th id="dt_header" value="asc">Date</th>
 					</tr>
 				</thead>
 				<tbody id="table_body">
