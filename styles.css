@@ -1,7 +1,24 @@
+#dieLibrary_div {
+	height: 300px;
+	overflow: auto;
+}
+
 .dieLibrary_div table {
+	border-collapse: collapse;
 	width: 100%;
 }
 
-.dieLibrary_div table, th, td {
-	border: 1px solid black;
+.dieLibrary_div th, td {
+	padding: 1%;
+	text-align: center;	
+	border-bottom: 1px solid #ddd;
+}
+
+.dieLibrary_div tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.dieLibrary_div th {
+	background-color: black;
+	color: white;
 }
