@@ -25,10 +25,23 @@
 	$(document).ready(function() {
 		populateTable();
 
+		/*
+			on click, run populateTable()
+		*/
 		$("#table_refresh").click(function() {
 			populateTable();
 		});
 
+		/*
+			on click, show the form for entering new data
+		*/
+		$("#insert_btn").click(function() {
+			$(".insert_form").toggle();
+		});
+
+		/*
+			Handles the form submit event, sends a post request to newEntry.php with the data in the form and refreshes the table
+		*/
 		$("#insert_form").submit(function(event) {
 			event.preventDefault();
 
@@ -41,9 +54,16 @@
 					csr_name: $("#csr_name").val()
 				},
 				function(data, status) {
-					//alert("Data: " + data + "\nPost Status: " + status);
+					//alert("Data: " + data + "\nPost Status: " + status); // uncomment the beginning of this line to debug
 					populateTable();
 				});
+		});
+
+		/*
+			deletes entries that have their boxes checked
+		*/
+		$("#delete_btn").click(fucntion() {
+
 		});
 	});
 
@@ -68,12 +88,12 @@
 				</tbody>
 		</table>
 
-		<button id="insert">Insert</button>
-		<button id="delete">Delete Selected</button>
-		<button id="update">Update Selected</button>
+		<button id="insert_btn">New Entry</button>
+		<button id="delete_btn">Delete Selected</button>
+		<button id="update_btn">Update Selected</button>
 	</div>
 
-	<div class="insert_form">
+	<div hidden class="insert_form">
 		<h3>Create New Entry</h3>
 		<form id="insert_form" method="POST" action="newEntry.php">
 			Job Number: <input type="text" id="job_num" name="job_num" required><br>
