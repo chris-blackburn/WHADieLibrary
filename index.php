@@ -1,24 +1,25 @@
 <html>
 <title>WHA Die Library</title>
 <head>
+<link rel="stylesheet" type="text/css" href="styles.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <script>
-	function viewTable() {
+	function populateTable() {
 		$.get(
-			"viewTable.php",
+			"populateTable.php",
 			null,
-			function(data) { $("#table").html(data); },
+			function(data) { $("#table_body").html(data); },
 			"html"
 		);
 	}
 
 	$(document).ready(function() {
-		viewTable();
+		populateTable();
 
 		$("#table_refresh").click(function() {
-			viewTable();
+			populateTable();
 		});
 	});
 
@@ -38,15 +39,32 @@
 			alert('success');
 		});
 	});*/
+
 </script>
 
 <body>
-	<button id="table_refresh">Refresh Table</button>
-	<div id="table">Could Not Grab Table Data</div>
+	<div class="dieLibrary_div">
+		<button id="table_refresh">Refresh Table</button>
 
-	<button class="insert">Insert</button>
-	<button class="delete">Delete</button>
-	<button class="update">Update</button>
+		<table>
+				<caption>WHA Die Library</caption>
+				<thead>
+					<tr>
+						<th id="check"></th>
+						<th id="jb_header">Job Number</th>
+						<th id="csr_header">CSR Name</th>
+						<th id="dt_header">Date</th>
+					</tr>
+				</thead>
+				<tbody id="table_body">
+
+				</tbody>
+		</table>
+
+		<button class="insert">Insert</button>
+		<button class="delete">Delete</button>
+		<button class="update">Update</button>
+	</div>
 
 	<h3 class="insert_form">Create New Entry</h3>
 	<form id="insert_form" class="insert_form" method="POST" action="newEntry.php">
