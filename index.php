@@ -17,70 +17,81 @@
 	/* 
 		This function access populateTable.php and grabs the data. It proceeds to parse it into
 			the table body with id 'table_body'
-	*/
-	function populateTable(arg, arg2) {
-		
-		if (arg == null) {
-			$.ajax({
-				type: "POST",
-				url: "populateTable.php",
-				data: { order: null, asc_desc: null },
-				success: function(data) { $("#table_body").html(data); }
-			})
-		} else {
-			$.ajax({
-				type: "POST",
-				url: "populateTable.php",
-				data: { order: arg, asc_desc: arg2},
-				success: function(data) { $("#table_body").html(data); }
-			})
+			*/
+	function populateTable(argv) {
+
+		// default to order by date, ascending
+		if (argv == null) {
+			argv = [ "date", "asc" ];
 		}
+		
+		// send post request
+		$.ajax({
+			type: "POST",
+			url: "populateTable.php",
+			data: { order: argv },
+			success: function(data, status) { 
+				console.log("Data: " + data + "\nPost Status: " + status);
+				$(".table_body").html(data);
+			}
+		})
+	}
+
+	function populateTableByOrder(headerID, order) {
+		asc_desc = $(headerID).attr("value");
+
+		populateTable([ order, asc_desc ]);
+
+		if (asc_desc == "asc")
+			$(headerID).attr("value", "desc");
+		else if (asc_desc == "desc")
+			$(headerID).attr("value", "asc");
 	}
 
 	/*
 		This runs when the webpage is loaded, it sets up triggers and populates the table on startup
-	*/
-	$(document).ready(function() {
-		populateTable(null);
+		*/
+		$(document).ready(function() {
+			populateTable(null);
 
 		/*
 			on click, run populateTable()
-		*/
-		$("#table_refresh").click(function() {
-			populateTable(null);
-		});
+			*/
+			$("#table_refresh").click(function() {
+				populateTable(null);
+			});
 
 		/*
 			on click, show the form for entering new data
-		*/
-		$("#insert_btn").click(function() {
-			$(".insert_form").toggle();
-		});
+			*/
+			$("#insert_btn").click(function() {
+				$(".insert_form").toggle();
+			});
 
 		/*
 			Handles the form submit event, sends a post request to newEntry.php with 
 				the data in the form and refreshes the table
-		*/
-		$("#insert_form").submit(function(event) {
-			event.preventDefault();
+				*/
+			$("#insert_form").submit(function(event) {
+				event.preventDefault();
 
-			url = $(this).attr("action");
+				url = $(this).attr("action");
 
-			$.ajax({
-				type: "POST",
-				url: url,
-				data: { job_num: $("#job_num").val(), csr_name: $("#csr_name").val() },
-				success: function(data, status) {
-					console.log("Data: " + data + "\nPost Status: " + status);
-					populateTable(null);
-				}
-			})
-		});
+				$.ajax({
+					type: "POST",
+					url: url,
+					data: { job_num: $("#job_num").val(), csr_name: $("#csr_name").val() },
+					success: function(data, status) {
+						console.log("Data: " + data + "\nPost Status: " + status);
+						populateTable(null);
+					}
+				})
+			});
 
 		/*
 			deletes entries that have their boxes checked
-		*/
-		$("#delete_btn").click(function() {
+			*/
+			$("#delete_btn").click(function() {
 			// grab all the checked boxes
 			var selected = [];
 			$(".table_checkboxes input[type=\"checkbox\"]:checked").each(function() {
@@ -88,7 +99,7 @@
 			});
 
 			if (selected.length != 0) {
-			// send POST data to deleteSelected.php containing the array of checked boxes
+				// send POST data to deleteSelected.php containing the array of checked boxes
 				$.ajax({
 					type: "POST",
 					url: "deleteSelected.php",
@@ -96,62 +107,50 @@
 					success: function(data, status) {
 						console.log("Data: " + data + "\nPost Status: " + status);
 						populateTable(null);
-					}
-				})
-			} else {
-				console.log("Delete: Nothing is Selected");
-			}
-		});
+						}
+					})
+				} else {
+					console.log("Delete: Nothing is Selected");
+				}
+			});
 
 		/*
 			used for ordering the table when clicking on the headers
-		*/
-		function populateTableByOrder(headerID, order) {
-			asc_desc = $(headerID).attr("value");
+			*/
+			$("#jb_header").click(function() {
+				populateTableByOrder($(this), "job_num");
+			});
 
-			populateTable(order, asc_desc);
+			$("#csr_header").click(function() {
+				populateTableByOrder($(this), "csr_name");
+			});
 
-			if (asc_desc == "asc")
-				$(headerID).attr("value", "desc");
-			else if (asc_desc == "desc")
-				$(headerID).attr("value", "asc");
-		}
-
-		$("#jb_header").click(function() {
-			populateTableByOrder($(this), "job_num");
-		});
-
-		$("#csr_header").click(function() {
-			populateTableByOrder($(this), "csr_name");
-		});
-
-		$("#dt_header").click(function() {
-			populateTableByOrder($(this), "date");
-		});
+			$("#dt_header").click(function() {
+				populateTableByOrder($(this), "date");
+			});
 		/*
 			bring up form for update entry wen double click entry
-		*/
-	});
+			*/
+		});
 
 </script>
 
 <body>
 	<button id="table_refresh">Refresh Table</button>
 
-	<div id="table_container" class="table_container">
+	<div class="table_container">
 		<table>
-				<caption>WHA Die Library</caption>
-				<thead>
-					<tr>
-						<th id="check">Select</th>
-						<th id="jb_header" value="asc">Job Number</th>
-						<th id="csr_header" value="asc">CSR Name</th>
-						<th id="dt_header" value="asc">Date</th>
-					</tr>
-				</thead>
-				<tbody id="table_body">
-					<!-- This gets populated by populateTable.php -->
-				</tbody>
+			<thead>
+				<tr class="headers">
+					<th id="check_header">Select</th>
+					<th id="jb_header" value="asc">Job Number</th>
+					<th id="csr_header" value="asc">CSR Name</th>
+					<th id="dt_header" value="asc">Date</th>
+				</tr>
+			</thead>
+			<tbody class="table_body">
+				<!-- This gets populated by populateTable.php -->
+			</tbody>
 		</table>
 	</div>
 

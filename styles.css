@@ -1,10 +1,14 @@
-.table_container table {
-	border-collapse: collapse;
+.table_container {
 	width: 100%;
 }
 
+.table_container table {
+	width: 100%;
+	border-spacing: 0;
+}
+
 .table_container th, td {
-	padding: 1%;
+	padding: 10px;
 	text-align: center;	
 	border-bottom: 1px solid #ddd;
 }
@@ -16,4 +20,26 @@
 .table_container th {
 	background-color: black;
 	color: white;
+}
+
+.table_container thead, tbody tr {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.table_body {
+	display: block;
+	max-height: 20em;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden; 
+}
+
+.table_body tr:hover {
+	background-color: #d0d0d0;
+}
+
+#check_header, .table_checkboxes {
+	width: 4em;
 }
