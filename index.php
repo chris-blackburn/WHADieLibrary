@@ -161,8 +161,8 @@
 	<div hidden class="insert_form">
 		<h3>Create New Entry</h3>
 		<form id="insert_form" method="POST" action="newEntry.php">
-			Job Number: <input type="text" id="job_num" required><br>
-			Your Name: <input type="text" id="csr_name" required><br>
+			Job Number: <input type="text" id="job_num" name="job_num" required><br>
+			Your Name: <input type="text" id="csr_name" name="csr_name" required><br>
 			<input type="submit" value="Submit">
 		</form>
 	</div>
