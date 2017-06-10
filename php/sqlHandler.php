@@ -19,12 +19,7 @@
 		private $pass = '';
 		private $db = '';
 
-		// default constructor only sets the server to localhost
-		function __construct() {
-			$this->server = 'localhost';
-		}
-
-		function __construct($server, $user, $pass, $db) {
+		function __construct($server = 'localhost', $user, $pass, $db) {
 			$this->server = $server;
 			$this->user = $user;
 			$this->pass = $pass;
