@@ -30,7 +30,7 @@
 
 .table_body {
 	display: block;
-	height: 20em;
+	height: 30em;
 	width: 100%;
 	overflow-y: auto;
 	overflow-x: hidden; 

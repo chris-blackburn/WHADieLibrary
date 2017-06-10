@@ -110,6 +110,7 @@ $(document).ready(function() {
 	$("#dt_header").click(function() {
 		populateTableByOrder($(this), "date");
 	});
+	
 /*
 	bring up form for update entry wen double click entry
 	*/
