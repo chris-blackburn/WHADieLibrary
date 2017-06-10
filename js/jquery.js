@@ -92,7 +92,7 @@ $(document).ready(function() {
 				}
 			})
 		} else {
-			console.log("Delete: Nothing is Selected");
+			console.log("Cannot Delete: Nothing is Selected");
 		}
 	});
 
