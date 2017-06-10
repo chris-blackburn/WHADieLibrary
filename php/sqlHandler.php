@@ -55,6 +55,18 @@
 			$this->disp("Connection closed<br>");
 		}
 
+		/*
+			This is used by the functions insert, delete, and update. It relpies a success with the
+				SQL code queried or Error along with the SQL code and error message.
+		*/
+		private function query($sql) {
+			if ($this->conn->query($sql) === TRUE) {
+				$this->disp("Success: " . $sql . "<br>");
+			} else {
+				$this->disp("Error: " . $sql . "<br>" . $this->conn->error . "<br>");
+			}
+		}
+
 			/*
 				Resulting SQL code:
 					SELECT [column1, column2, ...] FROM [table] WHERE [condition] ORDER BY [column]
@@ -78,18 +90,6 @@
 
 
 			return $result;
-		}
-
-	/*
-	This is used by the functions insert, delete, and update. It relpies a success with the
-		SQL code queried or Error along with the SQL code and error message.
-	*/
-		private function query($sql) {
-			if ($this->conn->query($sql) === TRUE) {
-				$this->disp("Success: " . $sql . "<br>");
-			} else {
-				$this->disp("Error: " . $sql . "<br>" . $this->conn->error . "<br>");
-			}
 		}
 
 	/*

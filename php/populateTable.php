@@ -23,10 +23,10 @@
 	// parse the data into table rows
 	while ($row = $result->fetch_assoc()) {
 		echo "	<tr>
-		<td class=\"table_checkboxes\"><input id=\"" . $row['id'] . "\" type=\"checkbox\"></td>
-		<td>" . $row['job_num'] . "</td>
-		<td>" . $row['csr_name'] . "</td>
-		<td>" . $row['date'] . "</td>
-		</tr>";
+					<td class=\"table_checkboxes\"><input id=\"" . $row['id'] . "\" type=\"checkbox\"></td>
+					<td>" . $row['job_num'] . "</td>
+					<td>" . $row['csr_name'] . "</td>
+					<td>" . $row['date'] . "</td>
+				</tr>";
 	}
 ?>
