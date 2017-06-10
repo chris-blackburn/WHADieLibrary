@@ -19,7 +19,7 @@
 		private $pass = '';
 		private $db = '';
 
-		function __construct($server = 'localhost', $user, $pass, $db) {
+		function __construct($server = 'localhost', $user = null, $pass = null, $db = null) {
 			$this->server = $server;
 			$this->user = $user;
 			$this->pass = $pass;
