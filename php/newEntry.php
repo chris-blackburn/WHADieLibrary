@@ -8,8 +8,8 @@
 
 		// prepare the arguements for database's insert() function
 	$table = "DieLibrary";
-	$values = $job_num . ", \"" . $csr_name . "\", \"" . $date . "\"";
-	$cols = "job_num, csr_name, date";
+	$values = [$job_num, $csr_name, $date];
+	$cols = ["job_num", "csr_name", "date"];
 
 		/*
 			Create new database object, setEcho on for error messages, connect to it,

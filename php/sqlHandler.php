@@ -8,6 +8,7 @@
 		to adjust SQL syntax).
 
 	*/
+
 	class Database {
 		protected $conn;
 
@@ -25,7 +26,7 @@
 			$this->db = $db;
 		}
 
-			// setEcho() and disp() are used to control output by the database object (pass 1 for on, 0 for off)
+		// setEcho() and disp() are used to control output by the database object (pass 1 for on, 0 for off)
 		public function setEcho($bool) {
 			$this->echo_off = !$bool;
 		}
@@ -41,18 +42,18 @@
 				$this->conn = new mysqli($this->server, $this->user, $this->pass, $this->db);
 
 				if ($this->conn->connect_error) {
-					die("Connection failed: " . $this->conn->connect_error . "<br>");
+					die("Connection failed: " . $this->conn->connect_error);
 				}
 
-				$this->disp("Connected Succesfully<br>");
+				$this->disp("Connected Succesfully");
 			} else {
-				$this->disp("Already Connected<br>");
+				$this->disp("Already Connected");
 			}
 		}
 
 		public function disconnect() {
 			$this->conn->close();
-			$this->disp("Connection closed<br>");
+			$this->disp("Connection closed");
 		}
 
 		/*
@@ -61,18 +62,23 @@
 		*/
 		private function query($sql) {
 			if ($this->conn->query($sql) === TRUE) {
-				$this->disp("Success: " . $sql . "<br>");
+				$this->disp("Success: " . $sql);
 			} else {
-				$this->disp("Error: " . $sql . "<br>" . $this->conn->error . "<br>");
+				$this->disp("Error: " . $sql . $this->conn->error);
 			}
 		}
 
-			/*
-				Resulting SQL code:
-					SELECT [column1, column2, ...] FROM [table] WHERE [condition] ORDER BY [column]
-			*/
+		/*
+			Resulting SQL code:
+				SELECT [column1, column2, ...] FROM [table] WHERE [condition] ORDER BY [column]
+		*/
 		public function select($table, $cols = '*', $where = null, $order = null, $asc_desc = null) {
 			$sql = "SELECT " . $cols . " FROM " . $table;
+
+			if ($cols != '*') {
+				$sql = "SELECT " . $this->parseArray($cols) . " FROM " . $table;
+			}
+
 			if ($where != NULL) 
 				$sql .= " WHERE " . $where;
 			if ($order != NULL) {
@@ -83,47 +89,49 @@
 
 			$result = $this->conn->query($sql);
 
-			if ($result !== TRUE)
-				$this->disp("Success: " . $sql . "<br>");
-			else
-				$this->disp("Error: " . $sql . "<br>" . $this->conn->error . "<br>");
-
-
 			return $result;
 		}
 
-	/*
-	Resulting SQL code:
-		INSERT INTO [table] ([column1], [column2], ...) VALUES ([value1], [value2], ...)
-	*/
+		/*
+		Resulting SQL code:
+			INSERT INTO [table] ([column1], [column2], ...) VALUES ([value1], [value2], ...)
+		*/
 		public function insert($table, $values, $cols = null) {
 			$sql = "INSERT INTO " . $table;
 			if ($cols != NULL)
-				$sql .= " ( " . $cols . " )";
+				$sql .= " ( " . implode(", ", $cols) . " )";
 
-			$sql .= " VALUES ( " . $values . " )";
+			$sql .= " VALUES " . $this->parseArray($values);
 
 			$this->query($sql);
 		}
 
-	/*
-	Resulting SQL code:
-		DELETE FROM [table] WHERE [condition] IN ([value1], [value2], ...)
-	*/
+		/*
+		Resulting SQL code:
+			DELETE FROM [table] WHERE [condition] IN ([value1], [value2], ...)
+		*/
 		public function delete($table, $where = null, $in = null) {
 			$sql = "DELETE FROM " . $table;
-			if ($where != NULL)
+			if ($where != NULL)	
 				$sql .= " WHERE " . $where;
 			if ($in != NULL)
-				$sql .= " IN " . $in;
+				$sql .= " IN " . $this->parseArray($in);
 
 			$this->query($sql);
 		}
+		/*
+			handles array arguments and prepares them for sql script, puts quotes around each
+				entry, with commas between them, and parenthases around all of it
+				( "[arg1]", "[arg2]", ... )
+		*/
+		private function parseArray($arg) {
+			return "( \"" . implode("\", \"", $arg) . "\" )";
+		}
 
-	/*
-	Resulting SQL code:
-		UPDATE [table] SET [column1] = [value1], [column2] = [value2], ... WHERE [condition] IN ([value1], [value2], ...)
-	*/
+		/*
+		Resulting SQL code:
+			UPDATE [table] SET [column1] = [value1], [column2] = [value2], ... WHERE [condition] IN ([value1], [value2], ...)
+		*/
 		public function update($table) {
 			$sql = "UPDATE " . $table . " SET";
 		}
