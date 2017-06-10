@@ -19,11 +19,71 @@
 		private $pass = '';
 		private $db = '';
 
+		// default constructor only sets the server to localhost
+		function __construct() {
+			$this->server = 'localhost';
+		}
+
 		function __construct($server, $user, $pass, $db) {
 			$this->server = $server;
 			$this->user = $user;
 			$this->pass = $pass;
 			$this->db = $db;
+		}
+
+		/*
+			handles array arguments and prepares them for sql script, puts quotes around each
+				entry, with commas between them, and parenthases around all of it
+				( "[arg1]", "[arg2]", ... )
+		*/
+		private function parseArray($arg) {
+			return "( \"" . implode("\", \"", $arg) . "\" )";
+		}
+
+		/*
+			This is used by the functions insert, delete, and update. It relpies a success with the
+				SQL code queried or Error along with the SQL code and error message.
+		*/
+		private function query($sql) {
+			if ($this->conn->query($sql) === TRUE) {
+				$this->disp("Success: " . $sql);
+			} else {
+				$this->disp("Error: " . $sql . $this->conn->error);
+			}
+		}
+
+		// setters
+		public function setServer($server) {
+			$this->server = $server;
+		}
+
+		public function setUser($user) {
+			$this->user = $user;
+		}
+
+		public function setPass($pass) {
+			$this->pass = $pass;
+		}
+
+		public function setDatabase($db) {
+			$this->db = $db;
+		}
+
+		// getters
+		public function getServer() {
+			return $this->server;
+		}
+
+		public function getUser() {
+			return $this->user;
+		}
+
+		public function getPass() {
+			return $this->pass;
+		}
+
+		public function getDatabase() {
+			return $this->db;
 		}
 
 		// setEcho() and disp() are used to control output by the database object (pass 1 for on, 0 for off)
@@ -57,18 +117,6 @@
 		}
 
 		/*
-			This is used by the functions insert, delete, and update. It relpies a success with the
-				SQL code queried or Error along with the SQL code and error message.
-		*/
-		private function query($sql) {
-			if ($this->conn->query($sql) === TRUE) {
-				$this->disp("Success: " . $sql);
-			} else {
-				$this->disp("Error: " . $sql . $this->conn->error);
-			}
-		}
-
-		/*
 			Resulting SQL code:
 				SELECT [column1, column2, ...] FROM [table] WHERE [condition] ORDER BY [column]
 		*/
@@ -93,8 +141,8 @@
 		}
 
 		/*
-		Resulting SQL code:
-			INSERT INTO [table] ([column1], [column2], ...) VALUES ([value1], [value2], ...)
+			Resulting SQL code:
+				INSERT INTO [table] ([column1], [column2], ...) VALUES ([value1], [value2], ...)
 		*/
 		public function insert($table, $values, $cols = null) {
 			$sql = "INSERT INTO " . $table;
@@ -107,30 +155,24 @@
 		}
 
 		/*
-		Resulting SQL code:
-			DELETE FROM [table] WHERE [condition] IN ([value1], [value2], ...)
+			Resulting SQL code:
+				DELETE FROM [table] WHERE [condition] IN ([value1], [value2], ...)
 		*/
 		public function delete($table, $where = null, $in = null) {
 			$sql = "DELETE FROM " . $table;
-			if ($where != NULL)	
+
+			if ($where != NULL)	{
 				$sql .= " WHERE " . $where;
-			if ($in != NULL)
-				$sql .= " IN " . $this->parseArray($in);
+				if ($in != NULL)
+					$sql .= " IN " . $this->parseArray($in);
+			}
 
 			$this->query($sql);
 		}
-		/*
-			handles array arguments and prepares them for sql script, puts quotes around each
-				entry, with commas between them, and parenthases around all of it
-				( "[arg1]", "[arg2]", ... )
-		*/
-		private function parseArray($arg) {
-			return "( \"" . implode("\", \"", $arg) . "\" )";
-		}
 
 		/*
-		Resulting SQL code:
-			UPDATE [table] SET [column1] = [value1], [column2] = [value2], ... WHERE [condition] IN ([value1], [value2], ...)
+			Resulting SQL code:
+				UPDATE [table] SET [column1] = [value1], [column2] = [value2], ... WHERE [condition] IN ([value1], [value2], ...)
 		*/
 		public function update($table) {
 			$sql = "UPDATE " . $table . " SET";
