@@ -33,45 +33,76 @@ function populateTableByOrder(headerID, order) {
 }
 
 /*
-This runs when the webpage is loaded, it sets up triggers and populates the table on startup
+This runs when the webpage is loaded
 */
 $(document).ready(function() {
-	populateTable(null);
+	/*
+		used for ordering the table when clicking on the headers
+	*/
+	$("#jb_header").click(function() {
+		populateTableByOrder($(this), "job_num");
+	});
 
-/*
+	$("#csr_header").click(function() {
+		populateTableByOrder($(this), "csr_name");
+	});
+
+	$("#dt_header").click(function() {
+		populateTableByOrder($(this), "date");
+	});
+
+	/*
 	on click, run populateTable()
 	*/
-	$("#table_refresh").click(function() {
+	$("#table_btn").click(function() {
+		// change the active tab
+		$(".tabs button").removeClass("active_tab");
+		$(this).addClass("active_tab");
+
+		$(".tab_content").hide();
+		$("#table_container").show();
 		populateTable(null);
 	});
 
-/*
-	on click, show the form for entering new data
+	// open the table tab and load the table by calling the table button click event function
+	$("#table_btn").click();
+
+	/*
+		on click, show the form for entering new data
 	*/
 	$("#insert_btn").click(function() {
-		$(".insert_form_container").toggle();
+		$(".tabs button").removeClass("active_tab");
+		$(this).addClass("active_tab");
+
+		$(".tab_content").hide();
+		$("#insert_form_container").show();
 	});
 
-/*
-	Handles the form submit event, sends a post request to newEntry.php with 
-		the data in the form and refreshes the table
+	/*
+		Handles the form submit event, sends a post request to newEntry.php with 
+			the data in the form and refreshes the table
 		*/
-	$(".insert_form_container form").submit(function(event) {
+	$("#insert_form_container form").submit(function(event) {
 		event.preventDefault();
 
 		$.ajax({
 			type: "POST",
 			url: "php/newEntry.php",
-			data: { job_num: $("#job_num").val(), csr_name: $("#csr_name").val() },
+			data: { 
+				// This is where all the form data is set
+				job_num: $("#job_num").val(), 
+				csr_name: $("#csr_name").val() 
+			},
 			success: function(data, status) {
 				console.log("Data: " + data + "\nPost Status: " + status);
-				populateTable(null);
+
+				$("#table_btn").click();
 			}
 		})
 	});
 
-/*
-	deletes entries that have their boxes checked
+	/*
+		deletes entries that have their boxes checked
 	*/
 	$("#delete_btn").click(function() {
 	// grab all the checked boxes
@@ -96,22 +127,22 @@ $(document).ready(function() {
 		}
 	});
 
-/*
-	used for ordering the table when clicking on the headers
+	/*
+		go to edit tab when an entry is clicked
 	*/
-	$("#jb_header").click(function() {
-		populateTableByOrder($(this), "job_num");
+	$(".table_body tr").click(function() {
+		alert("row clicked");
+
+		/*// reset the active tab
+		$(".tabs button").removeClass("active_tab");
+		$("#update_btn").addClass("active_tab");
+		$("#update_btn").show();
+
+		// hide all other content and show the update form
+		$(".tab_content").hide();*/
+
 	});
 
-	$("#csr_header").click(function() {
-		populateTableByOrder($(this), "csr_name");
-	});
-
-	$("#dt_header").click(function() {
-		populateTableByOrder($(this), "date");
-	});
 	
-/*
-	bring up form for update entry wen double click entry
-	*/
+
 });

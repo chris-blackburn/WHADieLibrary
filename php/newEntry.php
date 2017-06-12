@@ -4,12 +4,11 @@
 		// grab the data posted to this script
 	$job_num = $_POST["job_num"];
 	$csr_name = $_POST["csr_name"];
-	$date = date('Y-m-d h:i:sa');
-
+	
 		// prepare the arguements for database's insert() function
 	$table = "DieLibrary";
-	$values = [$job_num, $csr_name, $date];
-	$cols = ["job_num", "csr_name", "date"];
+	$values = [$job_num, $csr_name];
+	$cols = ["job_num", "csr_name"];
 
 		/*
 			Create new database object, setEcho on for error messages, connect to it,

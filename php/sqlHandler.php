@@ -31,7 +31,7 @@
 				entry, with commas between them, and parenthases around all of it
 				( "[arg1]", "[arg2]", ... )
 		*/
-		private function parseArray($arg) {
+		private function formatArray($arg) {
 			return "( \"" . implode("\", \"", $arg) . "\" )";
 		}
 
@@ -119,7 +119,7 @@
 			$sql = "SELECT " . $cols . " FROM " . $table;
 
 			if ($cols != '*') {
-				$sql = "SELECT " . $this->parseArray($cols) . " FROM " . $table;
+				$sql = "SELECT " . $this->formatArray($cols) . " FROM " . $table;
 			}
 
 			if ($where != NULL) 
@@ -144,7 +144,7 @@
 			if ($cols != NULL)
 				$sql .= " ( " . implode(", ", $cols) . " )";
 
-			$sql .= " VALUES " . $this->parseArray($values);
+			$sql .= " VALUES " . $this->formatArray($values);
 
 			$this->query($sql);
 		}
@@ -159,7 +159,7 @@
 			if ($where != NULL)	{
 				$sql .= " WHERE " . $where;
 				if ($in != NULL)
-					$sql .= " IN " . $this->parseArray($in);
+					$sql .= " IN " . $this->formatArray($in);
 			}
 
 			$this->query($sql);

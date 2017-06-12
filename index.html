@@ -10,11 +10,17 @@
 
 <body>
 
-	<div class="table_container">
+	<div class="tabs">
+		<button id="table_btn">View Table</button>
+		<button id="insert_btn">New Entry</button>
+		<button hidden id="update_btn">Update Entry</button>
+	</div>
+
+	<div id="table_container" class="tab_content">
 		<table>
 			<thead>
 				<tr>
-					<th id="check_header">Select</th>
+					<th id="check_header">Delete</th>
 					<th id="jb_header" value="asc">Job Number</th>
 					<th id="csr_header" value="asc">CSR Name</th>
 					<th id="dt_header" value="asc">Date</th>
@@ -24,22 +30,45 @@
 				<!-- This gets populated by populateTable.php, see js/jquery.js -->
 			</tbody>
 		</table>
+		<button id="delete_btn">Delete Selected</button>
 	</div>
 
-	<button id="table_refresh">Refresh Table</button>
-
-	<br>
-
-	<button id="insert_btn">New Entry</button>
-	<button id="delete_btn">Delete Selected</button>
-	<button id="update_btn">Update Selected</button>
-
-	<div hidden class="insert_form_container">
+	<div id="insert_form_container" class="tab_content">
 		<h3>Create New Entry</h3>
-		<form>
+		<form> <!-- The form tag doesn't need any attributes because jquery handles the submission -->
+		
 			Job Number: <input type="text" id="job_num" required><br>
 			Your Name: <input type="text" id="csr_name" required><br>
 			<input type="submit" value="Submit">
+			
+
+<!--
+			<input type="text" id="jobNumber" placeholder="Job number">
+			<input type="text" id="customerID" placeholder="customerID"><br>
+			Description:<br>
+			<input type="text" id="description"><br>
+			Expected usage:
+			<select id="expectedUsage">
+				<option value="once" selected>One time use</option>
+				<option value="plus">More than once</option>
+				<option value="regular">Regular</option>
+				<option value="unknown">Unknown</option>
+			</select><br>
+			Location:
+			<select>
+				<option value="Awaiting Arrival" selected>Awaiting Arrival</option>
+				<option value="green">Green Inventory</option>
+				<option value="gold">Gold Inventory</option>
+				<option value="sanwa">Sanwa</option>
+				<option value="Heidelberg">Heidelberg</option>
+				<option value="kluge">Kluge</option>
+			</select><br>
+			Tags:<br>
+			<input type="text" id="tags"><br>
+			Reviewed:
+			<input type="checkbox" id="reviewed"><br>
+-->
+
 		</form>
 	</div>
 

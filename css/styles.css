@@ -1,28 +1,55 @@
-.table_container {
-	width: 100%;
+.tabs {
+	overflow: hidden;
+	border: 1px solid #ccc;
+    background-color: #f1f1f1;
 }
 
-.table_container table {
+.tabs button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tabs button:hover {
+	background-color: #ccc;
+}
+
+.active_tab {
+	background-color: #ccc !important;
+}
+
+.tab_content {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+#table_container table {
 	width: 100%;
 	border-spacing: 0;
+	border: 1px solid #ccc;
 }
 
-.table_container th, td {
+#table_container th, td {
 	padding: 10px;
 	text-align: center;	
 	border-bottom: 1px solid #ddd;
 }
 
-.table_container tr:nth-child(even) {
+#table_container tr:nth-child(even) {
 	background-color: #f2f2f2;
 }
 
-.table_container th {
-	background-color: black;
+#table_container thead {
+	background-color: #333;
 	color: white;
 }
 
-.table_container thead, tbody tr {
+#table_container thead, tbody tr {
 	display: table;
 	width: 100%;
 	table-layout: fixed;
@@ -30,27 +57,32 @@
 
 .table_body {
 	display: block;
-	height: 30em;
+	height: 35em;
 	width: 100%;
 	overflow-y: auto;
 	overflow-x: hidden; 
 }
 
 .table_body tr:hover {
-	background-color: #d0d0d0;
+	background-color: #d0d0d0 !important;
+    transition: 0.3s;
+}
+
+.table_body tr {
+	cursor: pointer;
 }
 
 #check_header, .table_checkboxes {
 	width: 4em;
 }
 
-input[type='checkbox'] {
+#table_container input[type='checkbox'] {
     width: 2em;
     height: 2em;
     background: white;
     border-radius: 5px;
     border: 2px solid #555;
 }
-input[type='checkbox']:checked {
+#table_container input[type='checkbox']:checked {
     background: #abd;
 }
