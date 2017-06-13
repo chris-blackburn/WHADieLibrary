@@ -6,7 +6,7 @@ function populateTable(argv) {
 
 	// default to order by date, ascending
 	if (argv == null) {
-		argv = [ "dateEntered", "asc" ];
+		argv = [ "dateCreated", "asc" ];
 	}
 
 	// send post request
@@ -14,7 +14,7 @@ function populateTable(argv) {
 		type: "POST",
 		url: "php/populateTable.php",
 		data: { 
-			table: "dieBase",
+			table: $("#table_container").attr("value"),
 			order: argv 
 		},
 		success: function(data, status) { 
@@ -115,7 +115,7 @@ $(document).ready(function() {
 			type: "POST",
 			url: "php/deleteSelected.php",
 			data: { 
-				table: $("#table_container").attr("tableName"),
+				table: $("#table_container").attr("value"),
 				checks: selected 
 			},
 			success: function(data, status) {

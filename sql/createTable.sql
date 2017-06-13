@@ -1,19 +1,24 @@
-CREATE TABLE IF NOT EXISTS dieBase (
-	id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS dieBase2 (
+	dieID INT PRIMARY KEY AUTO_INCREMENT,
     jobNumber INT UNIQUE NOT NULL,
-    customerID INT UNIQUE NOT NULL,
-    description TEXT,
+    dateCreated DATETIME DEFAULT CURRENT_TIMESTAMP,
+    datePurchased DATE,
+    dateLastUsed DATE,
+    customerName TEXT NOT NULL,
+    customerID INT NOT NULL,
     tags TEXT,
-    dateEntered DATETIME DEFAULT CURRENT_TIMESTAMP,
-    expectedUsage ENUM("One time use", "More than once", "Regular", "Unknown"),
-    location ENUM("Green Inventory", "Gold Inventory", "Sanwa", "Heidelberg", "Kluge", "Awaiting Arrival"),
-    machine ENUM("Sanwa", "Heidelberg", "Kluge"),
     flatWidth INT,
     flatHeight INT,
     finishedWidth INT,
     finishedHeight INT,
     numPockets INT,
     pocketSize TEXT,
+    machine ENUM("Sanwa", "Heidelberg", "Kluge"),
+    location ENUM("Green Inventory", "Gold Inventory", "Sanwa", "Heidelberg", "Kluge", "Awaiting Arrival"),
+    expectedUsage ENUM("One time use", "More than once", "Regular", "Unknown"),
     numberUp INT,
-    reviewed ENUM("false", "true")
+    dieVendor TEXT,
+    docketReviewed ENUM("false", "true"),
+    description TEXT,
+    notes TEXT
 );

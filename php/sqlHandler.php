@@ -129,7 +129,7 @@
 				if ($asc_desc == "desc")
 					$sql .= " DESC";
 			}
-
+			
 			$result = $this->conn->query($sql);
 
 			return $result;

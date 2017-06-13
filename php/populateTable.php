@@ -23,9 +23,9 @@
 	// parse the data into table rows
 	while ($row = $result->fetch_assoc()) {
 		echo "	<tr class=\"table_rows\">
-					<td class=\"table_checkboxes\"><input name=\"" . $row['id'] . "\" type=\"checkbox\"></td>
-					<td class=\"row_id\">" . $row['id'] . "</td>
-					<td class=\"row_dateEntered\">" . $row['dateEntered'] . "</td>
+					<td class=\"table_checkboxes\"><input name=\"" . $row['dieID'] . "\" type=\"checkbox\"></td>
+					<td class=\"row_id\">" . $row['dieID'] . "</td>
+					<td class=\"row_dateCreated\">" . $row['dateCreated'] . "</td>
 					<td class=\"row_machine\">" . $row['machine'] . "</td>
 					<td class=\"row_location\">" . $row['location'] . "</td>
 					<td class=\"row_description\">" . $row['description'] . "</td>

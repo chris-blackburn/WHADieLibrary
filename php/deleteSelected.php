@@ -12,7 +12,7 @@
 	if (count($in) != 0) {
 		// prepare arguments for delete function in the database class
 		$table = $_POST["table"];
-		$where = "id";
+		$where = "dieID";
 
 		/*
 		Create new database object, setEcho on for error messages, connect to it,
