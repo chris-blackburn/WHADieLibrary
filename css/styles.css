@@ -10,7 +10,7 @@
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 1em 1em;
     transition: 0.3s;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .tab_content {
-    padding: 6px 12px;
+    padding: .5em 1em;
     border: 1px solid #ccc;
     border-top: none;
 }
@@ -35,7 +35,7 @@
 }
 
 #table_container th, td {
-	padding: 10px;
+	padding: .5em;
 	text-align: center;	
 	border-bottom: 1px solid #ddd;
 }
@@ -74,6 +74,29 @@
 
 #check_header, .table_checkboxes {
 	width: 4em;
+}
+
+#id_header, .row_id {
+	width: 3em;
+}
+
+#dateEntered_header, .row_dateEntered {
+	width: 11em;
+}
+
+#machine_header, .row_machine {
+	width: 10em;
+}
+
+#location_header, .row_location {
+	width: 10em;
+}
+
+#description_header, .row_description {
+	text-align: left !important;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 #table_container input[type='checkbox'] {

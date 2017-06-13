@@ -169,8 +169,9 @@
 			Resulting SQL code:
 				UPDATE [table] SET [column1] = [value1], [column2] = [value2], ... WHERE [condition] IN ([value1], [value2], ...)
 		*/
-		public function update($table) {
+		public function update($table, $values, $cols) {
 			$sql = "UPDATE " . $table . " SET";
+
 		}
 
 

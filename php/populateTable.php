@@ -2,7 +2,7 @@
 	require 'sqlHandler.php';
 
 	// Prepare the arguments
-	$table = "DieLibrary";
+	$table = $_POST["table"];
 	$cols = '*';
 	$where = NULL;
 	$order = $_POST["order"];
@@ -22,11 +22,13 @@
 
 	// parse the data into table rows
 	while ($row = $result->fetch_assoc()) {
-		echo "	<tr>
-					<td class=\"table_checkboxes\"><input id=\"" . $row['id'] . "\" type=\"checkbox\"></td>
-					<td>" . $row['job_num'] . "</td>
-					<td>" . $row['csr_name'] . "</td>
-					<td>" . $row['date'] . "</td>
+		echo "	<tr class=\"table_rows\">
+					<td class=\"table_checkboxes\"><input name=\"" . $row['id'] . "\" type=\"checkbox\"></td>
+					<td class=\"row_id\">" . $row['id'] . "</td>
+					<td class=\"row_dateEntered\">" . $row['dateEntered'] . "</td>
+					<td class=\"row_machine\">" . $row['machine'] . "</td>
+					<td class=\"row_location\">" . $row['location'] . "</td>
+					<td class=\"row_description\">" . $row['description'] . "</td>
 				</tr>";
 	}
 ?>

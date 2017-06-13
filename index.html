@@ -18,12 +18,14 @@
 
 	<div id="table_container" class="tab_content">
 		<table>
-			<thead>
+			<thead class="table_head">
 				<tr>
 					<th id="check_header">Delete</th>
-					<th id="jb_header" value="asc">Job Number</th>
-					<th id="csr_header" value="asc">CSR Name</th>
-					<th id="dt_header" value="asc">Date</th>
+					<th id="id_header" name="id" value="asc">ID</th>
+					<th id="dateEntered_header" name="dateEntered" value="asc">Date Entered</th>
+					<th id="machine_header" name="machine" value="asc">Machine</th>
+					<th id="location_header" name="location" value="asc">Location</th>
+					<th id="description_header" name="description" value="asc">Description</th>
 				</tr>
 			</thead>
 			<tbody class="table_body">
@@ -36,38 +38,72 @@
 	<div id="insert_form_container" class="tab_content">
 		<h3>Create New Entry</h3>
 		<form> <!-- The form tag doesn't need any attributes because jquery handles the submission -->
-		
-			Job Number: <input type="text" id="job_num" required><br>
-			Your Name: <input type="text" id="csr_name" required><br>
-			<input type="submit" value="Submit">
-			
 
-<!--
-			<input type="text" id="jobNumber" placeholder="Job number">
-			<input type="text" id="customerID" placeholder="customerID"><br>
+			<!-- use this to store nameother data and switch between adding/updating -->
+			<input type="hidden" name="id">
+			<input type="hidden" name="function" value="add">
+			<input type="hidden" name="table" value="dieBase">
+
+			<input type="text" name="jobNumber" placeholder="Job number" required>
+			<input type="text" name="customerID" placeholder="customerID" required><br>
+
 			Description:<br>
-			<input type="text" id="description"><br>
+			<input type="text" name="description"><br>
+
+			Tags:
+			<input type="text" name="tags"><br>
+
+			Purchase Date:
+			<input type="date" name="date"><br>
+
 			Expected usage:
-			<select id="expectedUsage">
-				<option value="once" selected>One time use</option>
-				<option value="plus">More than once</option>
-				<option value="regular">Regular</option>
-				<option value="unknown">Unknown</option>
+			<select name="expectedUsage">
+				<option value="One time use" selected>One time use</option>
+				<option value="More than once">More than once</option>
+				<option value="Regular">Regular</option>
+				<option value="Unknown">Unknown</option>
 			</select><br>
+
 			Location:
-			<select>
+			<select name="location">
 				<option value="Awaiting Arrival" selected>Awaiting Arrival</option>
-				<option value="green">Green Inventory</option>
-				<option value="gold">Gold Inventory</option>
-				<option value="sanwa">Sanwa</option>
+				<option value="Green Inventory">Green Inventory</option>
+				<option value="Godl Inventory">Gold Inventory</option>
+				<option value="Sanwa">Sanwa</option>
 				<option value="Heidelberg">Heidelberg</option>
-				<option value="kluge">Kluge</option>
+				<option value="Kluge">Kluge</option>
 			</select><br>
-			Tags:<br>
-			<input type="text" id="tags"><br>
+
+			Machine:
+			<select name="machine">
+				<option value="Sanwa">Sanwa</option>
+				<option value="Heidelberg">Heidelberg</option>
+				<option value="Kluge">Kluge</option>
+			</select><br>
+
+			Flat Size:
+			<input type="text" name="flatWidth" placeholder="Flat Width">
+			X
+			<input type="text" name="flatHeight" placeholder="Flat Height"><br>
+
+			Finished Size:
+			<input type="text" name="finishedWidth" placeholder="Finished Width">
+			X
+			<input type="text" name="finishedHeight" placeholder="Finished Height"><br>
+
+			Pockets:
+			<input type="range" name="pockets" value="0" min="0" max="10"><br>
+
+			Pocket Size:
+			<input type="text" name="pocketSize"><br>
+
+			Number Up:
+			<input type="range" name="numberUp" value="0" min="0" max="100"><br>
+
 			Reviewed:
-			<input type="checkbox" id="reviewed"><br>
--->
+			<input type="checkbox" name="reviewed"><br>
+
+			<input type="submit" value="Submit">
 
 		</form>
 	</div>

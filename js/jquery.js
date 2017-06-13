@@ -6,14 +6,17 @@ function populateTable(argv) {
 
 	// default to order by date, ascending
 	if (argv == null) {
-		argv = [ "date", "asc" ];
+		argv = [ "dateEntered", "asc" ];
 	}
 
 	// send post request
 	$.ajax({
 		type: "POST",
 		url: "php/populateTable.php",
-		data: { order: argv },
+		data: { 
+			table: "dieBase",
+			order: argv 
+		},
 		success: function(data, status) { 
 			console.log("Data: " + data + "\nPost Status: " + status);
 			$(".table_body").html(data);
@@ -21,34 +24,24 @@ function populateTable(argv) {
 	})
 }
 
-function populateTableByOrder(headerID, order) {
-	asc_desc = $(headerID).attr("value");
-
-	populateTable([ order, asc_desc ]);
-
-	if (asc_desc == "asc")
-		$(headerID).attr("value", "desc");
-	else if (asc_desc == "desc")
-		$(headerID).attr("value", "asc");
-}
-
 /*
 This runs when the webpage is loaded
 */
 $(document).ready(function() {
 	/*
-		used for ordering the table when clicking on the headers
+		used for ordering the table when clicking on the headers, access the name attribute
+			to reference the sql table => (ORDER BY [name])
 	*/
-	$("#jb_header").click(function() {
-		populateTableByOrder($(this), "job_num");
-	});
+	$(".table_head th").click(function() {
+		order = $(this).attr("name");
+		asc_desc = $(this).attr("value");
 
-	$("#csr_header").click(function() {
-		populateTableByOrder($(this), "csr_name");
-	});
+		populateTable([ order, asc_desc ]);
 
-	$("#dt_header").click(function() {
-		populateTableByOrder($(this), "date");
+		if (asc_desc == "asc")
+			$(this).attr("value", "desc");
+		else if (asc_desc == "desc")
+			$(this).attr("value", "asc");
 	});
 
 	/*
@@ -78,6 +71,15 @@ $(document).ready(function() {
 		$("#insert_form_container").show();
 	});
 
+	// the update button is hidden on page load
+	$("#update_btn").click(function() {
+		$(".tabs button").removeClass("active_tab");
+		$(this).addClass("active_tab");
+
+		$(".tab_content").hide();
+		$("#insert_form_container").show();
+	});
+
 	/*
 		Handles the form submit event, sends a post request to newEntry.php with 
 			the data in the form and refreshes the table
@@ -88,11 +90,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: "POST",
 			url: "php/newEntry.php",
-			data: { 
-				// This is where all the form data is set
-				job_num: $("#job_num").val(), 
-				csr_name: $("#csr_name").val() 
-			},
+			data: $(this).serialize(),
 			success: function(data, status) {
 				console.log("Data: " + data + "\nPost Status: " + status);
 
@@ -108,7 +106,7 @@ $(document).ready(function() {
 	// grab all the checked boxes
 	var selected = [];
 	$(".table_checkboxes input[type=\"checkbox\"]:checked").each(function() {
-		selected.push($(this).attr("id"));
+		selected.push($(this).attr("name"));
 	});
 
 	if (selected.length != 0) {
@@ -128,21 +126,16 @@ $(document).ready(function() {
 	});
 
 	/*
-		go to edit tab when an entry is clicked
+		go to edit form when an entry is clicked
 	*/
-	$(".table_body tr").click(function() {
-		alert("row clicked");
-
-		/*// reset the active tab
+	$(".table_body").delegate("tr", "dblclick", function() {
+		// reset the active tab
 		$(".tabs button").removeClass("active_tab");
 		$("#update_btn").addClass("active_tab");
 		$("#update_btn").show();
 
 		// hide all other content and show the update form
-		$(".tab_content").hide();*/
-
+		$(".tab_content").hide();
+		$("#insert_form_container").show();
 	});
-
-	
-
 });
