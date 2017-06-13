@@ -114,7 +114,10 @@ $(document).ready(function() {
 		$.ajax({
 			type: "POST",
 			url: "php/deleteSelected.php",
-			data: { checks: selected },
+			data: { 
+				table: $("#table_container").attr("tableName"),
+				checks: selected 
+			},
 			success: function(data, status) {
 				console.log("Data: " + data + "\nPost Status: " + status);
 				populateTable(null);

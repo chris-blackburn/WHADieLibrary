@@ -11,7 +11,7 @@
 	// make sure the array was populated, no reason to send a SQL query if it's NULL
 	if (count($in) != 0) {
 		// prepare arguments for delete function in the database class
-		$table = "DieLibrary";
+		$table = $_POST["table"];
 		$where = "id";
 
 		/*
