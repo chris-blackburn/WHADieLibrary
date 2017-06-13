@@ -76,23 +76,23 @@
 	width: 4em;
 }
 
-#id_header, .row_id {
+#id_header, .dieID_row {
 	width: 3em;
 }
 
-#dateCreated_header, .row_dateCreated {
+#dateLastUsed_header, .dateLastUsed_row {
 	width: 11em;
 }
 
-#machine_header, .row_machine {
+#machine_header, .machine_row {
 	width: 10em;
 }
 
-#location_header, .row_location {
+#location_header, .location_row {
 	width: 10em;
 }
 
-#description_header, .row_description {
+#description_header, .description_row {
 	text-align: left !important;
 	overflow: hidden;
 	white-space: nowrap;

@@ -1,24 +1,22 @@
 <?php
-	require 'sqlHandler.php';
+	require "sqlHandler.php";
 
-		// grab the data posted to this script
-	$job_num = $_POST["job_num"];
-	$csr_name = $_POST["csr_name"];
-	$in = $_POST["id"];
-	
-		// prepare the arguements for database's insert() function
-	$table = "DieLibrary";
-	$values = [$job_num, $csr_name];
-	$cols = ["job_num", "csr_name"];
-	$where = "id";
+	$table = $_POST["table"];
+	$dieID = $_POST["dieID"];
 
-		/*
-			Create new database object, setEcho on for error messages, connect to it,
-				insert using the prepped variables, and disconnect once we have the data
-		*/
-	$db = new Database('localhost', 'monty', 'some_pass', 'testDB'); 
-	$db->setEcho(1);
+	// create the form and fill it with the data of the selected table entry
+
+	$db = new Database("localhost", "monty", "some_pass", "testDB");
 	$db->connect();
-	$db->update($table, $values, $cols);
+
+	$cols = '*';
+	$where = "dieID=" . $dieID;
+
+	// use row["name"] to access the data
+	$result = $db->select($table, $cols, $where, $in);
+	$row = $result->fetch_assoc();
+
 	$db->disconnect();
+
+	// return $row;
 ?>

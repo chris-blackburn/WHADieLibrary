@@ -6,7 +6,7 @@ function populateTable(argv) {
 
 	// default to order by date, ascending
 	if (argv == null) {
-		argv = [ "dateCreated", "asc" ];
+		argv = [ "dateLastUsed", "desc" ];
 	}
 
 	// send post request
@@ -73,11 +73,21 @@ $(document).ready(function() {
 
 	// the update button is hidden on page load
 	$("#update_btn").click(function() {
+		// reset the active tab
 		$(".tabs button").removeClass("active_tab");
-		$(this).addClass("active_tab");
+		$("#update_btn").addClass("active_tab");
+		$("#update_btn").show();
 
+		// hide all other content and show the update form
 		$(".tab_content").hide();
-		$("#insert_form_container").show();
+		$("#update_form_container").show();
+	});
+
+	/*
+		go to edit form when an entry is clicked
+	*/
+	$(".table_body").delegate("tr", "dblclick", function() {
+		$("#update_btn").click();
 	});
 
 	/*
@@ -103,42 +113,30 @@ $(document).ready(function() {
 		deletes entries that have their boxes checked
 	*/
 	$("#delete_btn").click(function() {
-	// grab all the checked boxes
-	var selected = [];
-	$(".table_checkboxes input[type=\"checkbox\"]:checked").each(function() {
-		selected.push($(this).attr("name"));
+		// grab all the checked boxes
+		var selected = [];
+		$(".table_checkboxes input[type=\"checkbox\"]:checked").each(function() {
+			selected.push($(this).attr("name"));
+		});
+
+		if (selected.length != 0) {
+			// send POST data to deleteSelected.php containing the array of checked boxes
+			$.ajax({
+				type: "POST",
+				url: "php/deleteSelected.php",
+				data: { 
+					table: $("#table_container").attr("value"),
+					checks: selected 
+				},
+				success: function(data, status) {
+					console.log("Data: " + data + "\nPost Status: " + status);
+					populateTable(null);
+					}
+				})
+			} else {
+				console.log("Cannot Delete: Nothing is Selected");
+			}
 	});
 
-	if (selected.length != 0) {
-		// send POST data to deleteSelected.php containing the array of checked boxes
-		$.ajax({
-			type: "POST",
-			url: "php/deleteSelected.php",
-			data: { 
-				table: $("#table_container").attr("value"),
-				checks: selected 
-			},
-			success: function(data, status) {
-				console.log("Data: " + data + "\nPost Status: " + status);
-				populateTable(null);
-				}
-			})
-		} else {
-			console.log("Cannot Delete: Nothing is Selected");
-		}
-	});
-
-	/*
-		go to edit form when an entry is clicked
-	*/
-	$(".table_body").delegate("tr", "dblclick", function() {
-		// reset the active tab
-		$(".tabs button").removeClass("active_tab");
-		$("#update_btn").addClass("active_tab");
-		$("#update_btn").show();
-
-		// hide all other content and show the update form
-		$(".tab_content").hide();
-		$("#insert_form_container").show();
-	});
+	
 });

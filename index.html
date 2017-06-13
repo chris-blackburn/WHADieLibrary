@@ -22,7 +22,7 @@
 				<tr>
 					<th id="check_header">Delete</th>
 					<th id="id_header" name="dieID" value="asc">ID</th>
-					<th id="dateCreated_header" name="dateCreated" value="asc">Date Created</th>
+					<th id="dateLastUsed_header" name="dateLastUsed" value="asc">Date Last Used</th>
 					<th id="machine_header" name="machine" value="asc">Machine</th>
 					<th id="location_header" name="location" value="asc">Location</th>
 					<th id="description_header" name="description" value="asc">Description</th>
@@ -40,25 +40,24 @@
 		<form> <!-- The form tag doesn't need any attributes because jquery handles the submission -->
 
 			<!-- use this to store other data and switch between adding/updating -->
-			<input type="hidden" name="dieID">
 			<input type="hidden" name="function" value="add">
 			<input type="hidden" name="table" value="dieBase2">
 
 			<input type="text" name="jobNumber" placeholder="Job number" required>
-			<input type="text" name="customerID" placeholder="customerID" required><br>
+			<input type="text" name="customerID" placeholder="customerID" required>
 
-			<input type="text" name="customerName" placeholder="Customer Name"><br>
+			<input type="text" name="customerName" placeholder="Customer Name">
 
-			<input type="text" name="dieVendor" placeholder="dieVendor"><br>
+			<input type="text" name="dieVendor" placeholder="dieVendor">
 
-			Description:<br>
-			<input type="text" name="description"><br>
+			Description:
+			<input type="text" name="description">
 
 			Tags:
-			<input type="text" name="tags"><br>
+			<input type="text" name="tags">
 
 			Purchase Date:
-			<input type="date" name="datePurchased"><br>
+			<input type="date" name="datePurchased">
 
 			Expected usage:
 			<select name="expectedUsage">
@@ -66,7 +65,7 @@
 				<option value="More than once">More than once</option>
 				<option value="Regular">Regular</option>
 				<option value="Unknown">Unknown</option>
-			</select><br>
+			</select>
 
 			Location:
 			<select name="location">
@@ -76,44 +75,106 @@
 				<option value="Sanwa">Sanwa</option>
 				<option value="Heidelberg">Heidelberg</option>
 				<option value="Kluge">Kluge</option>
-			</select><br>
+			</select>
 
 			Machine:
 			<select name="machine">
 				<option value="Sanwa">Sanwa</option>
 				<option value="Heidelberg">Heidelberg</option>
 				<option value="Kluge">Kluge</option>
-			</select><br>
+			</select>
 
 			Flat Size:
 			<input type="number" name="flatWidth" placeholder="Flat Width">
 			X
-			<input type="number" name="flatHeight" placeholder="Flat Height"><br>
+			<input type="number" name="flatHeight" placeholder="Flat Height">
 
 			Finished Size:
 			<input type="number" name="finishedWidth" placeholder="Finished Width">
 			X
-			<input type="number" name="finishedHeight" placeholder="Finished Height"><br>
+			<input type="number" name="finishedHeight" placeholder="Finished Height">
 
 			Pockets:
-			<input type="range" name="numPockets" value="0" min="0" max="10"><br>
+			<input type="range" name="numPockets" value="0" min="0" max="10">
 
 			Pocket Size:
-			<input type="number" name="pocketSize"><br>
+			<input type="number" name="pocketSize">
 
 			Number Up:
-			<input type="range" name="numberUp" value="0" min="0" max="100"><br>
+			<input type="range" name="numberUp" value="0" min="0" max="100">
 
 			Docket Reviewed:
-			<input type="checkbox" name="docketReviewed"><br>
+			<input type="checkbox" name="docketReviewed">
 
 			Notes:
-			<input type="text" name="notes"><br>
+			<input type="text" name="notes">
 
 			<input type="submit" value="Submit">
 
 		</form>
 	</div>
 
+	<div id="update_form_container" class="tab_content">
+		<h3>Update Entry</h3>
+
+		<!-- Display as non-editable: job number, customer ID, customer name, die id, purchase date, machine -->
+
+		<form> <!-- The form tag doesn't need any attributes because jquery handles the submission -->
+
+			<!-- use this to store other data and switch between adding/updating -->
+			<input type="hidden" name="function" value="edit">
+			<input type="hidden" name="table" value="dieBase2">
+
+			Description:
+			<input type="text" name="description">
+
+			Expected usage:
+			<select name="expectedUsage">
+				<option value="One time use">One time use</option>
+				<option value="More than once">More than once</option>
+				<option value="Regular">Regular</option>
+				<option value="Unknown">Unknown</option>
+			</select>
+
+			Location:
+			<select name="location">
+				<option value="Awaiting Arrival">Awaiting Arrival</option>
+				<option value="Green Inventory">Green Inventory</option>
+				<option value="Godl Inventory">Gold Inventory</option>
+				<option value="Sanwa">Sanwa</option>
+				<option value="Heidelberg">Heidelberg</option>
+				<option value="Kluge">Kluge</option>
+			</select>
+
+			Flat Size:
+			<input type="number" name="flatWidth" placeholder="Flat Width">
+			X
+			<input type="number" name="flatHeight" placeholder="Flat Height">
+
+			Finished Size:
+			<input type="number" name="finishedWidth" placeholder="Finished Width">
+			X
+			<input type="number" name="finishedHeight" placeholder="Finished Height">
+
+			Pockets:
+			<input type="range" name="numPockets" value="0" min="0" max="10">
+
+			Pocket Size:
+			<input type="number" name="pocketSize">
+
+			Number Up:
+			<input type="range" name="numberUp" value="0" min="0" max="100">
+
+			Docket Reviewed:
+			<input type="checkbox" name="docketReviewed">
+
+			Notes:
+			<input type="text" name="notes">
+
+			<input type="submit" value="Submit">
+
+		</form>
+	</div>
+	
 </body>
 </html>

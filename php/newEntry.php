@@ -11,6 +11,8 @@
 
 	$unwantedFields = [ "table", "dieID", "function" ];
 
+	// maybe add if function = add, continue, else update
+
 	foreach ($_POST as $col => $value) {
 		// avoid sending unwanted data
 		if (in_array($col, $unwantedFields))

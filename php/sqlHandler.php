@@ -115,15 +115,19 @@
 			Resulting SQL code:
 				SELECT [column1, column2, ...] FROM [table] WHERE [condition] ORDER BY [column]
 		*/
-		public function select($table, $cols = '*', $where = null, $order = null, $asc_desc = null) {
+		public function select($table, $cols = '*', $where = null, $in = null, $order = null, $asc_desc = null) {
 			$sql = "SELECT " . $cols . " FROM " . $table;
 
 			if ($cols != '*') {
 				$sql = "SELECT " . $this->formatArray($cols) . " FROM " . $table;
 			}
 
-			if ($where != NULL) 
+			if ($where != NULL)	{
 				$sql .= " WHERE " . $where;
+				if ($in != NULL)
+					$sql .= " IN " . $this->formatArray($in);
+			}
+
 			if ($order != NULL) {
 				$sql .= " ORDER BY " . $order;
 				if ($asc_desc == "desc")
