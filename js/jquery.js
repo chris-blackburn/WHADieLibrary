@@ -138,5 +138,14 @@ $(document).ready(function() {
 			}
 	});
 
+	$("#update_form_container form").submit(function(event) {
+		event.preventDefault();
+
+		$.ajax({
+			type: "POST",	
+			url: "php/updateEntry.php",
+			data: $(this).serialize()
+		})
+	});
 	
 });
