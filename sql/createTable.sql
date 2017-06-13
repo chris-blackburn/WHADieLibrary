@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS dieBase (
     numPockets INT,
     pocketSize TEXT,
     numberUp INT,
-    reviewed BOOLEAN
+    reviewed ENUM("false", "true")
 );
