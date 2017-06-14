@@ -1,3 +1,7 @@
+/*
+	styling for the tabs on the top of the page
+*/
+
 .tabs {
 	overflow: hidden;
 	border: 1px solid #ccc;
@@ -27,6 +31,10 @@
     border: 1px solid #ccc;
     border-top: none;
 }
+
+/*
+	styling for the table
+*/
 
 #table_container table {
 	width: 100%;
@@ -110,6 +118,49 @@
     background: #abd;
 }
 
-#entry_info span {
+/*
+	styling for new entry and update forms
+*/
+
+.die_form input[type="submit"] {
+	color: white;
+	background-color: #333;
+	padding: 1em;
+	width: 20em;
+	border: none;
+	margin: 1em;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.die_form input[type="text"]:focus {
+    border: 2px solid lightblue;
+}
+
+.die_form input[type="text"] {
+	margin: 5px;
+	padding: 3px;
+	border: 2px solid #aaa;
+	border-radius: 2px;
+	box-sizing: border-box;
+}
+
+.die_form input[type="date"] {
+	margin: 5px;
+	padding: 1px;
+	border: 2px solid #aaa;
+	border-radius: 2px;
+	box-sizing: border-box;
+}
+
+.die_form input[type="date"]:focus {
+    border: 2px solid lightblue;
+}
+
+#entry_info label {
 	font-weight: bold;
+}
+
+#update_form_container form {
+	width: 50%;
 }
