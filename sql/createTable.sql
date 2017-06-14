@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS dieBase2 (
     expectedUsage ENUM("One time use", "More than once", "Regular", "Unknown"),
     numberUp INT,
     dieVendor TEXT,
-    docketReviewed ENUM("false", "true"),
+    docketReviewed ENUM("false", "true") DEFAULT "false",
     description TEXT,
     notes TEXT
 );

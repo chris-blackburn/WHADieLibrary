@@ -76,7 +76,7 @@
 	width: 4em;
 }
 
-#id_header, .dieID_row {
+#dieID_header, .dieID_row {
 	width: 3em;
 }
 
@@ -108,4 +108,8 @@
 }
 #table_container input[type='checkbox']:checked {
     background: #abd;
+}
+
+#entry_info span {
+	font-weight: bold;
 }

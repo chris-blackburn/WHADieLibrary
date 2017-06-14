@@ -11,9 +11,9 @@
 <body>
 
 	<div class="tabs">
-		<button id="table_btn">View Table</button>
-		<button id="insert_btn">New Entry</button>
-		<button hidden id="update_btn">Update Entry</button>
+		<button id="table_btn">View Table</putton>
+		<button id="insert_btn">New Entry</putton>
+		<button hidden id="update_btn">Update Entry</putton>
 	</div>
 
 	<div id="table_container" class="tab_content" value="dieBase2">
@@ -21,7 +21,7 @@
 			<thead class="table_head">
 				<tr>
 					<th id="check_header">Delete</th>
-					<th id="id_header" name="dieID" value="asc">ID</th>
+					<th id="dieID_header" name="dieID" value="asc">ID</th>
 					<th id="dateLastUsed_header" name="dateLastUsed" value="asc">Date Last Used</th>
 					<th id="machine_header" name="machine" value="asc">Machine</th>
 					<th id="location_header" name="location" value="asc">Location</th>
@@ -32,7 +32,7 @@
 				<!-- This gets populated by populateTable.php, see js/jquery.js -->
 			</tbody>
 		</table>
-		<button id="delete_btn">Delete Selected</button>
+		<button id="delete_btn">Delete Selected</putton>
 	</div>
 
 	<div id="insert_form_container" class="tab_content">
@@ -46,7 +46,7 @@
 			<input type="text" name="jobNumber" placeholder="Job number" required>
 			<input type="text" name="customerID" placeholder="customerID" required>
 
-			<input type="text" name="customerName" placeholder="Customer Name">
+			<input type="text" name="customerName" placeholder="Customer Name" required>
 
 			<input type="text" name="dieVendor" placeholder="dieVendor">
 
@@ -57,7 +57,7 @@
 			<input type="text" name="tags">
 
 			Purchase Date:
-			<input type="date" name="datePurchased">
+			<input type="date" name="datePurchased" required>
 
 			Expected usage:
 			<select name="expectedUsage">
@@ -71,7 +71,7 @@
 			<select name="location">
 				<option value="Awaiting Arrival" selected>Awaiting Arrival</option>
 				<option value="Green Inventory">Green Inventory</option>
-				<option value="Godl Inventory">Gold Inventory</option>
+				<option value="Gold Inventory">Gold Inventory</option>
 				<option value="Sanwa">Sanwa</option>
 				<option value="Heidelberg">Heidelberg</option>
 				<option value="Kluge">Kluge</option>
@@ -104,7 +104,8 @@
 			<input type="range" name="numberUp" value="0" min="0" max="100">
 
 			Docket Reviewed:
-			<input type="checkbox" name="docketReviewed">
+			<input type="hidden" name="docketReviewed" value="false">
+			<input type="checkbox" name="docketReviewed" value="true">
 
 			Notes:
 			<input type="text" name="notes">
@@ -118,10 +119,21 @@
 		<h3>Update Entry</h3>
 
 		<!-- Display as non-editable: job number, customer ID, customer name, die id, purchase date, machine -->
+		<div id="entry_info">
+			<span>Job Number:</span> <output name="jobNumber"></output> | 
+				<span>Customer ID:</span> <output name="customerID"></output> |
+				<span>Customer Name:</span> <output name="customerName"></output> | 
+				<span>Die ID:</span> <output name="dieID"></output><br>
+			<span>Purchase Date:</span> <output name="datePurchased"></output><br>
+			<span>Machine:</span> <output name="machine"></output>
+		</div>
+
+		<br>
 
 		<form> <!-- The form tag doesn't need any attributes because jquery handles the submission -->
 
 			<!-- use this to store other data and switch between adding/updating -->
+			<input type="hidden" name="dieID">
 			<input type="hidden" name="function" value="edit">
 			<input type="hidden" name="table" value="dieBase2">
 
@@ -140,7 +152,7 @@
 			<select name="location">
 				<option value="Awaiting Arrival">Awaiting Arrival</option>
 				<option value="Green Inventory">Green Inventory</option>
-				<option value="Godl Inventory">Gold Inventory</option>
+				<option value="Gold Inventory">Gold Inventory</option>
 				<option value="Sanwa">Sanwa</option>
 				<option value="Heidelberg">Heidelberg</option>
 				<option value="Kluge">Kluge</option>
@@ -166,7 +178,8 @@
 			<input type="range" name="numberUp" value="0" min="0" max="100">
 
 			Docket Reviewed:
-			<input type="checkbox" name="docketReviewed">
+			<input type="hidden" name="docketReviewed" value="false">
+			<input type="checkbox" name="docketReviewed" value="true">
 
 			Notes:
 			<input type="text" name="notes">
@@ -176,5 +189,5 @@
 		</form>
 	</div>
 	
-</body>
+</pody>
 </html>

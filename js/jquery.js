@@ -84,28 +84,21 @@ $(document).ready(function() {
 	});
 
 	/*
-		go to edit form when an entry is clicked
-	*/
-	$(".table_body").delegate("tr", "dblclick", function() {
-		$("#update_btn").click();
-	});
-
-	/*
-		Handles the form submit event, sends a post request to newEntry.php with 
+		Handles the form submit event, sends a post request to insertEntry.php with 
 			the data in the form and refreshes the table
-		*/
+	*/
 	$("#insert_form_container form").submit(function(event) {
 		event.preventDefault();
 
 		$.ajax({
 			type: "POST",
-			url: "php/newEntry.php",
+			url: "php/insertEntry.php",
 			data: $(this).serialize(),
 			success: function(data, status) {
-				console.log("Data: " + data + "\nPost Status: " + status);
+						console.log("Data: " + data + "\nPost Status: " + status);
 
-				$("#table_btn").click();
-			}
+						$("#table_btn").click();
+					}
 		})
 	});
 
@@ -114,7 +107,7 @@ $(document).ready(function() {
 	*/
 	$("#delete_btn").click(function() {
 		// grab all the checked boxes
-		var selected = [];
+		var selected = new Array();
 		$(".table_checkboxes input[type=\"checkbox\"]:checked").each(function() {
 			selected.push($(this).attr("name"));
 		});
@@ -129,13 +122,42 @@ $(document).ready(function() {
 					checks: selected 
 				},
 				success: function(data, status) {
-					console.log("Data: " + data + "\nPost Status: " + status);
-					populateTable(null);
+							console.log("Data: " + data + "\nPost Status: " + status);
+							populateTable(null);
+						}
+			})
+		} else {
+			console.log("Cannot Delete: Nothing is Selected");
+		}
+	});
+
+	/*
+		go to edit form when an entry is double clicked and
+			populate it with the entry's data
+	*/
+	$(".table_body").delegate("tr", "dblclick", function() {
+		$("#update_btn").click();
+
+		// send a post request with the table name and dieID to grab the rest of the data
+		$.ajax({
+			type: "GET",
+			url: "php/populateUpdateForm.php",
+			data: {
+				table: $("#table_container").attr("value"),
+				dieID: $(this).attr("name")
+			},
+			dataType: "JSON",
+			success: function(data, status) {
+						console.log("Data: " + data + "\nGET Status: " + status);
+
+						for (var key in data) {
+							console.log(key + "->" + data[key]);
+							$("#update_form_container [name=" + key + "]").val(data[key]);
+						}
 					}
-				})
-			} else {
-				console.log("Cannot Delete: Nothing is Selected");
-			}
+		})
+
+		
 	});
 
 	$("#update_form_container form").submit(function(event) {
@@ -143,8 +165,13 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: "POST",	
-			url: "php/updateEntry.php",
-			data: $(this).serialize()
+			url: "php/insertEntry.php",
+			data: $(this).serialize(),
+			success: function(data, status) {
+						console.log("Data: " + data + "\nPost Status: " + status);
+
+						$("#table_btn").click();
+					}
 		})
 	});
 	

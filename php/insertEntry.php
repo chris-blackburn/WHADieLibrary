@@ -9,7 +9,7 @@
 				in the sql database
 		*/
 
-	$unwantedFields = [ "table", "dieID", "function" ];
+	$unwantedFields = [ "table", "function", "dieID" ];
 
 	// maybe add if function = add, continue, else update
 
@@ -29,6 +29,17 @@
 	$db = new Database('localhost', 'monty', 'some_pass', 'testDB'); 
 	$db->setEcho(1);
 	$db->connect();
-	$db->insert($table, $values, $cols);
+
+	// adding new entry or editing an existing one
+	$function = $_POST['function'];
+
+	if ($function == "add")
+		$db->insert($table, $values, $cols);
+	else if ($function == "edit") {
+		$where = "dieID";
+		$in = $_POST["dieID"];
+		$db->update($table, $values, $cols, $where, $in);
+	}
+
 	$db->disconnect();
 ?>

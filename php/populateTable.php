@@ -28,7 +28,7 @@
 		if ($dateLastUsed == NULL)
 			$dateLastUsed = "Never";
 
-		echo "	<tr class=\"table_rows\">
+		echo "	<tr class=\"table_rows\" name=\"" . $row['dieID'] . "\">
 					<td class=\"table_checkboxes\"><input name=\"" . $row['dieID'] . "\" type=\"checkbox\"></td>
 					<td class=\"dieID_row\">" . $row['dieID'] . "</td>
 					<td class=\"dateLastUsed_row\">" . $dateLastUsed . "</td>

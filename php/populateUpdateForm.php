@@ -1,16 +1,17 @@
 <?php
 	require "sqlHandler.php";
 
-	$table = $_POST["table"];
-	$dieID = $_POST["dieID"];
+	$table = $_GET["table"];
+	$dieID = $_GET["dieID"];
 
 	// create the form and fill it with the data of the selected table entry
-
+	
 	$db = new Database("localhost", "monty", "some_pass", "testDB");
 	$db->connect();
 
 	$cols = '*';
-	$where = "dieID=" . $dieID;
+	$where = "dieID";
+	$in = $dieID;
 
 	// use row["name"] to access the data
 	$result = $db->select($table, $cols, $where, $in);
@@ -18,5 +19,5 @@
 
 	$db->disconnect();
 
-	// return $row;
+	echo json_encode($row);
 ?>
