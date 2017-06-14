@@ -56,7 +56,7 @@
 			Tags:
 			<input type="text" name="tags">
 
-			Purchase Date:
+			Date Purchased:
 			<input type="date" name="datePurchased" required>
 
 			Expected usage:
@@ -124,7 +124,8 @@
 				<span>Customer ID:</span> <output name="customerID"></output> |
 				<span>Customer Name:</span> <output name="customerName"></output> | 
 				<span>Die ID:</span> <output name="dieID"></output><br>
-			<span>Purchase Date:</span> <output name="datePurchased"></output><br>
+			<span>Date Purchased:</span> <output name="datePurchased"></output> |
+				<span>Date Last Used:</span> <output name="dateLastUsed"></output><br>
 			<span>Machine:</span> <output name="machine"></output>
 		</div>
 
@@ -176,6 +177,9 @@
 
 			Number Up:
 			<input type="range" name="numberUp" value="0" min="0" max="100">
+
+			Date Last Used:
+			<input type="date" name="dateLastUsed" required>
 
 			Docket Reviewed:
 			<input type="hidden" name="docketReviewed" value="false">

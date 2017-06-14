@@ -69,6 +69,16 @@ $(document).ready(function() {
 		$(this).addClass("active_tab");
 
 		$(".tab_content").hide();
+
+		// set the date fields to have the current date
+		$.ajax({
+			type: "GET",
+			url: "php/getCurrentDate.php",
+			success: function(data) {
+				$("#insert_form_container [name=\"datePurchased\"]").val(data);
+			}
+		})
+
 		$("#insert_form_container").show();
 	});
 
@@ -149,15 +159,19 @@ $(document).ready(function() {
 			success: function(data, status) {
 						console.log("Data: " + data + "\nGET Status: " + status);
 
+						// fill up the form with the existing data, contains some conditionals for dates and checkboxes
 						for (var name in data) {
 							console.log(name + "->" + data[name]);
-							if (name == "docketReviewed")
-								if (data[name] == "true")
+							if (name == "docketReviewed") {
+								if (data[name] == "true") // used to make the checkbox checked or not
 									$("#update_form_container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", true);
 								else
 									$("#update_form_container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", false);
-							else
+							} if (name == "dateLastUsed" && data[name] == "1983-01-01") {
+								$("#update_form_container output[name=\"dateLastUsed\"]").val("Never");
+							} else {
 								$("#update_form_container [name=\"" + name + "\"]").val(data[name]);
+							}
 						}
 					}
 		})

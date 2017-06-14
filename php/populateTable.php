@@ -25,7 +25,7 @@
 	while ($row = $result->fetch_assoc()) {
 		$dateLastUsed = $row['dateLastUsed'];
 
-		if ($dateLastUsed == NULL)
+		if ($dateLastUsed == "1983-01-01")
 			$dateLastUsed = "Never";
 
 		echo "	<tr class=\"table_rows\" name=\"" . $row['dieID'] . "\">
