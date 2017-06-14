@@ -48,13 +48,14 @@ $(document).ready(function() {
 	on click, run populateTable()
 	*/
 	$("#table_btn").click(function() {
+		populateTable(null);
+
 		// change the active tab
 		$(".tabs button").removeClass("active_tab");
 		$(this).addClass("active_tab");
 
 		$(".tab_content").hide();
 		$("#table_container").show();
-		populateTable(null);
 	});
 
 	// open the table tab and load the table by calling the table button click event function
@@ -108,7 +109,7 @@ $(document).ready(function() {
 	$("#delete_btn").click(function() {
 		// grab all the checked boxes
 		var selected = new Array();
-		$(".table_checkboxes input[type=\"checkbox\"]:checked").each(function() {
+		$(".table_checkboxes [type=\"checkbox\"]:checked").each(function() {
 			selected.push($(this).attr("name"));
 		});
 
@@ -136,8 +137,6 @@ $(document).ready(function() {
 			populate it with the entry's data
 	*/
 	$(".table_body").delegate("tr", "dblclick", function() {
-		$("#update_btn").click();
-
 		// send a post request with the table name and dieID to grab the rest of the data
 		$.ajax({
 			type: "GET",
@@ -150,14 +149,21 @@ $(document).ready(function() {
 			success: function(data, status) {
 						console.log("Data: " + data + "\nGET Status: " + status);
 
-						for (var key in data) {
-							console.log(key + "->" + data[key]);
-							$("#update_form_container [name=" + key + "]").val(data[key]);
+						for (var name in data) {
+							console.log(name + "->" + data[name]);
+							if (name == "docketReviewed")
+								if (data[name] == "true")
+									$("#update_form_container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", true);
+								else
+									$("#update_form_container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", false);
+							else
+								$("#update_form_container [name=\"" + name + "\"]").val(data[name]);
 						}
 					}
 		})
 
-		
+		$("#update_btn").click();
+
 	});
 
 	$("#update_form_container form").submit(function(event) {
