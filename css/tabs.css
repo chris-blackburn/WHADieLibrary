@@ -1,0 +1,33 @@
+/*
+	styling for the tabs on the top of the page
+*/
+
+.tabs {
+	overflow: hidden;
+	border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tabs button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 1em 1em;
+    transition: 0.3s;
+}
+
+.tabs button:hover {
+	background-color: #ccc;
+}
+
+.active_tab {
+	background-color: #ccc !important;
+}
+
+.tab_content {
+    padding: .5em 1em;
+    border: 1px solid #ccc;
+    border-top: none;
+}

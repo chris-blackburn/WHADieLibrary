@@ -3,7 +3,9 @@
 <html>
 <head>
 	<title>WHA Die Library</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="css/tabs.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+	<link rel="stylesheet" type="text/css" href="css/forms.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/jquery.js" type="text/javascript"></script>
 </head>
@@ -15,6 +17,8 @@
 		<button id="insert_btn">New Entry</putton>
 		<button hidden id="update_btn">Update Entry</putton>
 	</div>
+
+<!-- ***************************************************** TABLE ***************************************************** -->
 
 	<div id="table_container" class="tab_content" value="dieBase2">
 		<table>
@@ -35,131 +39,162 @@
 		<button id="delete_btn">Delete Selected</putton>
 	</div>
 
+<!-- ***************************************************** INSERT FORM ***************************************************** -->
+
 	<div id="insert_form_container" class="die_form tab_content">
-		<h3>Create New Entry</h3>
 		<form> <!-- The form tag doesn't need any attributes because jquery handles the submission -->
 
 			<!-- use this to store other data and switch between adding/updating -->
 			<input type="hidden" name="function" value="add">
 			<input type="hidden" name="table" value="dieBase2">
 
-			<input type="text" name="jobNumber" placeholder="Job number" required>
-			<input type="text" name="customerID" placeholder="customerID" required>
+			<div class="center">
+				<input type="text" name="jobNumber" placeholder="Job number" required>
+				<input type="text" name="customerID" placeholder="Customer ID" required>
+			</div>
 
-			<br>
+			<div class="center">
+				<input type="text" name="customerName" placeholder="Customer Name" required>
+			</div>
 
-			<input type="text" name="customerName" placeholder="Customer Name" required>
+			<div class="center">
+				<input type="text" name="dieVendor" placeholder="Die Vendor">
+			</div>
 
-			<br>
+			<div class="field">
+				<label for="input[name=description]">Description:</label>
+				<div class="field_input">	
+					<input type="text" name="description">
+				</div>
+			</div>
 
-			<input type="text" name="dieVendor" placeholder="Die Vendor">
+			<div class="field">
+				<label for="input[name=tags]">Tags:</label>
+				<div class="field_input">
+					<input type="text" name="tags">
+				</div>
+			</div>
 
-			<br>
+			<div class="field">
+				<label for="input[name=datePurchased]">Date Purchased:</label>
+				<div class="field_input">
+					<input type="date" name="datePurchased" required>
+				</div>	
+			</div>
 
-			<label for="input[name=description]">Description:</label>
-			<input type="text" name="description">
+			<div class="field">
+				<label for="input[name=expectedUsage]">Expected usage:</label>
+				<div class="field_input">
+					<select name="expectedUsage">
+						<option value="One time use" selected>One time use</option>
+						<option value="More than once">More than once</option>
+						<option value="Regular">Regular</option>
+						<option value="Unknown">Unknown</option>
+					</select>
+				</div>	
+			</div>
 
-			<br>
+			<div class="field">
+				<label for="input[name=location]">Location:</label>
+				<div class="field_input">
+						<select name="location">
+						<option value="Awaiting Arrival" selected>Awaiting Arrival</option>
+						<option value="Green Inventory">Green Inventory</option>
+						<option value="Gold Inventory">Gold Inventory</option>
+						<option value="Sanwa">Sanwa</option>
+						<option value="Heidelberg">Heidelberg</option>
+						<option value="Kluge">Kluge</option>
+					</select>
+				</div>	
+			</div>
 
-			<label for="input[name=tags]">Tags:</label>
-			<input type="text" name="tags">
+			<div class="field">
+				<label for="input[name=machine]">Machine:</label>
+				<div class="field_input">
+						<select name="machine">
+						<option value="Sanwa">Sanwa</option>
+						<option value="Heidelberg">Heidelberg</option>
+						<option value="Kluge">Kluge</option>
+					</select>
+				</div>	
+			</div>
 
-			<br>
+			<div class="field sizes">
+				<label for="input[name=flatWidth]">Flat Size:</label>
+				<div class="field_input">
+					<input type="number" name="flatWidth" placeholder="Flat Width">
+					X
+					<input type="number" name="flatHeight" placeholder="Flat Height">
+				</div>	
+			</div>
+				
+			<div class="field sizes">
+				<label for="input[name=finishedWidth]">Finished Size:</label>
+				<div class="field_input">
+					<input type="number" name="finishedWidth" placeholder="Finished Width">
+					X
+					<input type="number" name="finishedHeight" placeholder="Finished Height">
+				</div>	
+			</div>
 
-			<label for="input[name=datePurchased]">Date Purchased:</label>
-			<input type="date" name="datePurchased" required>
+			<div class="field">
+				<label for="input[name=numPockets]">Pockets:</label>
+				<div class="field_input">
+					<input type="range" name="numPockets" value="0" min="0" max="10">
+				</div>	
+			</div>
 
-			<br>
+			<div class="field">
+				<label for="input[name=pocketSize]">Pocket Size:</label>
+				<div class="field_input">
+					<input type="number" name="pocketSize">
+				</div>	
+			</div>
+			
+			<div class="field">
+				<label for="input[name=numberUp]">Number Up:</label>
+				<div class="field_input">
+					<input type="range" name="numberUp" value="0" min="0" max="100">
+				</div>	
+			</div>
+			
+			<div class="field">
+				<label for="input[name=docketReviewed]">Docket Reviewed:</label>
+				<div class="field_input">
+					<input type="hidden" name="docketReviewed" value="false">
+					<input type="checkbox" name="docketReviewed" value="true">
+				</div>	
+			</div>
+			
+			<div class="field">
+				<label for="input[name=notes]">Notes:</label>
+				<div class="field_input">
+					<input type="text" name="notes">
+				</div>	
+			</div>
+			
 
-			<label for="input[name=expectedUsage]">Expected usage:</label>
-			<select name="expectedUsage">
-				<option value="One time use" selected>One time use</option>
-				<option value="More than once">More than once</option>
-				<option value="Regular">Regular</option>
-				<option value="Unknown">Unknown</option>
-			</select>
-
-			<br>
-
-			<label for="input[name=location]">Location:</label>
-			<select name="location">
-				<option value="Awaiting Arrival" selected>Awaiting Arrival</option>
-				<option value="Green Inventory">Green Inventory</option>
-				<option value="Gold Inventory">Gold Inventory</option>
-				<option value="Sanwa">Sanwa</option>
-				<option value="Heidelberg">Heidelberg</option>
-				<option value="Kluge">Kluge</option>
-			</select>
-
-			<br>
-
-			<label for="input[name=machine]">Machine:</label>
-			<select name="machine">
-				<option value="Sanwa">Sanwa</option>
-				<option value="Heidelberg">Heidelberg</option>
-				<option value="Kluge">Kluge</option>
-			</select>
-
-			<br>
-
-			<label for="input[name=flatWidth]">Flat Size:</label>
-			<input type="number" name="flatWidth" placeholder="Flat Width">
-			X
-			<input type="number" name="flatHeight" placeholder="Flat Height">
-
-			<br>
-
-			<label for="input[name=finishedWidth]">Finished Size:</label>
-			<input type="number" name="finishedWidth" placeholder="Finished Width">
-			X
-			<input type="number" name="finishedHeight" placeholder="Finished Height">
-
-			<br>
-
-			<label for="input[name=numPockets]">Pockets:</label>
-			<input type="range" name="numPockets" value="0" min="0" max="10">
-
-			<label for="input[name=pocketSize]">Pocket Size:</label>
-			<input type="number" name="pocketSize">
-
-			<br>
-
-			<label for="input[name=numberUp]">Number Up:</label>
-			<input type="range" name="numberUp" value="0" min="0" max="100">
-
-			<br>
-
-			<label for="input[name=docketReviewed]">Docket Reviewed:</label>
-			<input type="hidden" name="docketReviewed" value="false">
-			<input type="checkbox" name="docketReviewed" value="true">
-
-			<br>
-
-			<label for="input[name=notes]">Notes:</label>
-			<input type="text" name="notes">
-
-			<br>
-
-			<input type="submit" value="Submit">
+			<div class="center">
+				<input class="center" type="submit" value="Add">
+			</div>
 
 		</form>
 	</div>
 
-	<div id="update_form_container" class="die_form tab_content">
-		<h3>Update Entry</h3>
+<!-- ***************************************************** UPDATE FORM ***************************************************** -->
 
+	<div id="update_form_container" class="die_form tab_content">
 		<!-- Display as non-editable: job number, customer ID, customer name, die id, purchase date, machine -->
 		<div id="entry_info">
 			<label for="output[name=jobNumner]">Job Number:</label> <output name="jobNumber"></output> | 
 				<label for="output[name=customerID]">Customer ID:</label> <output name="customerID"></output> |
 				<label for="output[name=customerName]">Customer Name:</label> <output name="customerName"></output> | 
-				<label for="output[name=dieID]">Die ID:</label> <output name="dieID"></output><br>
+				<label for="output[name=dieID]">Die ID:</label> <output name="dieID"></output>
 			<label for="output[name=datePurchased]">Date Purchased:</label> <output name="datePurchased"></output> |
-				<label for="output[name=dateLastUsed]">Date Last Used:</label> <output name="dateLastUsed"></output><br>
+				<label for="output[name=dateLastUsed]">Date Last Used:</label> <output name="dateLastUsed"></output>
 			<label for="output[name=machine]">Machine:</label> <output name="machine"></output>
 		</div>
-
-		<br>
+		
 
 		<form> <!-- The form tag doesn't need any attributes because jquery handles the submission -->
 
@@ -168,19 +203,19 @@
 			<input type="hidden" name="function" value="edit">
 			<input type="hidden" name="table" value="dieBase2">
 
-			<label for="input[name=description]">Description:</label>
 			<input type="text" name="description">
+				<label for="input[name=description]">Description:</label>
 
-			<label for="input[name=expectedUsage]">Expected usage:</label>
 			<select name="expectedUsage">
+				<label for="input[name=expectedUsage]">Expected usage:</label>
 				<option value="One time use">One time use</option>
 				<option value="More than once">More than once</option>
 				<option value="Regular">Regular</option>
 				<option value="Unknown">Unknown</option>
 			</select>
 
-			<label for="input[name=location]">Location:</label>
 			<select name="location">
+				<label for="input[name=location]">Location:</label>
 				<option value="Awaiting Arrival">Awaiting Arrival</option>
 				<option value="Green Inventory">Green Inventory</option>
 				<option value="Gold Inventory">Gold Inventory</option>
@@ -189,39 +224,39 @@
 				<option value="Kluge">Kluge</option>
 			</select>
 
-			<label for="input[name=flatWidth]">Flat Size:</label>
 			<input type="number" name="flatWidth" placeholder="Flat Width">
+				<label for="input[name=flatWidth]">Flat Size:</label>
 			X
 			<input type="number" name="flatHeight" placeholder="Flat Height">
 
-			<label for="input[name=finishedWidth]">Finished Size:</label>
 			<input type="number" name="finishedWidth" placeholder="Finished Width">
+				<label for="input[name=finishedWidth]">Finished Size:</label>
 			X
 			<input type="number" name="finishedHeight" placeholder="Finished Height">
 
-			<label for="input[name=numPockets]">Pockets:</label>
 			<input type="range" name="numPockets" value="0" min="0" max="10">
+				<label for="input[name=numPockets]">Pockets:</label>
 
-			<label for="input[name=pocketSize]">Pocket Size:</label>
 			<input type="number" name="pocketSize">
+				<label for="input[name=pocketSize]">Pocket Size:</label>
 
-			<label for="input[name=numerUp]">Number Up:</label>
 			<input type="range" name="numberUp" value="0" min="0" max="100">
+				<label for="input[name=numerUp]">Number Up:</label>
 
-			<label for="input[name=dateLastUsed]">Date Last Used:</label>
 			<input type="date" name="dateLastUsed" required>
+				<label for="input[name=dateLastUsed]">Date Last Used:</label>
 
-			<label for="input[name=docketReviewed]">Docket Reviewed:</label>
 			<input type="hidden" name="docketReviewed" value="false">
+				<label for="input[name=docketReviewed]">Docket Reviewed:</label>
 			<input type="checkbox" name="docketReviewed" value="true">
 
-			<label for="input[name=notes]">Notes:</label>
 			<input type="text" name="notes">
+				<label for="input[name=notes]">Notes:</label>
 
-			<input type="submit" value="Submit">
+			<input type="submit" value="Update">
 
 		</form>
 	</div>
 	
-</pody>
+</body>
 </html>
