@@ -13,35 +13,35 @@
 <body>
 
 	<div class="tabs">
-		<button id="table_btn">View Table</putton>
-		<button id="insert_btn">New Entry</putton>
-		<button hidden id="update_btn">Update Entry</putton>
+		<button id="table-btn">View Table</putton>
+		<button id="insert-btn">New Entry</putton>
+		<button hidden id="update-btn">Update Entry</putton>
 	</div>
 
 <!-- ***************************************************** TABLE ***************************************************** -->
 
-	<div id="table_container" class="tab_content" value="dieBase2">
+	<div id="table-container" class="tab-content" value="dieBase2">
 		<table>
-			<thead class="table_head">
+			<thead class="table-head">
 				<tr>
-					<th id="check_header">Delete</th>
-					<th id="dieID_header" name="dieID" value="asc">ID</th>
-					<th id="dateLastUsed_header" name="dateLastUsed" value="asc">Date Last Used</th>
-					<th id="machine_header" name="machine" value="asc">Machine</th>
-					<th id="location_header" name="location" value="asc">Location</th>
-					<th id="description_header" name="description" value="asc">Description</th>
+					<th id="check-header">Delete</th>
+					<th id="dieID-header" name="dieID" value="asc">ID</th>
+					<th id="dateLastUsed-header" name="dateLastUsed" value="asc">Date Last Used</th>
+					<th id="machine-header" name="machine" value="asc">Machine</th>
+					<th id="location-header" name="location" value="asc">Location</th>
+					<th id="description-header" name="description" value="asc">Description</th>
 				</tr>
 			</thead>
-			<tbody class="table_body">
+			<tbody class="table-body">
 				<!-- This gets populated by populateTable.php, see js/jquery.js -->
 			</tbody>
 		</table>
-		<button id="delete_btn">Delete Selected</putton>
+		<button id="delete-btn">Delete Selected</putton>
 	</div>
 
 <!-- ***************************************************** INSERT FORM ***************************************************** -->
 
-	<div id="insert_form_container" class="die_form tab_content">
+	<div id="insert-form-container" class="die-form tab-content">
 		<form> <!-- The form tag doesn't need any attributes because jquery handles the submission -->
 
 			<!-- use this to store other data and switch between adding/updating -->
@@ -63,28 +63,28 @@
 
 			<div class="field">
 				<label for="input[name=description]">Description:</label>
-				<div class="field_input">	
+				<div class="field-input">	
 					<input type="text" name="description">
 				</div>
 			</div>
 
 			<div class="field">
 				<label for="input[name=tags]">Tags:</label>
-				<div class="field_input">
+				<div class="field-input">
 					<input type="text" name="tags">
 				</div>
 			</div>
 
 			<div class="field">
 				<label for="input[name=datePurchased]">Date Purchased:</label>
-				<div class="field_input">
+				<div class="field-input">
 					<input type="date" name="datePurchased" required>
 				</div>	
 			</div>
 
 			<div class="field">
 				<label for="input[name=expectedUsage]">Expected usage:</label>
-				<div class="field_input">
+				<div class="field-input">
 					<select name="expectedUsage">
 						<option value="One time use" selected>One time use</option>
 						<option value="More than once">More than once</option>
@@ -96,7 +96,7 @@
 
 			<div class="field">
 				<label for="input[name=location]">Location:</label>
-				<div class="field_input">
+				<div class="field-input">
 						<select name="location">
 						<option value="Awaiting Arrival" selected>Awaiting Arrival</option>
 						<option value="Green Inventory">Green Inventory</option>
@@ -110,7 +110,7 @@
 
 			<div class="field">
 				<label for="input[name=machine]">Machine:</label>
-				<div class="field_input">
+				<div class="field-input">
 						<select name="machine">
 						<option value="Sanwa">Sanwa</option>
 						<option value="Heidelberg">Heidelberg</option>
@@ -121,7 +121,7 @@
 
 			<div class="field sizes">
 				<label for="input[name=flatWidth]">Flat Size:</label>
-				<div class="field_input">
+				<div class="field-input">
 					<input type="number" name="flatWidth" placeholder="Flat Width">
 					X
 					<input type="number" name="flatHeight" placeholder="Flat Height">
@@ -130,7 +130,7 @@
 				
 			<div class="field sizes">
 				<label for="input[name=finishedWidth]">Finished Size:</label>
-				<div class="field_input">
+				<div class="field-input">
 					<input type="number" name="finishedWidth" placeholder="Finished Width">
 					X
 					<input type="number" name="finishedHeight" placeholder="Finished Height">
@@ -139,28 +139,28 @@
 
 			<div class="field">
 				<label for="input[name=numPockets]">Pockets:</label>
-				<div class="field_input">
+				<div class="field-input">
 					<input type="range" name="numPockets" value="0" min="0" max="10">
 				</div>	
 			</div>
 
 			<div class="field">
 				<label for="input[name=pocketSize]">Pocket Size:</label>
-				<div class="field_input">
+				<div class="field-input">
 					<input type="number" name="pocketSize">
 				</div>	
 			</div>
 			
 			<div class="field">
 				<label for="input[name=numberUp]">Number Up:</label>
-				<div class="field_input">
+				<div class="field-input">
 					<input type="range" name="numberUp" value="0" min="0" max="100">
 				</div>	
 			</div>
 			
 			<div class="field">
 				<label for="input[name=docketReviewed]">Docket Reviewed:</label>
-				<div class="field_input">
+				<div class="field-input">
 					<input type="hidden" name="docketReviewed" value="false">
 					<input type="checkbox" name="docketReviewed" value="true">
 				</div>	
@@ -168,14 +168,13 @@
 			
 			<div class="field">
 				<label for="input[name=notes]">Notes:</label>
-				<div class="field_input">
+				<div class="field-input">
 					<input type="text" name="notes">
 				</div>	
 			</div>
 			
-
 			<div class="center">
-				<input class="center" type="submit" value="Add">
+				<input type="submit" value="Add">
 			</div>
 
 		</form>
@@ -183,15 +182,15 @@
 
 <!-- ***************************************************** UPDATE FORM ***************************************************** -->
 
-	<div id="update_form_container" class="die_form tab_content">
+	<div id="update-form-container" class="die-form tab-content">
 		<!-- Display as non-editable: job number, customer ID, customer name, die id, purchase date, machine -->
-		<div id="entry_info">
+		<div id="entry-info">
 			<label for="output[name=jobNumner]">Job Number:</label> <output name="jobNumber"></output> | 
 				<label for="output[name=customerID]">Customer ID:</label> <output name="customerID"></output> |
 				<label for="output[name=customerName]">Customer Name:</label> <output name="customerName"></output> | 
-				<label for="output[name=dieID]">Die ID:</label> <output name="dieID"></output>
-			<label for="output[name=datePurchased]">Date Purchased:</label> <output name="datePurchased"></output> |
-				<label for="output[name=dateLastUsed]">Date Last Used:</label> <output name="dateLastUsed"></output>
+				<label for="output[name=dieID]">Die ID:</label> <output name="dieID"></output><br>
+				<label for="output[name=datePurchased]">Date Purchased:</label> <output name="datePurchased"></output> |
+				<label for="output[name=dateLastUsed]">Date Last Used:</label> <output name="dateLastUsed"></output><br>
 			<label for="output[name=machine]">Machine:</label> <output name="machine"></output>
 		</div>
 		
@@ -199,61 +198,106 @@
 		<form> <!-- The form tag doesn't need any attributes because jquery handles the submission -->
 
 			<!-- use this to store other data and switch between adding/updating -->
-			<input type="hidden" name="dieID">
 			<input type="hidden" name="function" value="edit">
 			<input type="hidden" name="table" value="dieBase2">
 
-			<input type="text" name="description">
+			<div class="field">
 				<label for="input[name=description]">Description:</label>
+				<div class="field-input">	
+					<input type="text" name="description">
+				</div>
+			</div>
 
-			<select name="expectedUsage">
+			<div class="field">
 				<label for="input[name=expectedUsage]">Expected usage:</label>
-				<option value="One time use">One time use</option>
-				<option value="More than once">More than once</option>
-				<option value="Regular">Regular</option>
-				<option value="Unknown">Unknown</option>
-			</select>
+				<div class="field-input">
+					<select name="expectedUsage">
+						<option value="One time use">One time use</option>
+						<option value="More than once">More than once</option>
+						<option value="Regular">Regular</option>
+						<option value="Unknown">Unknown</option>
+					</select>
+				</div>	
+			</div>
 
-			<select name="location">
+			<div class="field">
 				<label for="input[name=location]">Location:</label>
-				<option value="Awaiting Arrival">Awaiting Arrival</option>
-				<option value="Green Inventory">Green Inventory</option>
-				<option value="Gold Inventory">Gold Inventory</option>
-				<option value="Sanwa">Sanwa</option>
-				<option value="Heidelberg">Heidelberg</option>
-				<option value="Kluge">Kluge</option>
-			</select>
+				<div class="field-input">
+						<select name="location">
+						<option value="Awaiting Arrival">Awaiting Arrival</option>
+						<option value="Green Inventory">Green Inventory</option>
+						<option value="Gold Inventory">Gold Inventory</option>
+						<option value="Sanwa">Sanwa</option>
+						<option value="Heidelberg">Heidelberg</option>
+						<option value="Kluge">Kluge</option>
+					</select>
+				</div>	
+			</div>
 
-			<input type="number" name="flatWidth" placeholder="Flat Width">
+			<div class="field sizes">
 				<label for="input[name=flatWidth]">Flat Size:</label>
-			X
-			<input type="number" name="flatHeight" placeholder="Flat Height">
-
-			<input type="number" name="finishedWidth" placeholder="Finished Width">
+				<div class="field-input">
+					<input type="number" name="flatWidth" placeholder="Flat Width">
+					X
+					<input type="number" name="flatHeight" placeholder="Flat Height">
+				</div>	
+			</div>
+				
+			<div class="field sizes">
 				<label for="input[name=finishedWidth]">Finished Size:</label>
-			X
-			<input type="number" name="finishedHeight" placeholder="Finished Height">
+				<div class="field-input">
+					<input type="number" name="finishedWidth" placeholder="Finished Width">
+					X
+					<input type="number" name="finishedHeight" placeholder="Finished Height">
+				</div>	
+			</div>
 
-			<input type="range" name="numPockets" value="0" min="0" max="10">
+			<div class="field">
 				<label for="input[name=numPockets]">Pockets:</label>
+				<div class="field-input">
+					<input type="range" name="numPockets" value="0" min="0" max="10">
+				</div>	
+			</div>
 
-			<input type="number" name="pocketSize">
+			<div class="field">
 				<label for="input[name=pocketSize]">Pocket Size:</label>
-
-			<input type="range" name="numberUp" value="0" min="0" max="100">
-				<label for="input[name=numerUp]">Number Up:</label>
-
-			<input type="date" name="dateLastUsed" required>
-				<label for="input[name=dateLastUsed]">Date Last Used:</label>
-
-			<input type="hidden" name="docketReviewed" value="false">
+				<div class="field-input">
+					<input type="number" name="pocketSize">
+				</div>	
+			</div>
+			
+			<div class="field">
+				<label for="input[name=numberUp]">Number Up:</label>
+				<div class="field-input">
+					<input type="range" name="numberUp" value="0" min="0" max="100">
+				</div>	
+			</div>
+			
+			<div class="field">
 				<label for="input[name=docketReviewed]">Docket Reviewed:</label>
-			<input type="checkbox" name="docketReviewed" value="true">
+				<div class="field-input">
+					<input type="hidden" name="docketReviewed" value="false">
+					<input type="checkbox" name="docketReviewed" value="true">
+				</div>	
+			</div>
 
-			<input type="text" name="notes">
+			<div class="field">
+				<label for="input[name=dateLastUsed]">Date Last Used:</label>
+				<div class="field-input">
+					<input type="date" name="dateLastUsed" required>
+				</div>
+			</div>
+			
+			<div class="field">
 				<label for="input[name=notes]">Notes:</label>
-
-			<input type="submit" value="Update">
+				<div class="field-input">
+					<input type="text" name="notes">
+				</div>	
+			</div>
+			
+			<div class="center">
+				<input type="submit" value="Update">
+			</div>
 
 		</form>
 	</div>

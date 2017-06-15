@@ -1,6 +1,6 @@
 /* 
 This function access populateTable.php and grabs the data. It proceeds to parse it into
-	the table body with id 'table_body'
+	the table body with id 'table-body'
 	*/
 function populateTable(argv) {
 
@@ -14,12 +14,12 @@ function populateTable(argv) {
 		type: "POST",
 		url: "php/populateTable.php",
 		data: { 
-			table: $("#table_container").attr("value"),
+			table: $("#table-container").attr("value"),
 			order: argv 
 		},
 		success: function(data, status) { 
 			console.log("Data: " + data + "\nPost Status: " + status);
-			$(".table_body").html(data);
+			$(".table-body").html(data);
 		}
 	})
 }
@@ -32,7 +32,7 @@ $(document).ready(function() {
 		used for ordering the table when clicking on the headers, access the name attribute
 			to reference the sql table => (ORDER BY [name])
 	*/
-	$(".table_head th").click(function() {
+	$(".table-head th").click(function() {
 		order = $(this).attr("name");
 		asc_desc = $(this).attr("value");
 
@@ -47,58 +47,58 @@ $(document).ready(function() {
 	/*
 	on click, run populateTable()
 	*/
-	$("#table_btn").click(function() {
+	$("#table-btn").click(function() {
 		populateTable(null);
 
 		// change the active tab
-		$(".tabs button").removeClass("active_tab");
-		$(this).addClass("active_tab");
+		$(".tabs button").removeClass("active-tab");
+		$(this).addClass("active-tab");
 
-		$(".tab_content").hide();
-		$("#table_container").show();
+		$(".tab-content").hide();
+		$("#table-container").show();
 	});
 
 	// open the table tab and load the table by calling the table button click event function
-	$("#table_btn").click();
+	$("#table-btn").click();
 
 	/*
 		on click, show the form for entering new data
 	*/
-	$("#insert_btn").click(function() {
-		$(".tabs button").removeClass("active_tab");
-		$(this).addClass("active_tab");
+	$("#insert-btn").click(function() {
+		$(".tabs button").removeClass("active-tab");
+		$(this).addClass("active-tab");
 
-		$(".tab_content").hide();
+		$(".tab-content").hide();
 
 		// set the date fields to have the current date
 		$.ajax({
 			type: "GET",
 			url: "php/getCurrentDate.php",
 			success: function(data) {
-				$("#insert_form_container [name=\"datePurchased\"]").val(data);
+				$("#insert-form-container [name=\"datePurchased\"]").val(data);
 			}
 		})
 
-		$("#insert_form_container").show();
+		$("#insert-form-container").show();
 	});
 
 	// the update button is hidden on page load
-	$("#update_btn").click(function() {
+	$("#update-btn").click(function() {
 		// reset the active tab
-		$(".tabs button").removeClass("active_tab");
-		$("#update_btn").addClass("active_tab");
-		$("#update_btn").show();
+		$(".tabs button").removeClass("active-tab");
+		$("#update-btn").addClass("active-tab");
+		$("#update-btn").show();
 
 		// hide all other content and show the update form
-		$(".tab_content").hide();
-		$("#update_form_container").show();
+		$(".tab-content").hide();
+		$("#update-form-container").show();
 	});
 
 	/*
 		Handles the form submit event, sends a post request to insertEntry.php with 
 			the data in the form and refreshes the table
 	*/
-	$("#insert_form_container form").submit(function(event) {
+	$("#insert-form-container form").submit(function(event) {
 		event.preventDefault();
 
 		$.ajax({
@@ -108,7 +108,7 @@ $(document).ready(function() {
 			success: function(data, status) {
 						console.log("Data: " + data + "\nPost Status: " + status);
 
-						$("#table_btn").click();
+						$("#table-btn").click();
 					}
 		})
 	});
@@ -116,10 +116,10 @@ $(document).ready(function() {
 	/*
 		deletes entries that have their boxes checked
 	*/
-	$("#delete_btn").click(function() {
+	$("#delete-btn").click(function() {
 		// grab all the checked boxes
 		var selected = new Array();
-		$(".table_checkboxes [type=\"checkbox\"]:checked").each(function() {
+		$(".table-checkboxes [type=\"checkbox\"]:checked").each(function() {
 			selected.push($(this).attr("name"));
 		});
 
@@ -129,7 +129,7 @@ $(document).ready(function() {
 				type: "POST",
 				url: "php/deleteSelected.php",
 				data: { 
-					table: $("#table_container").attr("value"),
+					table: $("#table-container").attr("value"),
 					checks: selected 
 				},
 				success: function(data, status) {
@@ -146,13 +146,13 @@ $(document).ready(function() {
 		go to edit form when an entry is double clicked and
 			populate it with the entry's data
 	*/
-	$(".table_body").delegate("tr", "dblclick", function() {
+	$(".table-body").delegate("tr", "dblclick", function() {
 		// send a post request with the table name and dieID to grab the rest of the data
 		$.ajax({
 			type: "GET",
 			url: "php/populateUpdateForm.php",
 			data: {
-				table: $("#table_container").attr("value"),
+				table: $("#table-container").attr("value"),
 				dieID: $(this).attr("name")
 			},
 			dataType: "JSON",
@@ -164,23 +164,23 @@ $(document).ready(function() {
 							console.log(name + "->" + data[name]);
 							if (name == "docketReviewed") {
 								if (data[name] == "true") // used to make the checkbox checked or not
-									$("#update_form_container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", true);
+									$("#update-form-container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", true);
 								else
-									$("#update_form_container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", false);
+									$("#update-form-container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", false);
 							} if (name == "dateLastUsed" && data[name] == "1983-01-01") {
-								$("#update_form_container output[name=\"dateLastUsed\"]").val("Never");
+								$("#update-form-container output[name=\"dateLastUsed\"]").val("Never");
 							} else {
-								$("#update_form_container [name=\"" + name + "\"]").val(data[name]);
+								$("#update-form-container [name=\"" + name + "\"]").val(data[name]);
 							}
 						}
 					}
 		})
 
-		$("#update_btn").click();
+		$("#update-btn").click();
 
 	});
 
-	$("#update_form_container form").submit(function(event) {
+	$("#update-form-container form").submit(function(event) {
 		event.preventDefault();
 
 		$.ajax({
@@ -190,7 +190,7 @@ $(document).ready(function() {
 			success: function(data, status) {
 						console.log("Data: " + data + "\nPost Status: " + status);
 
-						$("#table_btn").click();
+						$("#table-btn").click();
 					}
 		})
 	});

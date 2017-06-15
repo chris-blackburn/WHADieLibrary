@@ -28,13 +28,13 @@
 		if ($dateLastUsed == "1983-01-01")
 			$dateLastUsed = "Never";
 
-		echo "	<tr class=\"table_rows\" name=\"" . $row['dieID'] . "\">
-					<td class=\"table_checkboxes\"><input name=\"" . $row['dieID'] . "\" type=\"checkbox\"></td>
-					<td class=\"dieID_row\">" . $row['dieID'] . "</td>
-					<td class=\"dateLastUsed_row\">" . $dateLastUsed . "</td>
-					<td class=\"machine_row\">" . $row['machine'] . "</td>
-					<td class=\"location_row\">" . $row['location'] . "</td>
-					<td class=\"description_row\">" . $row['description'] . "</td>
+		echo "	<tr class=\"table-rows\" name=\"" . $row['dieID'] . "\">
+					<td class=\"table-checkboxes\"><input name=\"" . $row['dieID'] . "\" type=\"checkbox\"></td>
+					<td class=\"dieID-row\">" . $row['dieID'] . "</td>
+					<td class=\"dateLastUsed-row\">" . $dateLastUsed . "</td>
+					<td class=\"machine-row\">" . $row['machine'] . "</td>
+					<td class=\"location-row\">" . $row['location'] . "</td>
+					<td class=\"description-row\">" . $row['description'] . "</td>
 				</tr>";
 	}
 ?>

@@ -22,11 +22,11 @@
 	background-color: #ccc;
 }
 
-.active_tab {
+.active-tab {
 	background-color: #ccc !important;
 }
 
-.tab_content {
+.tab-content {
     padding: .5em 1em;
     border: 1px solid #ccc;
     border-top: none;

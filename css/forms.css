@@ -2,18 +2,18 @@
 	styling for new entry and update forms
 */
 
-.die_form input, select, button {
+.die-form input, select, button {
 	 -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.die_form form {
+.die-form form {
 	width: 50%;
 	text-align: left;
 }
 
-.die_form input[type="submit"] {
+.die-form input[type="submit"] {
 	color: white;
 	background-color: #333;
 	padding: 1em;
@@ -23,11 +23,11 @@
 	border-radius: 5px;
 }
 
-.die_form input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
+.die-form input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
     border: 2px solid lightblue;
 }
 
-.die_form input[type="text"], input[type="number"], input[type="date"] {
+.die-form input[type="text"], input[type="number"], input[type="date"] {
 	padding: 10px;
 	border: 2px solid #aaa;
 	border-radius: 2px;
@@ -48,19 +48,19 @@
 	margin-right: 3em;
 }
 
-.field_input {
+.field-input {
 	display: block;
 	float: right;
 	position: relative;
 }
 
-.field_input input {
+.field-input input {
 }
 
 /*
 	insert form specific
 */
-#insert_form_container {
+#insert-form-container {
 
 }
 
@@ -68,6 +68,6 @@
 	update form specific
 */
 
-#entry_info label {
+#entry-info label {
 	font-weight: bold;
 }
