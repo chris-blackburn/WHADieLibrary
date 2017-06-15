@@ -120,8 +120,8 @@
 			</div>
 
 			<div class="field sizes">
-				<label for="input[name=flatWidth]">Flat Size:</label>
-				<div class="field-input">
+				<label for="flat-sizes">Flat Size:</label>
+				<div class="field-input" id="flat-sizes">
 					<input type="number" name="flatWidth" placeholder="Flat Width">
 					X
 					<input type="number" name="flatHeight" placeholder="Flat Height">
@@ -129,8 +129,8 @@
 			</div>
 				
 			<div class="field sizes">
-				<label for="input[name=finishedWidth]">Finished Size:</label>
-				<div class="field-input">
+				<label for="finished-sizes">Finished Size:</label>
+				<div class="field-input" id="finished-sizes">
 					<input type="number" name="finishedWidth" placeholder="Finished Width">
 					X
 					<input type="number" name="finishedHeight" placeholder="Finished Height">
@@ -198,6 +198,7 @@
 		<form> <!-- The form tag doesn't need any attributes because jquery handles the submission -->
 
 			<!-- use this to store other data and switch between adding/updating -->
+			<input type="hidden" name="dieID">
 			<input type="hidden" name="function" value="edit">
 			<input type="hidden" name="table" value="dieBase2">
 
@@ -235,8 +236,8 @@
 			</div>
 
 			<div class="field sizes">
-				<label for="input[name=flatWidth]">Flat Size:</label>
-				<div class="field-input">
+				<label for="flat-sizes">Flat Size:</label>
+				<div class="field-input" id="flat-sizes">
 					<input type="number" name="flatWidth" placeholder="Flat Width">
 					X
 					<input type="number" name="flatHeight" placeholder="Flat Height">
@@ -244,8 +245,8 @@
 			</div>
 				
 			<div class="field sizes">
-				<label for="input[name=finishedWidth]">Finished Size:</label>
-				<div class="field-input">
+				<label for="finished-sizes">Finished Size:</label>
+				<div class="field-input" id="finished-sizes">
 					<input type="number" name="finishedWidth" placeholder="Finished Width">
 					X
 					<input type="number" name="finishedHeight" placeholder="Finished Height">
