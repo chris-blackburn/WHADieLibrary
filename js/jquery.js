@@ -117,29 +117,42 @@ $(document).ready(function() {
 		deletes entries that have their boxes checked
 	*/
 	$("#delete-btn").click(function() {
-		// grab all the checked boxes
-		var selected = new Array();
-		$(".table-checkboxes [type=\"checkbox\"]:checked").each(function() {
-			selected.push($(this).attr("name"));
-		});
+		// confirmation dialog
+		$("#confirm-delete").dialog({
+			buttons: {
+				"Confirm": function() {
+					// grab all the checked boxes
+					var selected = new Array();
+					$(".table-checkboxes [type=\"checkbox\"]:checked").each(function() {
+						selected.push($(this).attr("name"));
+					});
 
-		if (selected.length != 0) {
-			// send POST data to deleteSelected.php containing the array of checked boxes
-			$.ajax({
-				type: "POST",
-				url: "php/deleteSelected.php",
-				data: { 
-					table: $("#table-container").attr("value"),
-					checks: selected 
+					if (selected.length != 0) {
+						// send POST data to deleteSelected.php containing the array of checked boxes
+						$.ajax({
+							type: "POST",
+							url: "php/deleteSelected.php",
+							data: { 
+								table: $("#table-container").attr("value"),
+								checks: selected 
+							},
+							success: function(data, status) {
+										console.log("Data: " + data + "\nPost Status: " + status);
+										populateTable(null);
+									}
+						})
+					} else {
+						console.log("Cannot Delete: Nothing is Selected");
+					}
+
+					$(this).dialog("close");
 				},
-				success: function(data, status) {
-							console.log("Data: " + data + "\nPost Status: " + status);
-							populateTable(null);
-						}
-			})
-		} else {
-			console.log("Cannot Delete: Nothing is Selected");
-		}
+
+				"Cancel": function() {
+					$(this).dialog("close");
+				}
+			}
+		});
 	});
 
 	/*
@@ -167,7 +180,7 @@ $(document).ready(function() {
 									$("#update-form-container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", true);
 								else
 									$("#update-form-container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", false);
-							} if (name == "dateLastUsed" && data[name] == "1983-01-01") {
+							} if (name == "dateLastUsed" && (data[name] == "1983-01-01" || data[name] == "0000-00-00")) {
 								$("#update-form-container output[name=\"dateLastUsed\"]").val("Never");
 							} else {
 								$("#update-form-container [name=\"" + name + "\"]").val(data[name]);
@@ -193,6 +206,104 @@ $(document).ready(function() {
 						$("#table-btn").click();
 					}
 		})
+	});
+
+	// filter 
+	function filter(selector, query) {
+		query = $.trim(query);
+		query = query.replace(/ /gi, "|");
+
+		if ($(this).text().search(new RegExp(query, "i")) < 0) {
+			$(this).hide();
+		} else {
+			$(this).show();
+		}
+	}
+
+	// quick search 
+	$("#table-quick-search").keyup(function(event) {
+		var $row = $(".table-body tr");
+
+		if ($(this).val() == '') {
+			$(".table-body tr").show();
+		} else {
+			var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+	        	reg = RegExp(val, 'i'),
+	        	text;		
+
+        	$row.show().filter(function() {
+		        text = $(this).text().replace(/\s+/g, ' ');
+		        return !reg.test(text);
+		    }).hide();
+        }
+	});
+
+	// auto-complete for tags, separated arrays for later implemenation
+	$(function() {
+		var productTags = [
+			"Business Card",
+			"Brochure",
+			"Booklet/Catalog",
+			"Box",
+			"Coupon",
+			"Coaster",
+			"CD/DVD Holder",
+			"Door Hanger",
+			"Envelope",
+			"Hang Tag",
+			"Invitation/Greeting Card",
+			"Pocket",
+			"Sticker/Label",
+			"Tent"
+		];
+
+		var featuresTags = [
+			"BC Slit",
+			"Corner",
+			"Gusset",
+			"Horizontal Pocket",
+			"Moon BC Slits",
+			"Perforation",
+			"Pop Up/3D",
+			"Shape",
+			"Tabs",
+			"Vertical Pocket",
+			"Window",
+			"Wrap"
+		];
+
+		var items = $.merge(productTags, featuresTags);
+
+		// Nitish Kumar's (stack overflow) code for autocomplete of multiple items
+		function split( val ) {
+		    return val.split( /,\s*/ );
+		}
+
+		function extractLast(term) {
+			return split(term).pop();
+		}
+
+		// this is where the autocomplete happens, jquery makes it easy
+		$("#insert-form-container [name=\"tags\"]").autocomplete({
+			source: function(request, response) {
+                response($.ui.autocomplete.filter(
+                items, extractLast(request.term)));
+            },
+			focus: function() {
+				return false;
+			},
+			select: function( event, ui ) {
+		        var terms = split( this.value );
+		        // remove the current input
+		        terms.pop();
+		        // add the selected item
+		        terms.push( ui.item.value );
+		        // add placeholder to get the comma-and-space at the end
+		        terms.push( "" );
+		        this.value = terms.join( ", " );
+		        return false;
+	        }
+		});
 	});
 	
 });

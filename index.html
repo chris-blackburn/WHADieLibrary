@@ -3,10 +3,14 @@
 <html>
 <head>
 	<title>WHA Die Library</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<link rel="stylesheet" type="text/css" href="css/tabs.css">
 	<link rel="stylesheet" type="text/css" href="css/table.css">
 	<link rel="stylesheet" type="text/css" href="css/forms.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 	<script src="js/jquery.js" type="text/javascript"></script>
 </head>
 
@@ -21,6 +25,7 @@
 <!-- ***************************************************** TABLE ***************************************************** -->
 
 	<div id="table-container" class="tab-content" value="dieBase2">
+		<input type="text" id="table-quick-search" placeholder="Quick Search">
 		<table>
 			<thead class="table-head">
 				<tr>
@@ -36,7 +41,8 @@
 				<!-- This gets populated by populateTable.php, see js/jquery.js -->
 			</tbody>
 		</table>
-		<button id="delete-btn">Delete Selected</putton>
+		<button id="delete-btn">Delete Selected</button>
+		<div hidden title="Confirm Delete" id="confirm-delete">Are you sure you want to delete these entries?<br><br>You <strong>cannot</strong> undo this operation!</div>
 	</div>
 
 <!-- ***************************************************** INSERT FORM ***************************************************** -->
@@ -71,7 +77,7 @@
 			<div class="field">
 				<label for="input[name=tags]">Tags:</label>
 				<div class="field-input">
-					<input type="text" name="tags">
+					<input type="text" name="tags" id="tags">
 				</div>
 			</div>
 
@@ -122,18 +128,18 @@
 			<div class="field sizes">
 				<label for="flat-sizes">Flat Size:</label>
 				<div class="field-input" id="flat-sizes">
-					<input type="number" name="flatWidth" placeholder="Flat Width">
+					<input type="number" name="flatWidth" placeholder="Flat Width" step="any">
 					X
-					<input type="number" name="flatHeight" placeholder="Flat Height">
+					<input type="number" name="flatHeight" placeholder="Flat Height" step="any">
 				</div>	
 			</div>
 				
 			<div class="field sizes">
 				<label for="finished-sizes">Finished Size:</label>
 				<div class="field-input" id="finished-sizes">
-					<input type="number" name="finishedWidth" placeholder="Finished Width">
+					<input type="number" name="finishedWidth" placeholder="Finished Width" step="any">
 					X
-					<input type="number" name="finishedHeight" placeholder="Finished Height">
+					<input type="number" name="finishedHeight" placeholder="Finished Height" step="any">
 				</div>	
 			</div>
 
@@ -147,12 +153,12 @@
 			<div class="field">
 				<label for="input[name=pocketSize]">Pocket Size:</label>
 				<div class="field-input">
-					<input type="number" name="pocketSize">
+					<input type="number" name="pocketSize"  step="any">
 				</div>	
 			</div>
 			
 			<div class="field">
-				<label for="input[name=numberUp]">Number Up:</label>
+				<label for="input[name=numberUp]"># Up:</label>
 				<div class="field-input">
 					<input type="range" name="numberUp" value="0" min="0" max="100">
 				</div>	
@@ -238,18 +244,18 @@
 			<div class="field sizes">
 				<label for="flat-sizes">Flat Size:</label>
 				<div class="field-input" id="flat-sizes">
-					<input type="number" name="flatWidth" placeholder="Flat Width">
+					<input type="number" name="flatWidth" placeholder="Flat Width" step="any">
 					X
-					<input type="number" name="flatHeight" placeholder="Flat Height">
+					<input type="number" name="flatHeight" placeholder="Flat Height" step="any">
 				</div>	
 			</div>
 				
 			<div class="field sizes">
 				<label for="finished-sizes">Finished Size:</label>
 				<div class="field-input" id="finished-sizes">
-					<input type="number" name="finishedWidth" placeholder="Finished Width">
+					<input type="number" name="finishedWidth" placeholder="Finished Width" step="any">
 					X
-					<input type="number" name="finishedHeight" placeholder="Finished Height">
+					<input type="number" name="finishedHeight" placeholder="Finished Height" step="any">
 				</div>	
 			</div>
 
@@ -263,7 +269,7 @@
 			<div class="field">
 				<label for="input[name=pocketSize]">Pocket Size:</label>
 				<div class="field-input">
-					<input type="number" name="pocketSize">
+					<input type="number" name="pocketSize" step="any">
 				</div>	
 			</div>
 			

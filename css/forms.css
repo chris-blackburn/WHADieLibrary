@@ -39,7 +39,7 @@
 }
 
 .field {
-	display: block;
+	display: inline;
 	margin: 1em 0;
 }
 
@@ -47,16 +47,6 @@
 	margin-top: .5em;
 	margin-right: 3em;
 }
-
-.field-input {
-	display: block;
-	float: right;
-	position: relative;
-}
-
-.field-input input {
-}
-
 /*
 	insert form specific
 */
