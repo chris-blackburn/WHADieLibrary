@@ -108,10 +108,32 @@ $(document).ready(function() {
 	// pull requests
 	$(".table-body").delegate(".pull-btn", "click", function(event) {
 		var rowID = $(this).parents(".table-rows").attr("name");
-		var dateLastUsed = $(this).parent().siblings(".dateLastUsed-row").text();
 
-		$("#pull-form-container [name=\"dieID\"]").val(rowID);
-		$("#pull-form-container [name=\"dateLastUsed\"]").val(dateLastUsed);
+		$.ajax({
+			type: "GET",
+			url: "php/populateUpdateForm.php",
+			data: {
+				table: $("#table-container").attr("value"),
+				dieID: rowID,
+				cols: '*'
+			},
+			dataType: "JSON",
+			success: function(data, status) {
+				console.log("Data: " + data + "\nGET Status: " + status);
+
+				// Create hidden inputs for later submission
+				for (var name in data) {
+					var hiddenEntry = $("<input type=\"hidden\" name=\"" + name + "\" value=\"" + data[name] + "\">");
+
+					$("#entry-data").append(hiddenEntry);
+
+					if (name == "dateLastUsed")
+						$("#pull-form-container [type=\"date\"]").val(data[name]);
+				}
+			}
+		})
+
+		$("#pull-form-container output[name=\"dieID\"]").val(rowID);
 		
 		$("#pull-btn").click();
 	});
@@ -224,10 +246,25 @@ $(document).ready(function() {
 			url: "php/insertEntry.php",
 			data: $(this).serialize(),
 			success: function(data, status) {
-						console.log("Data: " + data + "\nPost Status: " + status);
+				console.log("Data: " + data + "\nPost Status: " + status);
 
-						$("#table-btn").click();
-					}
+				$("#table-btn").click();
+			}
+		})
+	});
+
+	$("#pull-form-container form").submit(function(event) {
+		event.preventDefault();
+
+		$.ajax({
+			type: "POST",	
+			url: "php/insertEntry.php",
+			data: $(this).serialize(),
+			success: function(data, status) {
+				console.log("Data: " + data + "\nPost Status: " + status);
+
+				$("#table-btn").click();
+			}
 		})
 	});
 

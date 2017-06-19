@@ -314,7 +314,12 @@
 
 	<div id="pull-form-container" class="die-form tab-content">
 		<form>
-			<input type="hidden" name="dieID">
+			<input type="hidden" name="function" value="add">
+			<input type="hidden" name="table" value="dieBase2">
+
+			<div hidden id="entry-data">
+				<!-- This is where i will store the data for entries when accessed -->
+			</div>
 
 			<label for="output[name=dieID]">Die ID:</label> <output name="dieID"></output>
 			<br>
@@ -333,7 +338,6 @@
 			</select>
 			<br><br>
 			<input type="submit" value="Request">
-			<button name="cancel-pull">Cancel</button>
 		</form>
 	</div>
 
