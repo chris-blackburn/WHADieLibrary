@@ -20,6 +20,7 @@
 		<button id="table-btn">View Table</putton>
 		<button id="insert-btn">New Entry</putton>
 		<button hidden id="update-btn">Update Entry</putton>
+		<button hidden id="pull-btn">Pull Request</putton>
 	</div>
 
 <!-- ***************************************************** TABLE ***************************************************** -->
@@ -230,7 +231,7 @@
 			<div class="field">
 				<label for="input[name=location]">Location:</label>
 				<div class="field-input">
-						<select name="location">
+					<select name="location">
 						<option value="Awaiting Arrival">Awaiting Arrival</option>
 						<option value="Green Inventory">Green Inventory</option>
 						<option value="Gold Inventory">Gold Inventory</option>
@@ -308,6 +309,33 @@
 
 		</form>
 	</div>
-	
+
+<!-- ***************************************************** PULL FORM ***************************************************** -->
+
+	<div id="pull-form-container" class="die-form tab-content">
+		<form>
+			<input type="hidden" name="dieID">
+
+			<label for="output[name=dieID]">Die ID:</label> <output name="dieID"></output>
+			<br>
+			<input type="date" name="dateLastUsed">
+			<br>
+			<input type="number" name="jobNumber" placeholder="New Job Number">
+			<br>
+			<label for="input[name=location]">Location:</label>
+			<select name="location">
+				<option value="Awaiting Arrival">Awaiting Arrival</option>
+				<option value="Green Inventory">Green Inventory</option>
+				<option value="Gold Inventory">Gold Inventory</option>
+				<option value="Sanwa">Sanwa</option>
+				<option value="Heidelberg">Heidelberg</option>
+				<option value="Kluge">Kluge</option>
+			</select>
+			<br><br>
+			<input type="submit" value="Request">
+			<button name="cancel-pull">Cancel</button>
+		</form>
+	</div>
+
 </body>
 </html>

@@ -3,13 +3,13 @@
 
 	$table = $_GET["table"];
 	$dieID = $_GET["dieID"];
+	$cols = $_GET["cols"];
 
 	// create the form and fill it with the data of the selected table entry
 	
 	$db = new Database("localhost", "monty", "some_pass", "testDB");
 	$db->connect();
 
-	$cols = '*';
 	$where = "dieID";
 	$in = $dieID;
 

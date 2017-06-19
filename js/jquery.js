@@ -94,6 +94,28 @@ $(document).ready(function() {
 		$("#update-form-container").show();
 	});
 
+	$("#pull-btn").click(function() {
+		// reset the active tab
+		$(".tabs button").removeClass("active-tab");
+		$("#pull-btn").addClass("active-tab");
+		$("#pull-btn").show();
+
+		// hide all other content and show the pull request form
+		$(".tab-content").hide();
+		$("#pull-form-container").show();
+	});
+
+	// pull requests
+	$(".table-body").delegate(".pull-btn", "click", function(event) {
+		var rowID = $(this).parents(".table-rows").attr("name");
+		var dateLastUsed = $(this).parent().siblings(".dateLastUsed-row").text();
+
+		$("#pull-form-container [name=\"dieID\"]").val(rowID);
+		$("#pull-form-container [name=\"dateLastUsed\"]").val(dateLastUsed);
+		
+		$("#pull-btn").click();
+	});
+
 	/*
 		Handles the form submit event, sends a post request to insertEntry.php with 
 			the data in the form and refreshes the table
@@ -106,10 +128,10 @@ $(document).ready(function() {
 			url: "php/insertEntry.php",
 			data: $(this).serialize(),
 			success: function(data, status) {
-						console.log("Data: " + data + "\nPost Status: " + status);
+				console.log("Data: " + data + "\nPost Status: " + status);
 
-						$("#table-btn").click();
-					}
+				$("#table-btn").click();
+			}
 		})
 	});
 
@@ -120,11 +142,15 @@ $(document).ready(function() {
 		// confirmation dialog
 		$("#confirm-delete").dialog({
 			buttons: {
+				"Cancel": function() {
+					$(this).dialog("close");
+				},
+
 				"Confirm": function() {
 					// grab all the checked boxes
 					var selected = new Array();
 					$(".table-checkboxes [type=\"checkbox\"]:checked").each(function() {
-						selected.push($(this).attr("name"));
+						selected.push($(this).parents(".table-rows").attr("name"));
 					});
 
 					if (selected.length != 0) {
@@ -146,10 +172,6 @@ $(document).ready(function() {
 					}
 
 					$(this).dialog("close");
-				},
-
-				"Cancel": function() {
-					$(this).dialog("close");
 				}
 			}
 		});
@@ -166,27 +188,28 @@ $(document).ready(function() {
 			url: "php/populateUpdateForm.php",
 			data: {
 				table: $("#table-container").attr("value"),
-				dieID: $(this).attr("name")
+				dieID: $(this).attr("name"),
+				cols: '*'
 			},
 			dataType: "JSON",
 			success: function(data, status) {
-						console.log("Data: " + data + "\nGET Status: " + status);
+				console.log("Data: " + data + "\nGET Status: " + status);
 
-						// fill up the form with the existing data, contains some conditionals for dates and checkboxes
-						for (var name in data) {
-							console.log(name + "->" + data[name]);
-							if (name == "docketReviewed") {
-								if (data[name] == "true") // used to make the checkbox checked or not
-									$("#update-form-container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", true);
-								else
-									$("#update-form-container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", false);
-							} if (name == "dateLastUsed" && (data[name] == "1983-01-01" || data[name] == "0000-00-00")) {
-								$("#update-form-container output[name=\"dateLastUsed\"]").val("Never");
-							} else {
-								$("#update-form-container [name=\"" + name + "\"]").val(data[name]);
-							}
-						}
+				// fill up the form with the existing data, contains some conditionals for dates and checkboxes
+				for (var name in data) {
+					console.log(name + "->" + data[name]);
+					if (name == "docketReviewed") {
+						if (data[name] == "true") // used to make the checkbox checked or not
+							$("#update-form-container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", true);
+						else
+							$("#update-form-container [type=\"checkbox\"][name=\"" + name + "\"]").attr("checked", false);
+					} if (name == "dateLastUsed" && (data[name] == "1983-01-01" || data[name] == "0000-00-00")) {
+						$("#update-form-container output[name=\"dateLastUsed\"]").val("Never");
+					} else {
+						$("#update-form-container [name=\"" + name + "\"]").val(data[name]);
 					}
+				}
+			}
 		})
 
 		$("#update-btn").click();
@@ -274,7 +297,6 @@ $(document).ready(function() {
 
 		var items = $.merge(productTags, featuresTags);
 
-		// Nitish Kumar's (stack overflow) code for autocomplete of multiple items
 		function split( val ) {
 		    return val.split( /,\s*/ );
 		}
@@ -306,4 +328,6 @@ $(document).ready(function() {
 		});
 	});
 	
+	
+
 });

@@ -28,14 +28,14 @@
 		if ($dateLastUsed == "1983-01-01" || $dateLastUsed == "0000-00-00")
 			$dateLastUsed = "Never";
 
-		echo "	<tr class=\"table-rows\">
-					<td class=\"table-checkboxes\"><input name=\"" . $row['dieID'] . "\" type=\"checkbox\"></td>
+		echo "	<tr class=\"table-rows\" name=\"" . $row['dieID'] . "\">
+					<td class=\"table-checkboxes\"><input type=\"checkbox\"></td>
 					<td class=\"dieID-row\">" . $row['dieID'] . "</td>
 					<td class=\"dateLastUsed-row\">" . $dateLastUsed . "</td>
 					<td class=\"machine-row\">" . $row['machine'] . "</td>
 					<td class=\"location-row\">" . $row['location'] . "</td>
 					<td class=\"description-row\">" . $row['description'] . "</td>
-					<td class=\"pull-row\"><input type=\"button\" value=\"Pull\"></td>
+					<td class=\"pull-row\"><button class=\"pull-btn\">Pull</button></td>
 				</tr>";
 	}
 ?>
