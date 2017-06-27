@@ -1,4 +1,5 @@
 <?php
+	include "../includes/constants.php";
 	/*
 
 	This is the Database class. It is used to create a new database object which has various functions
@@ -15,22 +16,18 @@
 		private $echo_off = 1;
 
 		private $server = '';
-		private $user = '';
-		private $pass = '';
 		private $db = '';
 
-		function __construct($server = 'localhost', $user = 'monty', $pass = 'some_pass', $db = 'testDB') {
+		function __construct($server = DB_HOST, $db = DB_DBASE) {
 			$this->server = $server;
-			$this->user = $user;
-			$this->pass = $pass;
 			$this->db = $db;
 		}
 
-		public function connect() {
+		public function connect($user = DB_USER, $pass = DB_PASS) {
 			// check if a connection already exists
 			if (!$this->conn) {
 				// if not, create the new connection
-				$this->conn = new mysqli($this->server, $this->user, $this->pass, $this->db);
+				$this->conn = new mysqli($this->server, $user, $pass, $this->db);
 
 				// if there exists an error number (therefore it did not connect), display the error message and number
 				if ($this->conn->connect_errno) {
@@ -46,6 +43,17 @@
 		public function disconnect() {
 			$this->conn->close();
 			echo "Connection closed";
+		}
+
+		/*
+			handles array arguments and prepares them for sql script, puts quotes around each
+				entry, with commas between them, and parenthases around all of it
+				( "[arg1]", "[arg2]", ... )
+		*/
+		private function formatArray($arg) {
+			if (is_array($arg))
+				return "( \"" . implode("\", \"", $arg) . "\" )";
+			return "( \"" . $arg . "\" )";
 		}
 
 		/*
@@ -69,10 +77,11 @@
 				SELECT [column1, column2, ...] FROM [table] WHERE [condition] ORDER BY [column]
 		*/
 		public function select($table, $cols = '*', $where = null, $in = null, $order = null, $asc_desc = null) {
-			$sql = "SELECT " . $cols . " FROM " . $table;
 
 			if ($cols != '*') {
 				$sql = "SELECT " . implode(", ", $cols) . " FROM " . $table;
+			} else {
+				$sql = "SELECT " . $cols . " FROM " . $table;
 			}
 
 			if ($where != NULL)	{
@@ -87,20 +96,23 @@
 					$sql .= " DESC";
 			}
 	
-			$result = $this->query($sql);
-
-			return $result;
+			return $this->query($sql);
 		}
 
 		/*
-			handles array arguments and prepares them for sql script, puts quotes around each
-				entry, with commas between them, and parenthases around all of it
-				( "[arg1]", "[arg2]", ... )
+			Resulting SQL code:
+				INSERT INTO [table] ([column1], [column2], ...) VALUES ([value1], [value2], ...)
 		*/
-		private function formatArray($arg) {
-			if (is_array($arg))
-				return "( \"" . implode("\", \"", $arg) . "\" )";
-			return "( \"" . $arg . "\" )";
+		public function insert($table, $values, $cols = null) {
+			$sql = "INSERT INTO " . $table;
+			if ($cols != NULL)
+				$sql .= " ( " . implode(", ", $cols) . " )";
+
+			$sql .= " VALUES " . $this->formatArray($values);
+
+			$this->query($sql);
 		}
+
+		
 	}
 ?>

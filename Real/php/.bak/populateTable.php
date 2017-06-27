@@ -1,4 +1,27 @@
 <?php
+
+	require_once "Databse.php";
+	include_once "../includes/constants.php"
+
+	// create a new database object, default constructor
+	$db = new Database();
+
+	// connect to the database, default parameters
+	$db->connect();
+
+	// grab the data from the die table
+	$table = $_POST["table"];
+	$result = $db->select($table);
+
+	// return the data in json format, separated by tilde's (to separate multiple json objects)
+	while ($row = $result->fetch_assoc()) {
+		echo json_encode($row) . "~";
+	}
+
+	// release the data
+	$result->free_result();
+
+	/*
 	require 'sqlHandler.php';
 
 	// Prepare the arguments
@@ -37,5 +60,5 @@
 					<td class=\"description-row\">" . $row['description'] . "</td>
 					<td class=\"pull-row\"><button class=\"pull-btn\">Pull</button></td>
 				</tr>";
-	}
+*/
 ?>

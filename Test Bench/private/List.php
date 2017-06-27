@@ -1,9 +1,10 @@
 <?php
-	require_once "Database.php";
+	
+	
 
-	class List {
+	class Lisst {
 
-		private $db = new Database();
+		private $db;
 		private $table;
 		private $columns;
 
@@ -12,7 +13,7 @@
 				Database() object, $db, which by default simply creates the 
 				object with no arguments
 		*/
-		function __construct(Database &$db, $table, $columns) {
+		function __construct(Database &$db, $table = DIE_TABLE, $columns = '*') {
 			// set the table
 			$this->setTable($table);
 
@@ -42,7 +43,7 @@
 		}
 
 		public function getList() {
-			$db->connect();
+			$this->db->connect();
 
 			// grab the data
 			$result = $this->db->select($this->table, $this->columns);
@@ -51,7 +52,7 @@
 
 			// free the data
 			$result->free_result();
-			$db->disconnect();
+			$this->db->disconnect();
 		}
 	}
 ?>

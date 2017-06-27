@@ -12,3 +12,7 @@
 -->
 
 <!--<script src="../includes/js/jquery.js" type="text/javascript"></script>-->
+<script src="../private/js/javascript.js" type="text/javascript"></script>
+
+<!-- php scripts -->
+
