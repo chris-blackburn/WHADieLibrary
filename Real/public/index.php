@@ -24,7 +24,7 @@
 
 	<div id="table-container" class="tab-content">
 		<input type="text" id="table-quick-search" placeholder="Quick Search">
-		<table>
+		<table class="tablesorter">
 			<thead class="table-head">
 				<tr>
 					<th id="dieID-header" name="dieID" value="asc">ID</th>

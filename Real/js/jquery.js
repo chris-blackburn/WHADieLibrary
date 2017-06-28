@@ -20,8 +20,16 @@ $(document).ready(function() {
 	// set the active tab
 	$("#table-btn").click();
 
+	// make tables of class tablesorter, sortable
+	$(".tablesorter").tablesorter();
+
 	// populate the table when the page loads
-	getDieTable();
+	populateDieTable();
+
+	// handler for table sorting when clicking on headers
+	$("table th").on("click", function() {
+
+	});
 
 	// handler for any forms regarding dies
 	$(".die-form form").submit(function(event) {
@@ -40,7 +48,7 @@ $(document).ready(function() {
 				console.log("Status: " + status + "\nData: " + data);
 
 				// update the die table on success and switch to the table tab
-				getDieTable();
+				populateDieTable();
 				$("#table-btn").click();
 			},
 			error: function(data, status) {
@@ -124,8 +132,8 @@ $(document).ready(function() {
 	*****************************************************************************
 */
 
-function getDieTable() {
-	var $url = "../php/populateDieTable.php";
+function populateDieTable() {
+	var $url = "../php/getDieTable.php";
 
 	$.ajax({
 		url: $url,
@@ -168,6 +176,8 @@ function getDieTable() {
 					$json = $.parseJSON(data.substring($begin, $end));
 			}
 
+			// update sorting
+			$(".tablesorter").trigger("update");
 		},
 		error: function(data, status) {
 			console.log("Status: " + status + "\nData: " + data);

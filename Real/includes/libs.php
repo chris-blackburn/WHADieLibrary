@@ -11,3 +11,4 @@
 
 <!-- JS -->
 <script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../includes/jquery.tablesorter.js"></script>
