@@ -1,4 +1,3 @@
-<!-- GLOBAL CONSTANTS FOR DATABASE CONNECTION -->
 <?php
 	define("DB_HOST", "localhost");
 	define("DB_USER", "monty");

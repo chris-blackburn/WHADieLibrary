@@ -2,13 +2,13 @@
 	styling for the tabs on the top of the page
 */
 
-.tabs {
+.tab-buttons {
 	overflow: hidden;
 	border: 1px solid #ccc;
     background-color: #f1f1f1;
 }
 
-.tabs button {
+.tab-buttons button {
     background-color: inherit;
     float: left;
     border: none;
@@ -18,7 +18,7 @@
     transition: 0.3s;
 }
 
-.tabs button:hover {
+.tab-buttons button:hover {
 	background-color: #ccc;
 }
 

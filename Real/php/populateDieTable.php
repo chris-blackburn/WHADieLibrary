@@ -12,12 +12,14 @@
 	// grab the data from the die table
 	$result = $db->select(DIE_TABLE);
 
+	// disconnect from the database
+	$db->disconnect();
+
 	// return the data in json format, separated by tilde's (to separate multiple json objects)
 	while ($row = $result->fetch_assoc()) {
 		echo json_encode($row) . "~";
 	}
 
-	// release the data and disconnect
+	// release the data
 	$result->free_result();
-	$db->disconnect();
 ?>

@@ -113,6 +113,32 @@
 			$this->query($sql);
 		}
 
-		
+		/*
+			Resulting SQL code:
+				UPDATE [table] SET [column1] = [value1], [column2] = [value2], ... WHERE [condition] IN ([value1], [value2], ...)
+		*/
+		public function update($table, $values, $cols, $where = null, $in = null) {
+			$sql = "UPDATE " . $table . " SET";
+
+			if (is_array($cols)) {
+				$set = array_combine($cols, $values);
+
+				foreach ($set as $col => $value) {
+					$sql .= " " . $col . " = \"" . $value . "\",";
+				}
+
+				$sql = substr($sql, 0, -1);
+			} else
+				$sql .= " " . $cols . " = \"" . $values . "\"";
+			
+
+			if ($where != NULL)	{
+				$sql .= " WHERE " . $where;
+				if ($in != NULL)
+					$sql .= " IN " . $this->formatArray($in);
+			}
+
+			$this->query($sql);
+		}
 	}
 ?>

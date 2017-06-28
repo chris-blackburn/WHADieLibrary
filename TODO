@@ -1,0 +1,2 @@
+add login function, use Database()->connect($user, $pass)
+trim sql and escape dangerous characters

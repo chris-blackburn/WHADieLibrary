@@ -19,7 +19,7 @@
 
 	// connect to the database
 	$db = new Database();
-	$db->connect(/*$updateUser, $updateUserPass*/); // UPDATE PENDING: Login as user that can insert, 
+	$db->connect(/*$updateUser, $updateUserPass*/);
 
 	// adding new entry or editing an existing one?
 	$function = $_POST['function'];

@@ -1,20 +1,20 @@
-<form action="../php/submitDie.php"> <!-- The form tag doesn't need any attributes because jquery handles the submission -->
+<!-- Display as non-editable: job number, customer ID, customer name, die id, purchase date, machine -->
+<div id="entry-info">
+	<label for="output[name=jobNumner]">Job Number:</label> <output name="jobNumber"></output> | 
+		<label for="output[name=customerID]">Customer ID:</label> <output name="customerID"></output> |
+		<label for="output[name=customerName]">Customer Name:</label> <output name="customerName"></output> | 
+		<label for="output[name=dieID]">Die ID:</label> <output name="dieID"></output><br>
+		<label for="output[name=datePurchased]">Date Purchased:</label> <output name="datePurchased"></output> |
+		<label for="output[name=dateLastUsed]">Date Last Used:</label> <output name="dateLastUsed"></output><br>
+	<label for="output[name=machine]">Machine:</label> <output name="machine"></output>
+</div>
+
+
+<form action="../php/submitDie.php">
 
 	<!-- use this to store other data and switch between adding/updating -->
-	<input type="hidden" name="function" value="add">
-
-	<div class="center">
-		<input type="text" name="jobNumber" placeholder="Job number" required>
-		<input type="text" name="customerID" placeholder="Customer ID" required>
-	</div>
-
-	<div class="center">
-		<input type="text" name="customerName" placeholder="Customer Name" required>
-	</div>
-
-	<div class="center">
-		<input type="text" name="dieVendor" placeholder="Die Vendor">
-	</div>
+	<input type="hidden" name="dieID">
+	<input type="hidden" name="function" value="edit">
 
 	<div class="field">
 		<label for="input[name=description]">Description:</label>
@@ -24,24 +24,10 @@
 	</div>
 
 	<div class="field">
-		<label for="input[name=tags]">Tags:</label>
-		<div class="field-input">
-			<input type="text" name="tags" id="tags">
-		</div>
-	</div>
-
-	<div class="field">
-		<label for="input[name=datePurchased]">Date Purchased:</label>
-		<div class="field-input">
-			<input type="date" name="datePurchased" value="<?php echo date("Y-m-d"); ?>" required>
-		</div>	
-	</div>
-
-	<div class="field">
 		<label for="input[name=expectedUsage]">Expected usage:</label>
 		<div class="field-input">
 			<select name="expectedUsage">
-				<option value="One time use" selected>One time use</option>
+				<option value="One time use">One time use</option>
 				<option value="More than once">More than once</option>
 				<option value="Regular">Regular</option>
 				<option value="Unknown">Unknown</option>
@@ -52,21 +38,10 @@
 	<div class="field">
 		<label for="input[name=location]">Location:</label>
 		<div class="field-input">
-				<select name="location">
-				<option value="Awaiting Arrival" selected>Awaiting Arrival</option>
+			<select name="location">
+				<option value="Awaiting Arrival">Awaiting Arrival</option>
 				<option value="Green Inventory">Green Inventory</option>
 				<option value="Gold Inventory">Gold Inventory</option>
-				<option value="Sanwa">Sanwa</option>
-				<option value="Heidelberg">Heidelberg</option>
-				<option value="Kluge">Kluge</option>
-			</select>
-		</div>	
-	</div>
-
-	<div class="field">
-		<label for="input[name=machine]">Machine:</label>
-		<div class="field-input">
-				<select name="machine">
 				<option value="Sanwa">Sanwa</option>
 				<option value="Heidelberg">Heidelberg</option>
 				<option value="Kluge">Kluge</option>
@@ -102,12 +77,12 @@
 	<div class="field">
 		<label for="input[name=pocketSize]">Pocket Size:</label>
 		<div class="field-input">
-			<input type="number" name="pocketSize"  step="any">
+			<input type="number" name="pocketSize" step="any">
 		</div>	
 	</div>
 	
 	<div class="field">
-		<label for="input[name=numberUp]"># Up:</label>
+		<label for="input[name=numberUp]">Number Up:</label>
 		<div class="field-input">
 			<input type="range" name="numberUp" value="0" min="0" max="100">
 		</div>	
@@ -120,6 +95,13 @@
 			<input type="checkbox" name="docketReviewed" value="true">
 		</div>	
 	</div>
+
+	<div class="field">
+		<label for="input[name=dateLastUsed]">Date Last Used:</label>
+		<div class="field-input">
+			<input type="date" name="dateLastUsed" required>
+		</div>
+	</div>
 	
 	<div class="field">
 		<label for="input[name=notes]">Notes:</label>
@@ -129,7 +111,7 @@
 	</div>
 	
 	<div class="center">
-		<input type="submit" value="Add">
+		<input type="submit" value="Update">
 	</div>
 
 </form>
