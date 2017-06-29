@@ -1,11 +1,9 @@
 <!-- Display as non-editable: job number, customer ID, customer name, die id, purchase date, machine -->
 <div id="entry-info">
-	<label for="output[name=jobNumner]">Job Number:</label> <output name="jobNumber"></output> | 
-		<label for="output[name=customerID]">Customer ID:</label> <output name="customerID"></output> |
-		<label for="output[name=customerName]">Customer Name:</label> <output name="customerName"></output> | 
-		<label for="output[name=dieID]">Die ID:</label> <output name="dieID"></output><br>
-		<label for="output[name=datePurchased]">Date Purchased:</label> <output name="datePurchased"></output> |
-		<label for="output[name=dateLastUsed]">Date Last Used:</label> <output name="dateLastUsed"></output><br>
+	<label for="output[name=customerName]">Customer Name:</label> <output name="customerName"></output> | 
+	<label for="output[name=?dieID]">Die ID:</label> <output name="?dieID"></output><br>
+	<label for="output[name=datePurchased]">Date Purchased:</label> <output name="datePurchased"></output> |
+	<label for="output[name=jobDate]">Date Last Used:</label> <output name="jobDate"></output><br>
 	<label for="output[name=machine]">Machine:</label> <output name="machine"></output>
 </div>
 
@@ -13,8 +11,8 @@
 <form action="../php/submitDie.php">
 
 	<!-- use this to store other data and switch between adding/updating -->
-	<input type="hidden" name="dieID">
-	<input type="hidden" name="function" value="edit">
+	<input type="hidden" name="?dieID">
+	<input type="hidden" name="?function" value="edit">
 
 	<div class="field">
 		<label for="input[name=description]">Description:</label>

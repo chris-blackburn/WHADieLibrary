@@ -26,13 +26,8 @@ $(document).ready(function() {
 	// populate the table when the page loads
 	populateDieTable();
 
-	// handler for table sorting when clicking on headers
-	$("table th").on("click", function() {
-
-	});
-
-	// handler for any forms regarding dies
-	$(".die-form form").submit(function(event) {
+	// handler for any forms
+	$(".forms form").submit(function(event) {
 		// prevent the default form submit action from happening
 		event.preventDefault();
 
@@ -78,9 +73,7 @@ $(document).ready(function() {
 				$json = $.parseJSON($json);
 
 				for (var name in $json) {
-					console.log(name + "=>" + $json[name]);
-
-					$("#update-form-container [name=\"" + name + "\"").val($json[name]);
+					$("#update-form-container [name=\"" + ((name == "dieID") ? "?" + name : name) + "\"").val($json[name]);
 
 					$("#update-btn").click();
 				}
@@ -93,37 +86,32 @@ $(document).ready(function() {
 
 	});
 
-	// ***************************************************** NEED NEW SEARCH FUNCTION
-			// filter 
-			function filter(selector, query) {
-				query = $.trim(query);
-				query = query.replace(/ /gi, "|");
+	$("#table-container").on("click", ".pull-btn", function() {
+		// grab the die id from the row of the clicked button
+		$dieID = $(this).parents("tr").attr("name");
 
-				if ($(this).text().search(new RegExp(query, "i")) < 0) {
-					$(this).hide();
-				} else {
-					$(this).show();
-				}
-			}
+		// set the die id in the pull request form and switch tabs
+		$("#pull-form-container [name=\"dieID\"").val($dieID);
+		$("#pull-btn").click();
+	});
 
-			// quick search 
-			$("#table-quick-search").keyup(function(event) {
-				var $row = $(".table-body tr");
+	// quick search 
+	$("#table-quick-search").keyup(function(event) {
+		var $rows = $("#table-container tbody > tr");
 
-				if ($(this).val() == '') {
-					$(".table-body tr").show();
-				} else {
-					var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
-			        	reg = RegExp(val, 'i'),
-			        	text;		
+		if ($(this).val() == '') {
+			$rows.show();
+		} else {
+			var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+	        	reg = RegExp(val, 'i'),
+	        	text;		
 
-		        	$row.show().filter(function() {
-				        text = $(this).text().replace(/\s+/g, ' ');
-				        return !reg.test(text);
-				    }).hide();
-		        }
-			});
-
+        	$rows.show().filter(function() {
+		        text = $(this).text().replace(/\s+/g, ' ');
+		        return !reg.test(text);
+		    }).hide();
+        }
+	});
 });
 
 /*
@@ -157,7 +145,7 @@ function populateDieTable() {
 				// create the row element
 				$row =  "<tr class=\"table-rows\" name=\"" + $json['dieID'] + "\">";
 				$row +=		"<td class=\"dieID-row\">" + $json['dieID'] + "</td>"
-				$row +=		"<td class=\"dateLastUsed-row\">" + $json['dateLastUsed'] + "</td>"
+				$row +=		"<td class=\"datePurchased-row\">" + $json['datePurchased'] + "</td>"
 				$row +=		"<td class=\"machine-row\">" + $json['machine'] + "</td>"
 				$row +=		"<td class=\"location-row\">" + $json['location'] + "</td>"
 				$row +=		"<td class=\"description-row\">" + $json['description'] + "</td>"

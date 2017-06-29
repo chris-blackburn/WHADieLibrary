@@ -1,2 +1,8 @@
 add login function, use Database()->connect($user, $pass)
 trim sql and escape dangerous characters
+tag autocomplete
+fix searching
+
+both job entry and die on new die
+change database class to build sql then user submits query (allows for prepared statements as well)
+soft code row selecting for used with transaction table

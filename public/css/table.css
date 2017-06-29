@@ -1,0 +1,100 @@
+/*
+  styling for the table
+*/
+
+#table-container table {
+  width: 100%;
+  border-spacing: 0;
+  border: 1px solid #ccc;
+}
+
+#table-container th, td {
+  padding: .5em;
+  text-align: center; 
+  border-bottom: 1px solid #ddd;
+}
+
+#table-container tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#table-container thead {
+  background-color: #333;
+  color: white;
+}
+
+#table-container thead, tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table-body {
+  display: block;
+  height: 35em;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden; 
+}
+
+.table-body tr:hover {
+  background-color: #d0d0d0 !important;
+    transition: 0.3s;
+}
+
+.table-body tr {
+  cursor: pointer;
+}
+
+#check-header, .table-checkboxes {
+  width: 4em;
+}
+
+#dieID-header, .dieID-row {
+  width: 3em;
+}
+
+#datePurchased-header, .datePurchased-row {
+  width: 9em;
+}
+
+#machine-header, .machine-row {
+  width: 10em;
+}
+
+#location-header, .location-row {
+  width: 10em;
+}
+
+#description-header, .description-row {
+  text-align: left !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#table-container input[type='checkbox'] {
+    width: 2em;
+    height: 2em;
+    background: white;
+    border-radius: 5px;
+    border: 2px solid #555;
+}
+#table-container input[type='checkbox']:checked {
+    background: #abd;
+}
+
+#delete-btn {
+  margin: 1em;
+  color: white;
+  background-color: #333;
+  padding: 1em;
+  width: 20em;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pull-row {
+  float: right;
+}

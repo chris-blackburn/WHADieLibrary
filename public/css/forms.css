@@ -8,11 +8,6 @@
           box-sizing: border-box;
 }
 
-.die-form form {
-	width: 50%;
-	text-align: left;
-}
-
 .die-form input[type="submit"] {
 	color: white;
 	background-color: #333;
@@ -31,33 +26,4 @@
 	padding: 10px;
 	border: 2px solid #aaa;
 	border-radius: 2px;
-}
-
-.center {
-	text-align: center;
-	margin: 5px auto;
-}
-
-.field {
-	display: inline;
-	margin: 1em 0;
-}
-
-.field > label {
-	margin-top: .5em;
-	margin-right: 3em;
-}
-/*
-	insert form specific
-*/
-#insert-form-container {
-
-}
-
-/*
-	update form specific
-*/
-
-#entry-info label {
-	font-weight: bold;
 }
