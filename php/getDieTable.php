@@ -10,14 +10,19 @@
 	$db->connect();
 
 	// grab the data from the die table
-	$result = $db->select(DIE_TABLE);
+	$table = $_GET['table'];
+	
+	if ($table == "die")
+		$result = $db->select(DIE_TABLE);
+	else if ($table == "job")
+		$result = $db->select(JOB_TABLE);
 
 	// disconnect from the database
 	$db->disconnect();
 
 	// return the data in json format, separated by tilde's (to separate multiple json objects)
 	while ($row = $result->fetch_assoc()) {
-		echo json_encode($row) . "~";
+		echo json_encode($row);
 	}
 
 	// release the data

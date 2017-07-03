@@ -2,28 +2,28 @@
   styling for the table
 */
 
-#table-container table {
+.table-container table {
   width: 100%;
   border-spacing: 0;
   border: 1px solid #ccc;
 }
 
-#table-container th, td {
+.table-container th, td {
   padding: .5em;
   text-align: center; 
   border-bottom: 1px solid #ddd;
 }
 
-#table-container tr:nth-child(even) {
+.table-container tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-#table-container thead {
+.table-container thead {
   background-color: #333;
   color: white;
 }
 
-#table-container thead, tbody tr {
+.table-container thead, tbody tr {
   display: table;
   width: 100%;
   table-layout: fixed;
@@ -39,7 +39,7 @@
 
 .table-body tr:hover {
   background-color: #d0d0d0 !important;
-    transition: 0.3s;
+  transition: 0.3s;
 }
 
 .table-body tr {
@@ -73,14 +73,14 @@
   text-overflow: ellipsis;
 }
 
-#table-container input[type='checkbox'] {
+.table-container input[type='checkbox'] {
     width: 2em;
     height: 2em;
     background: white;
     border-radius: 5px;
     border: 2px solid #555;
 }
-#table-container input[type='checkbox']:checked {
+.table-container input[type='checkbox']:checked {
     background: #abd;
 }
 
@@ -97,4 +97,20 @@
 
 .pull-row {
   float: right;
+  padding: 0;
+}
+
+.pull-row button {
+    display: table-cell;
+    height: 4em;
+    width: 4em;
+    background-color: #ccc;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.pull-row button:hover {
+  background-color: #fff;
 }

@@ -68,7 +68,7 @@
 
 	<div>
 		<label for="input[name=numPockets]">Pockets:</label>
-			<input type="range" name="numPockets" value="0" min="0" max="10">
+			<input type="number" name="numPockets" max="10">
 	</div>
 
 	<div>
@@ -78,13 +78,15 @@
 
 	<div>
 		<label for="input[name=numberUp]"># Up:</label>
-			<input type="range" name="numberUp" value="0" min="0" max="100">
+			<input type="number" name="numberUp" min="0" max="100">
 	</div>
 
 	<div>
 		<label for="input[name=dieReviewed]">Die Reviewed:</label>
-			<input type="hidden" name="dieReviewed" value="false">
-			<input type="checkbox" name="dieReviewed" value="true">
+			<select name="dieReviewed">
+				<option value="false" selected>false</option>
+				<option value="true">true</option>
+			</select>
 	</div>
 
 	<input type="submit" value="Create Die">

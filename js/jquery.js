@@ -18,13 +18,14 @@ $(document).ready(function() {
 	});
 
 	// set the active tab
-	$("#table-btn").click();
+	$("#die-table-btn").click();
 
 	// make tables of class tablesorter, sortable
 	$(".tablesorter").tablesorter();
 
 	// populate the table when the page loads
 	populateDieTable();
+	populateJobTable()
 
 	// handler for any forms
 	$(".forms form").submit(function(event) {
@@ -44,6 +45,7 @@ $(document).ready(function() {
 
 				// update the die table on success and switch to the table tab
 				populateDieTable();
+				populateJobTable();
 				$("#table-btn").click();
 			},
 			error: function(data, status) {
@@ -53,7 +55,7 @@ $(document).ready(function() {
 	});
 
 	// handler for double clicking a die entry, pull up the update form and fill it with that die's info
-	$("#table-container tbody").on("dblclick", "tr", function() {
+	$("#die-table tbody").on("dblclick", "tr", function() {
 		// grab the die id of the current entry
 		var $dieID = $(this).attr("name");
 		var $url = "../php/populateUpdateDieForm.php";
@@ -73,7 +75,8 @@ $(document).ready(function() {
 				$json = $.parseJSON($json);
 
 				for (var name in $json) {
-					$("#update-form-container [name=\"" + ((name == "dieID") ? "?" + name : name) + "\"").val($json[name]);
+					// any element in the div with name attribute ending with name string
+					$("#update-form-container [name$=\"" + name + "\"").val($json[name]);
 
 					$("#update-btn").click();
 				}
@@ -86,7 +89,7 @@ $(document).ready(function() {
 
 	});
 
-	$("#table-container").on("click", ".pull-btn", function() {
+	$("#die-table").on("click", ".pull-btn", function() {
 		// grab the die id from the row of the clicked button
 		$dieID = $(this).parents("tr").attr("name");
 
@@ -96,8 +99,8 @@ $(document).ready(function() {
 	});
 
 	// quick search 
-	$("#table-quick-search").keyup(function(event) {
-		var $rows = $("#table-container tbody > tr");
+	$(".table-quick-search").keyup(function(event) {
+		var $rows = $(this).siblings("table > tbody > tr");
 
 		if ($(this).val() == '') {
 			$rows.show();
@@ -126,19 +129,20 @@ function populateDieTable() {
 	$.ajax({
 		url: $url,
 		type: "GET",
+		data: { table: "die" },
 		success: function(data, status) {
 			// add ignore json data
 			console.log("Status: " + status + "\nData: " + data);
 
 			// used to loop through each JSON object (they are separated by '~')
 			$begin = data.indexOf("{");
-			$end = data.indexOf("~");
+			$end = data.indexOf("}");
 
 			// prime the json data
-			$json = $.parseJSON(data.substring($begin, $end));
+			$json = $.parseJSON(data.substring($begin, $end + 1));
 
 			// empty the existing data
-			$("#table-container tbody").empty();
+			$("#die-table tbody").empty();
 
 			// while there is another json object
 			while ($begin > 0 && $end > 0) {
@@ -153,15 +157,67 @@ function populateDieTable() {
 				$row +=	"</tr>";
 
 				// add the row to the table
-				$("#table-container tbody").append($row);
+				$("#die-table tbody").append($row);
 
 
 				// grab the next json object
-				$begin = data.indexOf("{", $end);
-				$end = data.indexOf("~", $begin);
+				$begin = data.indexOf("{", $end + 1);
+				$end = data.indexOf("}", $begin);
 
 				if ($begin > 0 && $end > 0)
-					$json = $.parseJSON(data.substring($begin, $end));
+					$json = $.parseJSON(data.substring($begin, $end + 1));
+			}
+
+			// update sorting
+			$(".tablesorter").trigger("update");
+		},
+		error: function(data, status) {
+			console.log("Status: " + status + "\nData: " + data);
+		}
+	})
+}
+
+function populateJobTable() {
+	var $url = "../php/getDieTable.php";
+
+	$.ajax({
+		url: $url,
+		type: "GET",
+		data: { table: "job" },
+		success: function(data, status) {
+			// add ignore json data
+			console.log("Status: " + status + "\nData: " + data);
+
+			// used to loop through each JSON object (they are separated by '~')
+			$begin = data.indexOf("{");
+			$end = data.indexOf("}");
+
+			// prime the json data
+			$json = $.parseJSON(data.substring($begin, $end + 1));
+
+			// empty the existing data
+			$("#job-table tbody").empty();
+
+			// while there is another json object
+			while ($begin > 0 && $end > 0) {
+				// create the row element
+				$row =  "<tr class=\"table-rows\">";
+				$row +=		"<td>" + $json['jobNumber'] + "</td>"
+				$row +=		"<td>" + $json['dieID'] + "</td>"
+				$row +=		"<td>" + $json['customerName'] + "</td>"
+				$row +=		"<td>" + $json['jobDate'] + "</td>"
+				$row +=	"</tr>";
+
+				// add the row to the table
+				$("#job-table tbody").append($row);
+
+
+				// grab the next json object
+				$begin = data.indexOf("{", $end + 1);
+				$end = data.indexOf("}", $begin);
+
+				if ($begin > 0 && $end > 0)
+					$json = $.parseJSON(data.substring($begin, $end + 1));
 			}
 
 			// update sorting

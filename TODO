@@ -6,3 +6,5 @@ fix searching
 both job entry and die on new die
 change database class to build sql then user submits query (allows for prepared statements as well)
 soft code row selecting for used with transaction table
+
+data last used = most recent job that used a die

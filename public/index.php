@@ -14,7 +14,8 @@
 
 	<!-- the name attribute for each button should be the target div for which its content holds -->
 	<div class="tab-buttons">
-		<button id="table-btn" name="table-container" class="active-tab">View Table</button>
+		<button id="die-table-btn" name="die-table" class="active-tab">Die Table</button>
+		<button id="job-table-btn" name="job-table">Transaction History</button>
 		<button id="insert-btn" name="new-die-form-container">Create New Die</button>
 		<button id="update-btn" name="update-form-container">Update Die</button>
 		<button id="pull-btn" name="pull-form-container">Pull Request</button>
@@ -22,8 +23,14 @@
 
 <!-- ***************************************************** DIE TABLE ***************************************************** -->
 
-	<div id="table-container" class="tab-content">
+	<div id="die-table" class="table-container tab-content">
 		<?php include "dieTable.php" ?>
+	</div>
+
+<!-- ***************************************************** JOB TABLE ***************************************************** -->
+	
+	<div id="job-table" class="table-container tab-content">
+		<?php include "jobTable.php" ?>
 	</div>
 
 <!-- ***************************************************** NEW DIE FORM ***************************************************** -->

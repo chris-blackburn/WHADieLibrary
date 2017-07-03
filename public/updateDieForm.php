@@ -2,8 +2,8 @@
 <div id="entry-info">
 	<label for="output[name=customerName]">Customer Name:</label> <output name="customerName"></output> | 
 	<label for="output[name=?dieID]">Die ID:</label> <output name="?dieID"></output><br>
-	<label for="output[name=datePurchased]">Date Purchased:</label> <output name="datePurchased"></output> |
-	<label for="output[name=jobDate]">Date Last Used:</label> <output name="jobDate"></output><br>
+	<label for="output[name=datePurchased]">Date Purchased:</label> <output name="datePurchased"></output> |<br>
+	<!--<label for="output[name=jobDate]">Date Last Used:</label> <output name="jobDate"></output><br>-->
 	<label for="output[name=machine]">Machine:</label> <output name="machine"></output>
 </div>
 
@@ -68,7 +68,7 @@
 	<div class="field">
 		<label for="input[name=numPockets]">Pockets:</label>
 		<div class="field-input">
-			<input type="range" name="numPockets" value="0" min="0" max="10">
+			<input type="number" name="numPockets" min="0" max="10">
 		</div>	
 	</div>
 
@@ -82,25 +82,27 @@
 	<div class="field">
 		<label for="input[name=numberUp]">Number Up:</label>
 		<div class="field-input">
-			<input type="range" name="numberUp" value="0" min="0" max="100">
+			<input type="number" name="numberUp" min="0" max="100">
 		</div>	
 	</div>
 	
 	<div class="field">
-		<label for="input[name=docketReviewed]">Docket Reviewed:</label>
+		<label for="input[name=dieReviewed]">Die Reviewed:</label>
 		<div class="field-input">
-			<input type="hidden" name="docketReviewed" value="false">
-			<input type="checkbox" name="docketReviewed" value="true">
+			<select name="dieReviewed">
+				<option value="false">false</option>
+				<option value="true">true</option>
+			</select>
 		</div>	
 	</div>
-
+<!--
 	<div class="field">
 		<label for="input[name=dateLastUsed]">Date Last Used:</label>
 		<div class="field-input">
 			<input type="date" name="dateLastUsed" required>
 		</div>
 	</div>
-	
+	-->
 	<div class="field">
 		<label for="input[name=notes]">Notes:</label>
 		<div class="field-input">
