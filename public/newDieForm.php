@@ -1,8 +1,8 @@
 <form action="../php/submitDie.php">
 
 	<!-- use this to store other data and switch between adding/updating -->
-	<input type="hidden" name="?type" value="die">
-	<input type="hidden" name="?function" value="add">
+	<input type="hidden" name="!type" value="die">
+	<input type="hidden" name="!function" value="add">
 
 	<input type="text" name="dieVendor" placeholder="Die Vendor">
 
@@ -12,8 +12,22 @@
 	</div>
 
 	<div>
-		<label for="input[name=tags]">Tags:</label>
-			<input type="text" name="tags" id="tags">
+		<label for="tags">Tags:</label>
+		<select style="height: 10em;" id="tags" multiple="multiple" class="multi-select">
+			<?php
+				$productTags = [ "Business Card", "Brochure", "Booklet/Catalog", "Box", "Coupon", "Coaster", "CD/DVD Holder", "Door Hanger", "Envelope", "Hang Tag", "Invitation/Greeting Card", "Pocket", "Sticker/Label", "Tent" ];
+
+				$featuresTags = [ "BC Slit", "Corner", "Gusset", "Horizontal Pocket", "Moon BC Slits", "Perforation", "Pop Up/3D", "Shape", "Tabs", "Vertical Pocket", "Window", "Wrap" ];
+
+				$tags = array_merge($productTags, $featuresTags);
+
+				foreach($tags as $tag) {
+					echo "<option value=\"" . $tag . "\">" . $tag . "</option>";
+				}
+			?>
+		</select>
+		(Tip: Ctrl+Click to select multiple tags)
+		<input type="hidden" name="tags">
 	</div>
 
 	<div>

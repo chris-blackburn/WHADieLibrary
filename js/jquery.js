@@ -32,6 +32,15 @@ $(document).ready(function() {
 		// prevent the default form submit action from happening
 		event.preventDefault();
 
+		// change the way the tag select sends data
+		if ($(this).has("#tags")) {
+			var selMulti = $.map($("#tags option:selected"), function (el, i) {
+		         return $(el).text();
+		    });
+
+			$("input[name=\"tags\"]").val(selMulti.join(", "));
+		}
+
 		// grab the url
 		var $url = $(this).attr("action");
 
@@ -46,7 +55,7 @@ $(document).ready(function() {
 				// update the die table on success and switch to the table tab
 				populateDieTable();
 				populateJobTable();
-				$("#table-btn").click();
+				$("#die-table-btn").click();
 			},
 			error: function(data, status) {
 				console.log("Status: " + status + "\nData: " + data);
@@ -100,7 +109,12 @@ $(document).ready(function() {
 
 	// quick search 
 	$(".table-quick-search").keyup(function(event) {
-		var $rows = $(this).siblings("table > tbody > tr");
+		var $rows;
+
+		if ($(this).attr("name") == "die")
+			$rows = $("#die-table tbody tr");
+		else if ($(this).attr("name") == "job")
+			$rows = $("#job-table tbody tr");
 
 		if ($(this).val() == '') {
 			$rows.show();
@@ -148,12 +162,13 @@ function populateDieTable() {
 			while ($begin > 0 && $end > 0) {
 				// create the row element
 				$row =  "<tr class=\"table-rows\" name=\"" + $json['dieID'] + "\">";
-				$row +=		"<td class=\"dieID-row\">" + $json['dieID'] + "</td>"
-				$row +=		"<td class=\"datePurchased-row\">" + $json['datePurchased'] + "</td>"
-				$row +=		"<td class=\"machine-row\">" + $json['machine'] + "</td>"
-				$row +=		"<td class=\"location-row\">" + $json['location'] + "</td>"
-				$row +=		"<td class=\"description-row\">" + $json['description'] + "</td>"
-				$row +=		"<td class=\"pull-row\"><button class=\"pull-btn\">Pull</button></td>"
+				$row +=		"<td class=\"dieID-row\">" + $json['dieID'] + " </td>";
+				$row +=		"<td class=\"datePurchased-row\">" + $json['datePurchased'] + " </td>";
+				$row +=		"<td class=\"machine-row\">" + $json['machine'] + " </td>";
+				$row +=		"<td class=\"location-row\">" + $json['location'] + " </td>";
+				$row +=		"<td class=\"description-row\">" + $json['description'] + " </td>";
+				$row +=		"<td class=\"pull-row\"><button class=\"pull-btn\">Pull</button></td>";
+				$row +=		"<td hidden>" + $json['tags'] + "</td>";
 				$row +=	"</tr>";
 
 				// add the row to the table
@@ -202,10 +217,10 @@ function populateJobTable() {
 			while ($begin > 0 && $end > 0) {
 				// create the row element
 				$row =  "<tr class=\"table-rows\">";
-				$row +=		"<td>" + $json['jobNumber'] + "</td>"
-				$row +=		"<td>" + $json['dieID'] + "</td>"
-				$row +=		"<td>" + $json['customerName'] + "</td>"
-				$row +=		"<td>" + $json['jobDate'] + "</td>"
+				$row +=		"<td>" + $json['jobNumber'] + "</td> "
+				$row +=		"<td>" + $json['dieID'] + "</td> "
+				$row +=		"<td>" + $json['customerName'] + "</td> "
+				$row +=		"<td>" + $json['jobDate'] + "</td> "
 				$row +=	"</tr>";
 
 				// add the row to the table

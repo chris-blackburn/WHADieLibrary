@@ -56,6 +56,11 @@
 			return "( \"" . $arg . "\" )";
 		}
 
+		private function escapeArguments(&$arg) {
+			foreach($arg as $key=>$value)
+				$arg[$key] = $this->conn->real_escape_string($value);
+		}
+
 		/*
 			Sends an sql query to the database and returns the output, also error catches
 		*/
@@ -104,6 +109,8 @@
 				INSERT INTO [table] ([column1], [column2], ...) VALUES ([value1], [value2], ...)
 		*/
 		public function insert($table, $values, $cols = null) {
+			$this->escapeArguments($values);
+
 			$sql = "INSERT INTO " . $table;
 			if ($cols != NULL)
 				$sql .= " ( " . implode(", ", $cols) . " )";
@@ -118,6 +125,8 @@
 				UPDATE [table] SET [column1] = [value1], [column2] = [value2], ... WHERE [condition] IN ([value1], [value2], ...)
 		*/
 		public function update($table, $values, $cols, $where = null, $in = null) {
+			$this->escapeArguments($values);
+
 			$sql = "UPDATE " . $table . " SET";
 
 			if (is_array($cols)) {

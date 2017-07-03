@@ -1,6 +1,9 @@
 /*
 	styling for new entry and update forms
 */
+label {
+	font-weight: bold;
+}
 
 .die-form input, select, button {
 	 -webkit-box-sizing: border-box;

@@ -5,7 +5,7 @@
 	// for each POST, add it to the respective array, ignoring entries in unwantedFields
 	foreach ($_POST as $col => $value) {
 		// avoid sending unwanted data, unwanted fields start with "?" in the forms
-		if ($col{0} == "?")
+		if ($col{0} == "!")
 			continue;
 		
 		$cols[] = $col;
@@ -13,7 +13,7 @@
 	}
 
 	// switch tables depending on the entry type determined by the html form
-	$type = $_POST["?type"];
+	$type = $_POST["!type"];
 
 	if ($type == "die")
 		$table = DIE_TABLE;
@@ -25,13 +25,13 @@
 	$db->connect(/*$updateUser, $updateUserPass*/);
 
 	// adding new entry or editing an existing one?
-	$function = $_POST["?function"];
+	$function = $_POST["!function"];
 
 	if ($function == "add")
 		$db->insert($table, $values, $cols);
 	else if ($function == "edit") {
 		$where = "dieID";
-		$in = $_POST["?dieID"];
+		$in = $_POST["!dieID"];
 		$db->update($table, $values, $cols, $where, $in);
 	}
 

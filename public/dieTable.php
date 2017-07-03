@@ -1,4 +1,4 @@
-<input type="text" class="table-quick-search" placeholder="Quick Search">
+<input type="text" class="table-quick-search" name="die" placeholder="Quick Search">
 <table class="tablesorter">
 	<thead class="table-head">
 		<tr>
