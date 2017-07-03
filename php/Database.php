@@ -18,6 +18,8 @@
 		private $server = '';
 		private $db = '';
 
+		private $queryID;
+
 		function __construct($server = DB_HOST, $db = DB_DBASE) {
 			$this->server = $server;
 			$this->db = $db;
@@ -65,8 +67,9 @@
 			Sends an sql query to the database and returns the output, also error catches
 		*/
 		public function query($sql) {
-			// query the sql code
+			// query the sql code and grab the last id and store it
 			$result = $this->conn->query($sql);
+			$this->queryID = $this->conn->insert_id;
 
 			// if the query failed, die with error message
 			if (!$result) {
@@ -75,6 +78,10 @@
 
 			echo "Success: \"" . $sql . "\"";
 			return $result;
+		}
+
+		public function getQueryID() {
+			return $this->queryID;
 		}
 
 		/*

@@ -6,4 +6,6 @@
 
 	define("DIE_TABLE", "dies");
 	define("JOB_TABLE", "jobs");
+
+	define("PDF_DIR", "/srv/http/WHA/DieLibrary/dies/")
 ?>

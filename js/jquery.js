@@ -44,11 +44,28 @@ $(document).ready(function() {
 		// grab the url
 		var $url = $(this).attr("action");
 
+		// grab form data
+		var $formData = new FormData();
+		var $pdfFile = $("#file-upload").prop("files")[0];
+		
+		if ($pdfFile)
+			$formData.append("pdfFile", $pdfFile);
+
+		// append all other input data
+		$(this).find("input[type!=submit][name], select[name]").each(function() {
+			$name = $(this).attr("name");
+			$val = $(this).val();
+
+			$formData.append($name, $val);
+		});
+
 		// send POST to the url, where the data is handled and the entry is added
 		$.ajax({
 			url: $url,
 			type: "POST",
-			data: $(this).serialize(),
+			data: $formData,
+			contentType: false,
+    		processData: false,
 			success: function(data, status) {
 				console.log("Status: " + status + "\nData: " + data);
 

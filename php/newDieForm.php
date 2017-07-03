@@ -1,4 +1,4 @@
-<form action="../php/submitDie.php">
+<form action="../php/submitDie.php" enctype="multipart/form-data">
 
 	<!-- use this to store other data and switch between adding/updating -->
 	<input type="hidden" name="!type" value="die">
@@ -101,6 +101,10 @@
 				<option value="false" selected>false</option>
 				<option value="true">true</option>
 			</select>
+	</div>
+
+	<div>
+		<label for="input[name=pdfFile]">Upload PDF:</label> <input id="file-upload" type="file">
 	</div>
 
 	<input type="submit" value="Create Die">
