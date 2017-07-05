@@ -5,13 +5,28 @@ label {
 	font-weight: bold;
 }
 
-.die-form input, select, button {
+.forms {
+	overflow: hidden;
+}
+
+.forms form {
+	width: 50%;
+	float: left;
+}
+
+#pdf-obj {
+	
+	width: 50%;
+	height: 40em;
+}
+
+.forms input, select, button {
 	 -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.die-form input[type="submit"] {
+.forms input[type="submit"] {
 	color: white;
 	background-color: #333;
 	padding: 1em;
@@ -21,12 +36,13 @@ label {
 	border-radius: 5px;
 }
 
-.die-form input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
+.forms input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
     border: 2px solid lightblue;
 }
 
-.die-form input[type="text"], input[type="number"], input[type="date"] {
+.forms input[type="text"], input[type="number"], input[type="date"] {
 	padding: 10px;
 	border: 2px solid #aaa;
 	border-radius: 2px;
 }
+

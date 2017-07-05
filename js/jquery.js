@@ -104,8 +104,14 @@ $(document).ready(function() {
 					// any element in the div with name attribute ending with name string
 					$("#update-form-container [name$=\"" + name + "\"").val($json[name]);
 
-					$("#update-btn").click();
 				}
+
+				// for viewing the pdf of the die
+				$pdfLocation = "../dies/" + $dieID + ".pdf"
+				$("#pdf-obj").attr("data", $pdfLocation);
+				$("#pdf-link").attr("href", $pdfLocation);
+
+				$("#update-btn").click();
 
 			},
 			error: function(data, status) {
