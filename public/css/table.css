@@ -8,6 +8,10 @@
   border: 1px solid #ccc;
 }
 
+.table-container th:hover {
+  cursor: pointer;
+}
+
 .table-container th, td {
   padding: .5em;
   text-align: center; 
@@ -46,24 +50,20 @@
   cursor: pointer;
 }
 
-#check-header, .table-checkboxes {
-  width: 4em;
-}
-
 #dieID-header, .dieID-row {
   width: 3em;
 }
 
 #datePurchased-header, .datePurchased-row {
-  width: 9em;
+  width: 7em;
 }
 
 #machine-header, .machine-row {
-  width: 10em;
+  width: 6em;
 }
 
 #location-header, .location-row {
-  width: 10em;
+  width: 8em;
 }
 
 #description-header, .description-row {
@@ -84,17 +84,6 @@
     background: #abd;
 }
 
-#delete-btn {
-  margin: 1em;
-  color: white;
-  background-color: #333;
-  padding: 1em;
-  width: 20em;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
 .pull-row {
   float: right;
   padding: 0;
@@ -103,7 +92,7 @@
 .pull-row button {
     display: table-cell;
     height: 4em;
-    width: 4em;
+    width: 8em;
     background-color: #ccc;
     border: none;
     outline: none;

@@ -87,8 +87,8 @@ $(document).ready(function() {
 		})
 	});
 
-	// handler for double clicking a die entry, pull up the update form and fill it with that die's info
-	$("#die-table tbody").on("dblclick", "tr", function() {
+	// handler for clicking a die entry, pull up the update form and fill it with that die's info
+	$(".tables tbody").on("click", "tr", function() {
 		// grab the die id of the current entry
 		var $dieID = $(this).attr("name");
 		var $url = "../php/populateUpdateDieForm.php";
@@ -116,7 +116,8 @@ $(document).ready(function() {
 				// for viewing the pdf of the die
 				$pdfLocation = "../dies/" + $dieID + ".pdf"
 				$("#pdf-obj").attr("data", $pdfLocation);
-				$("#pdf-link").attr("href", $pdfLocation);
+				$("#pdf-obj a").attr("href", $pdfLocation);
+				$("#pdf-obj iframe").attr("src", $pdfLocation);
 
 				$("#update-btn").click();
 
@@ -137,14 +138,18 @@ $(document).ready(function() {
 		$("#pull-btn").click();
 	});
 
+	$("button.refresh-table").on("click", function() {
+		var $parentID = $(this).parent().attr("id");
+
+		if ($parentID == "die-table")
+			populateDieTable();
+		else if ($parentID == "job-table")
+			populateJobTable();
+	});
+
 	// quick search 
 	$(".table-quick-search").keyup(function(event) {
-		var $rows;
-
-		if ($(this).attr("name") == "die")
-			$rows = $("#die-table tbody tr");
-		else if ($(this).attr("name") == "job")
-			$rows = $("#job-table tbody tr");
+		var $rows = $("#" + $(this).parent().attr("id") + " tbody tr");
 
 		if ($(this).val() == '') {
 			$rows.show();
@@ -197,8 +202,8 @@ function populateDieTable() {
 				$row +=		"<td class=\"machine-row\">" + $json['machine'] + " </td>";
 				$row +=		"<td class=\"location-row\">" + $json['location'] + " </td>";
 				$row +=		"<td class=\"description-row\">" + $json['description'] + " </td>";
-				$row +=		"<td class=\"pull-row\"><button class=\"pull-btn\">Pull</button></td>";
-				$row +=		"<td hidden>" + $json['tags'] + "</td>";
+				$row +=		"<td class=\"pull-row\"><button class=\"pull-btn\">Pull </button></td>";
+				$row +=		"<td hidden>" + $json['tags'] + " </td>";
 				$row +=	"</tr>";
 
 				// add the row to the table
@@ -215,6 +220,7 @@ function populateDieTable() {
 
 			// update sorting
 			$(".tablesorter").trigger("update");
+		
 		},
 		error: function(data, status) {
 			console.log("Status: " + status + "\nData: " + data);
@@ -246,7 +252,7 @@ function populateJobTable() {
 			// while there is another json object
 			while ($begin > 0 && $end > 0) {
 				// create the row element
-				$row =  "<tr class=\"table-rows\">";
+				$row =  "<tr class=\"table-rows\" name=\"" + $json['dieID'] + "\">";
 				$row +=		"<td>" + $json['jobNumber'] + "</td> "
 				$row +=		"<td>" + $json['dieID'] + "</td> "
 				$row +=		"<td>" + $json['customerName'] + "</td> "

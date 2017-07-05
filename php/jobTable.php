@@ -1,5 +1,6 @@
-<input type="text" class="table-quick-search" name="job" placeholder="Quick Search">
-<table class="tablesorter">
+<input type="text" class="table-quick-search" placeholder="Quick Search">
+<button class="refresh-table">Refresh Table</button>
+<table class="tablesorter tables">
 	<thead class="table-head">
 		<tr>
 			<th>Job Number</th>

@@ -112,5 +112,5 @@
 </form>
 
 <object id="pdf-obj" type="application/pdf">
-	<p>If you are unable to see the pdf, your browser may not support it. Please click <a id="pdf-link">here</a> to download it</p>
+	<iframe>If you are unable to see the pdf, your browser may not support it. Please click <a>here</a> to download it</iframe>
 </object>

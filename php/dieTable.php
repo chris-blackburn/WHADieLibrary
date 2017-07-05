@@ -1,8 +1,9 @@
-<input type="text" class="table-quick-search" name="die" placeholder="Quick Search">
-<table class="tablesorter">
+<input type="text" class="table-quick-search" placeholder="Quick Search">
+<button class="refresh-table">Refresh Table</button>
+<table class="tablesorter tables">
 	<thead class="table-head">
 		<tr>
-			<th id="dieID-header">ID</th>
+			<th id="dieID-header">Die ID</th>
 			<th id="datePurchased-header">Purchase Date</th>
 			<th id="machine-header">Machine</th>
 			<th id="location-header">Location</th>

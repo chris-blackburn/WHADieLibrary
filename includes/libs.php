@@ -9,6 +9,9 @@
 <link rel="stylesheet" type="text/css" href="css/table.css">
 <link rel="stylesheet" type="text/css" href="css/forms.css">
 
+<!-- GOOGLE FONTS -->
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
+
 <!-- JS -->
 <script src="../js/jquery.js" type="text/javascript"></script>
 <script src="../includes/jquery.tablesorter.js"></script>
