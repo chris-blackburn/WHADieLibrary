@@ -4,6 +4,14 @@
 	<input type="hidden" name="!type" value="die">
 	<input type="hidden" name="!function" value="add">
 
+	<input type="number" name="?jobNumber" placeholder="Job number" required>
+	<input type="text" name="?customerName" placeholder="Customer Name">
+
+	<div>
+		<label for="input[name=jobDate]">Job Date:</label>
+			<input type="date" name="?jobDate" value="<?php echo date("Y-m-d"); ?>">
+	</div>
+
 	<input type="text" name="dieVendor" placeholder="Die Vendor">
 
 	<div>

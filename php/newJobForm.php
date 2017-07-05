@@ -5,7 +5,7 @@
 	<input type="hidden" name="dieID">
 	<input type="hidden" name="!function" value="add">
 
-	<input type="text" name="jobNumber" placeholder="Job number" required>
+	<input type="number" name="jobNumber" placeholder="Job number" required>
 	<input type="text" name="customerName" placeholder="Customer Name">
 
 	<div>

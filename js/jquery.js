@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 	// handler for any forms
 	$(".forms form").submit(function(event) {
-		// prevent the default form submit action from happening
+		// if(typeof window.FormData === 'undefined') 
 		event.preventDefault();
 
 		// change the way the tag select sends data
@@ -44,20 +44,27 @@ $(document).ready(function() {
 		// grab the url
 		var $url = $(this).attr("action");
 
-		// grab form data
-		var $formData = new FormData();
-		var $pdfFile = $("#file-upload").prop("files")[0];
-		
-		if ($pdfFile)
-			$formData.append("pdfFile", $pdfFile);
+		var $formData;
 
-		// append all other input data
-		$(this).find("input[type!=submit][name], select[name]").each(function() {
-			$name = $(this).attr("name");
-			$val = $(this).val();
+		// if the form has a file to upload, the data needs to be sent a different way
+		if ($(this).has("input[type=file]")) {
+			// grab form data
+			$formData = new FormData();
+			var $pdfFile = $("#file-upload").prop("files")[0];
+			
+			if ($pdfFile)
+				$formData.append("pdfFile", $pdfFile);
 
-			$formData.append($name, $val);
-		});
+			// append all other input data
+			$(this).find("input[type!=submit][name], select[name]").each(function() {
+				$name = $(this).attr("name");
+				$val = $(this).val();
+
+				$formData.append($name, $val);
+			});
+		} else {
+			$formData = $(this).serialize();
+		}
 
 		// send POST to the url, where the data is handled and the entry is added
 		$.ajax({

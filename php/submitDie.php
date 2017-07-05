@@ -2,13 +2,10 @@
 	require_once "Database.php";
 	include_once "../includes/constants.php";
 
-	print_r($_FILES);
-	print_r($_POST);
-
 	// for each POST, add it to the respective array, ignoring entries in unwantedFields
 	foreach ($_POST as $col => $value) {
 		// avoid sending unwanted data, unwanted fields start with "?" in the forms
-		if ($col{0} == "!")
+		if ($col{0} == "!" || $col{0} == "?")
 			continue;
 		
 		$cols[] = $col;
@@ -49,6 +46,14 @@
 				echo "Failed to upload file";
 		} else {
 			echo "No File Uploaded";
+		}
+
+		// if there are job form elements in a die form
+		if (isset($_POST["?jobNumber"])) {
+			// job number, die id, customer name, new die?, job date
+			$values = [ $_POST["?jobNumber"], $qID, $_POST["?customerName"], "yes", $_POST["?jobDate"] ];
+
+			$db->insert(JOB_TABLE, $values);
 		}
 
 	} else if ($function == "edit") {
