@@ -88,7 +88,7 @@ $(document).ready(function() {
 	});
 
 	// handler for clicking a die entry, pull up the update form and fill it with that die's info
-	$(".tables tbody").on("click", "tr", function() {
+	$(".tables tbody").on("dblclick", "tr", function() {
 		// grab the die id of the current entry
 		var $dieID = $(this).attr("name");
 		var $url = "../php/populateUpdateDieForm.php";
