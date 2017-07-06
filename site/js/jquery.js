@@ -84,7 +84,9 @@ $(document).ready(function() {
 			error: function(data, status) {
 				console.log("Status: " + status + "\nData: " + data);
 			}
-		})
+		});
+
+		$(this)[0].reset();
 	});
 
 	// handler for clicking a die entry, pull up the update form and fill it with that die's info

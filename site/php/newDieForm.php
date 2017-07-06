@@ -12,8 +12,6 @@
 			<input type="date" name="?jobDate" value="<?php echo date("Y-m-d"); ?>">
 	</div>
 
-	<input type="text" name="dieVendor" placeholder="Die Vendor">
-
 	<div>
 		<label for="input[name=description]">Description:</label>
 			<input type="text" name="description">
@@ -28,6 +26,7 @@
 				$featuresTags = [ "BC Slit", "Corner", "Gusset", "Horizontal Pocket", "Moon BC Slits", "Perforation", "Pop Up/3D", "Shape", "Tabs", "Vertical Pocket", "Window", "Wrap" ];
 
 				$tags = array_merge($productTags, $featuresTags);
+				asort($tags);
 
 				foreach($tags as $tag) {
 					echo "<option value=\"" . $tag . "\">" . $tag . "</option>";
