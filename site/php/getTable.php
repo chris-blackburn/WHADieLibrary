@@ -1,7 +1,7 @@
 <?php
 
 	require_once "Database.php";
-	include_once "../includes/constants.php";
+	include_once "constants.php";
 
 	// create a new database object, default constructor
 	$db = new Database();

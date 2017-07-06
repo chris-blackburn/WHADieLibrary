@@ -13,5 +13,8 @@
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
 
 <!-- JS -->
-<script src="../js/jquery.js" type="text/javascript"></script>
-<script src="../includes/jquery.tablesorter.js"></script>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery.tablesorter.js"></script>
+
+<!-- include constants -->
+<?php include "php/constants.php" ?>

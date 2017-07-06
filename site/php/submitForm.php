@@ -1,6 +1,6 @@
 <?php
 	require_once "Database.php";
-	include_once "../includes/constants.php";
+	include_once "constants.php";
 
 	// for each POST, add it to the respective array, ignoring entries in unwantedFields
 	foreach ($_POST as $col => $value) {
@@ -43,7 +43,7 @@
 			if (move_uploaded_file($_FILES["pdfFile"]["tmp_name"], $targetFile))
 				echo "File Uploaded!";
 			else
-				echo "Failed to upload file";
+				echo "Failed to upload file: " . $targetFile . " (" . $_FILES["pdfFile"]["error"] . ")";
 		} else {
 			echo "No File Uploaded";
 		}

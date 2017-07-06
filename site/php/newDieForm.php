@@ -1,4 +1,4 @@
-<form action="../php/submitDie.php" enctype="multipart/form-data">
+<form action="../php/submitForm.php" enctype="multipart/form-data">
 
 	<!-- use this to store other data and switch between adding/updating -->
 	<input type="hidden" name="!type" value="die">

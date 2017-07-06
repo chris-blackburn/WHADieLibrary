@@ -1,4 +1,4 @@
-<form action="../php/submitDie.php">
+<form action="../php/submitForm.php">
 	<label for="output[name=dieID]">Die ID:</label> <output name="dieID"></output><br>
 
 	<input type="hidden" name="!type" value="job">

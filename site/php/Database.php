@@ -1,5 +1,5 @@
 <?php
-	include "../includes/constants.php";
+	include "constants.php";
 	/*
 
 	This is the Database class. It is used to create a new database object which has various functions

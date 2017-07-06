@@ -8,7 +8,7 @@
 </div>
 
 
-<form action="../php/submitDie.php">
+<form action="../php/submitForm.php">
 
 	<!-- use this to store other data and switch between adding/updating -->
 	<input type="hidden" name="!dieID">

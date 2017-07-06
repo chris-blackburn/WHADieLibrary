@@ -1,6 +1,6 @@
 <?php
 	require_once "Database.php";
-	include_once "../includes/constants.php";
+	include_once "constants.php";
 
 	// get the die ID
 	$dieID = $_GET["dieID"];
