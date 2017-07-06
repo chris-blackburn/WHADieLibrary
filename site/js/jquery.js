@@ -5,6 +5,12 @@ $(document).ready(function() {
 
 	// create event handler for tabs
 	$(".tab-buttons").on("click", "button", function() {
+
+		// hide buttons that should be hidden
+		$("button.hidden").each(function() {
+			$(this).hide();
+		});
+
 		// remove the active class from all buttons
 		$(".tab-buttons button").removeClass("active-tab");
 		// add active to the button that called the handler
@@ -14,6 +20,13 @@ $(document).ready(function() {
 		var $target = $(this).attr("name");
 		$(".tab-content").hide();
 		$("#" + $target).show();
+
+		// if the class is hidden, hide, unless it is the active tab
+		if ($(this).hasClass("hidden") && !$(this).hasClass("active-tab")) {
+			$(this).hide();
+		} else {
+			$(this).show();
+		}
 
 	});
 

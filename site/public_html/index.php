@@ -13,8 +13,8 @@
 		<button id="die-table-btn" name="die-table" class="active-tab">Die Table</button>
 		<button id="job-table-btn" name="job-table">Transaction History</button>
 		<button id="insert-btn" name="new-die-form-container">Create New Die</button>
-		<button hidden id="update-btn" name="update-form-container">Update Die</button>
-		<button hidden id="pull-btn" name="pull-form-container">Pull Request</button>
+		<button hidden id="update-btn" name="update-form-container" class="hidden">Update Die</button>
+		<button hidden id="pull-btn" name="pull-form-container" class="hidden">Pull Request</button>
 	</div>
 
 <!-- ***************************************************** DIE TABLE ***************************************************** -->
