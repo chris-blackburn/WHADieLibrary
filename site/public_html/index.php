@@ -3,7 +3,7 @@
 <head>
 	<title>WHA Die Library</title>
 	<!-- Include libraries and css forms -->
-	<?php include "php/libs.php"; ?>
+	<?php include "../php/libs.php"; ?>
 </head>
 
 <body>
@@ -20,31 +20,31 @@
 <!-- ***************************************************** DIE TABLE ***************************************************** -->
 
 	<div id="die-table" class="table-container tab-content">
-		<?php include "php/dieTable.php" ?>
+		<?php include "../php/dieTable.php" ?>
 	</div>
 
 <!-- ***************************************************** JOB TABLE ***************************************************** -->
 	
 	<div id="job-table" class="table-container tab-content">
-		<?php include "php/jobTable.php" ?>
+		<?php include "../php/jobTable.php" ?>
 	</div>
 
 <!-- ***************************************************** NEW DIE FORM ***************************************************** -->
 
 	<div id="new-die-form-container" class="forms tab-content">
-		<?php include "php/newDieForm.php" ?>
+		<?php include "../php/newDieForm.php" ?>
 	</div>
 
 <!-- ***************************************************** UPDATE DIE FORM ***************************************************** -->
 
 	<div id="update-form-container" class="forms tab-content">
-		<?php include "php/updateDieForm.php" ?>
+		<?php include "../php/updateDieForm.php" ?>
 	</div>
 
 <!-- ***************************************************** PULL FORM ***************************************************** -->
 
 	<div id="pull-form-container" class="forms tab-content">
-		<?php include "php/newJobForm.php" ?>
+		<?php include "../php/newJobForm.php" ?>
 	</div>
 
 </body>

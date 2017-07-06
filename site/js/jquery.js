@@ -91,7 +91,7 @@ $(document).ready(function() {
 	$(".tables tbody").on("dblclick", "tr", function() {
 		// grab the die id of the current entry
 		var $dieID = $(this).attr("name");
-		var $url = "php/getEntryByID.php";
+		var $url = "../php/getEntryByID.php";
 
 		// sent a GET request to grab all the info about the clicked entry
 		$.ajax({
@@ -114,7 +114,7 @@ $(document).ready(function() {
 				}
 
 				// for viewing the pdf of the die
-				$pdfLocation = "dies/" + $dieID + ".pdf"
+				$pdfLocation = "../dies/" + $dieID + ".pdf"
 				$("#pdf-obj").attr("data", $pdfLocation);
 				$("#pdf-obj a").attr("href", $pdfLocation);
 				$("#pdf-obj iframe").attr("src", $pdfLocation);
@@ -173,7 +173,7 @@ $(document).ready(function() {
 */
 
 function populateDieTable() {
-	var $url = "php/getTable.php";
+	var $url = "../php/getTable.php";
 
 	$.ajax({
 		url: $url,
@@ -229,7 +229,7 @@ function populateDieTable() {
 }
 
 function populateJobTable() {
-	var $url = "php/getTable.php";
+	var $url = "../php/getTable.php";
 
 	$.ajax({
 		url: $url,
