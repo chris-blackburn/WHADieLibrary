@@ -22,7 +22,3 @@ input[type="text"], input[type="number"], input[type="date"] {
 	border-radius: 2px;
 	margin: 5px;
 }
-
-.ui-datepicker td {
-	width: 2em;
-}

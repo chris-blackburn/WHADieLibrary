@@ -55,7 +55,7 @@ $(document).ready(function() {
 
 	// set the active tab
 	$("#die-table-btn").click();
-
+	
 	// make tables of class tablesorter, sortable
 	$(".tablesorter").tablesorter();
 

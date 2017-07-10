@@ -12,9 +12,12 @@
   cursor: pointer;
 }
 
-.table-container th, .table-container td {
+.table-container th, td {
   padding: .5em;
   text-align: center; 
+}
+
+.table-container tr {
   border-bottom: 1px solid #ddd;
 }
 
