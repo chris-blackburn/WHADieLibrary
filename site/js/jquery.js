@@ -3,6 +3,14 @@
 */
 $(document).ready(function() {
 
+	// fallback for date fields
+	if ( $('input[type="date"]').prop('type') != 'date' ) {
+	    $('input[type="date"]').datepicker({
+	    	dateFormat: "yy-mm-dd",
+	    	closeText: "Close"
+	    });
+	}
+
 	// create event handler for tabs
 	$(".tab-buttons").on("click", "button", function() {
 
