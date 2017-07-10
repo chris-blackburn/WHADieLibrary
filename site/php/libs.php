@@ -1,5 +1,7 @@
 <!-- AJAX/JQUERY API -->	
 <script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../js/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
 
 <!-- Local CSS -->
 <link rel="stylesheet" type="text/css" href="../css/styles.css">
