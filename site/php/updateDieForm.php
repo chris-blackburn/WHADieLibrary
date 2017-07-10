@@ -17,7 +17,7 @@
 	<div class="field">
 		<label for="input[name=description]">Description:</label>
 		<div class="field-input">	
-			<input type="text" name="!description">
+			<textarea name="!description"></textarea>
 		</div>
 	</div>
 
@@ -110,6 +110,19 @@
 
 </form>
 
-<object id="pdf-obj" type="application/pdf">
-	<iframe>If you are unable to see the pdf, your browser may not support it. Please click <a>here</a> to download it</iframe>
-</object>
+<div class="tab-buttons-2">
+	<button id="pdf-container-btn" name="pdf-container">Preview</button>
+	<button name="die-files">Download</button>
+</div>
+
+<div id="pdf-container" class="tab-content-2 active-tab-2">
+	<object id="pdf-obj" type="application/pdf">
+		<iframe>If you are unable to see the pdf, your browser may not support it. Please click <a>here</a> to download it</iframe>
+	</object>
+</div>
+
+<div id="die-files" class="tab-content-2">
+	<p id="download-links">
+		Download Links:
+	</p>
+</div>

@@ -1,4 +1,77 @@
 <?php
+	function reArrayFiles(&$file_post) {
+
+	    $file_ary = array();
+	    $file_count = count($file_post['name']);
+	    $file_keys = array_keys($file_post);
+
+	    for ($i=0; $i<$file_count; $i++) {
+	        foreach ($file_keys as $key) {
+	            $file_ary[$i][$key] = $file_post[$key][$i];
+	        }
+	    }
+
+	    return $file_ary;
+	}
+
+	function uploadFiles($qID) {
+		// if no files were uploaded, then return
+		if (empty($_FILES))
+			return "No Files Uploaded.";
+
+		$targetPath;
+		// make a new folder for the die
+		if (mkdir(PDF_DIR . $qID)) {
+			echo "Directory " . $qID . " successfully created.";
+			$targetPath = PDF_DIR . $qID . "/";
+		} else {
+			echo "Could not create directory: " . $qID;
+		}
+
+		// check if a die pdf file was uploaded 
+		if ($_FILES["pdfFile"]["error"] != UPLOAD_ERR_NO_FILE) {
+			// grab the filetype
+			$filetype = end((explode(".", $_FILES["pdfFile"]["name"]))); # extra () to prevent notice
+
+			// specify the target file
+			if ($filetype == "pdf") {
+				$targetFile = $targetPath . $qID . ".pdf";
+
+				// upload the file
+				if (move_uploaded_file($_FILES["pdfFile"]["tmp_name"], $targetFile))
+					echo "File Uploaded!";
+				else
+					echo "Failed to upload file: " . $targetFile . " (" . $_FILES["pdfFile"]["error"] . ")";
+			} else {
+				echo "Incorrect Filetype...";
+			}
+
+
+		} else {
+			echo "No Die PDF File Uploaded.";
+		}
+
+		// for all the other files
+		if ($_FILES["otherFiles"]["error"][0] != UPLOAD_ERR_NO_FILE) {
+			// rearrange so the array is easier to use
+			$otherFiles = reArrayFiles($_FILES["otherFiles"]);
+
+			// upload each file
+			foreach ($otherFiles as $file) {
+				$targetFile = $targetPath . $file["name"];
+
+				if (move_uploaded_file($file["tmp_name"], $targetFile))
+					echo "File Uploaded!";
+				else
+					echo "Failed to upload file: " . $targetFile . " (" . $file["error"] . ")";
+			}
+		} else {
+			echo "No other files uploaded.";
+		}
+	}
+?>
+
+<?php
 	require_once "Database.php";
 	include_once "constants.php";
 
@@ -35,20 +108,7 @@
 		// grab the id of the query that just went through
 		$qID = $db->getQueryID();
 
-		// check if a file was uploaded 
-		if (is_uploaded_file($_FILES["pdfFile"]["tmp_name"])) {
-			// setup save location and filename (used the id of what was just submitted)
-			$targetDir = PDF_DIR;
-			$targetFile = $targetDir . $qID . ".pdf";
-
-			// upload the file
-			if (move_uploaded_file($_FILES["pdfFile"]["tmp_name"], $targetFile))
-				echo "File Uploaded!";
-			else
-				echo "Failed to upload file: " . $targetFile . " (" . $_FILES["pdfFile"]["error"] . ")";
-		} else {
-			echo "No File Uploaded";
-		}
+		echo uploadFiles($qID);
 	} else if ($dieFunction == "edit") {
 		// if the marker for dieID (not to be submited normally) is set, update where the ID is matched
 		if (isset($_POST["dieID"])) {

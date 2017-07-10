@@ -14,7 +14,7 @@
 
 	<div>
 		<label for="input[name=description]">Description:</label>
-			<input type="text" name="!description">
+			<textarea name="!description"></textarea>
 	</div>
 
 	<div>
@@ -111,7 +111,11 @@
 	</div>
 
 	<div>
-		<label for="input[name=pdfFile]">Upload PDF:</label> <input name="pdfFile" type="file">
+		<label for="input[name=pdfFile]">Upload PDF:</label> <input name="pdfFile" type="file" accept=".pdf,application/pdf">
+	</div>
+
+	<div>
+		<label for="input[name=otherFiles]">Upload Other Files:</label> <input name="otherFiles[]" type="file" multiple accept=".pdf,.eps,application/pdf,application/postscript">
 	</div>
 
 	<input type="submit" value="Create Die">

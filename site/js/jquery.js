@@ -30,6 +30,21 @@ $(document).ready(function() {
 
 	});
 
+	// create event handler for tabs in the update form
+	$(".tab-buttons-2").on("click", "button", function() {
+		// remove the active class from all buttons
+		$(".tab-buttons-2 button").removeClass("active-tab-2");
+		// add active to the button that called the handler
+		$(this).addClass("active-tab-2");
+
+		// hide all tab content and show the relevant content, target content is in the name attribute
+		var $target = $(this).attr("name");
+		$(".tab-content-2").hide();
+		$("#" + $target).show();
+	});
+
+	$("#pdf-container").click();
+
 	// set the active tab
 	$("#die-table-btn").click();
 
@@ -114,10 +129,30 @@ $(document).ready(function() {
 				}
 
 				// for viewing the pdf of the die
-				$pdfLocation = "../dies/" + $dieID + ".pdf"
+				$diePath = "../dies/" + $dieID + "/";
+
+				$pdfLocation = "../dies/" + $dieID + "/" + $dieID + ".pdf"
 				$("#pdf-obj").attr("data", $pdfLocation);
 				$("#pdf-obj a").attr("href", $pdfLocation);
 				$("#pdf-obj iframe").attr("src", $pdfLocation);
+
+				$("#pdf-container-btn").click();
+
+				// grab all other files
+				$.ajax({
+					url: "../php/getFilesByID.php",
+					type: "POST",
+					data: {
+						dir: $diePath
+					},
+					success: function(data, status) {
+						$("#download-links").empty();
+						$("#download-links").append("Download Links:" + data);
+					},
+					error: function(data, status) {
+						console.log("Status: " + status + "\nData: " + data);
+					}
+				});
 
 				$("#update-btn").click();
 
