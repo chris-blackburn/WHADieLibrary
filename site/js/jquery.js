@@ -42,9 +42,6 @@ $(document).ready(function() {
 
 	// handler for any forms
 	$(".forms form").submit(function(event) {
-		// if(typeof window.FormData === 'undefined') 
-		event.preventDefault();
-
 		// change the way the tag select sends data
 		if ($(this).has("#tags")) {
 			var selMulti = $.map($("#tags option:selected"), function (el, i) {
@@ -54,34 +51,22 @@ $(document).ready(function() {
 			$("input[name=\"tags\"]").val(selMulti.join(", "));
 		}
 
-		// grab the url
-		var $url = $(this).attr("action");
-
 		var $formData;
 
 		// if the form has a file to upload, the data needs to be sent a different way
-		if ($(this).has("input[type=file]")) {
-			// grab form data
-			$formData = new FormData();
-			var $pdfFile = $("#file-upload").prop("files")[0];
-			
-			if ($pdfFile)
-				$formData.append("pdfFile", $pdfFile);
-
-			// append all other input data
-			$(this).find("input[type!=submit][name], select[name]").each(function() {
-				$name = $(this).attr("name");
-				$val = $(this).val();
-
-				$formData.append($name, $val);
-			});
-		} else {
+		if (typeof FormData !== 'undefined') {
+			event.preventDefault();
+			$formData = new FormData(this);
+		} else if (!$(this).has("input[type=file]")) {
+			event.preventDefault();
 			$formData = $(this).serialize();
+		} else {
+			return;
 		}
 
 		// send POST to the url, where the data is handled and the entry is added
 		$.ajax({
-			url: $url,
+			url: $(this).attr("action"),
 			type: "POST",
 			data: $formData,
 			contentType: false,
@@ -147,9 +132,11 @@ $(document).ready(function() {
 	$("#die-table").on("click", ".pull-btn", function() {
 		// grab the die id from the row of the clicked button
 		$dieID = $(this).parents("tr").attr("name");
+		$location = $(this).parent().siblings(".location-row").text().slice(0, -1);
 
 		// set the die id in the pull request form and switch tabs
-		$("#pull-form-container [name=\"dieID\"").val($dieID);
+		$("#pull-form-container [name$=\"dieID\"").val($dieID);
+		$("#pull-form-container [name$=\"location\"").val($location);
 		$("#pull-btn").click();
 	});
 

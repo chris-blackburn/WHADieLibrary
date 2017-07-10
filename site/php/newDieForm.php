@@ -1,10 +1,10 @@
 <form action="../php/submitForm.php" enctype="multipart/form-data">
 
 	<!-- use this to store other data and switch between adding/updating -->
-	<input type="hidden" name="!type" value="die">
-	<input type="hidden" name="!function" value="add">
+	<input type="hidden" name="dieFunction" value="add">
+	<input type="hidden" name="jobFunction" value="add">
 
-	<input type="number" name="?jobNumber" placeholder="Job number" required>
+	<input type="number" name="?jobNumber" placeholder="Job number" min="0" required>
 	<input type="text" name="?customerName" placeholder="Customer Name">
 
 	<div>
@@ -14,7 +14,7 @@
 
 	<div>
 		<label for="input[name=description]">Description:</label>
-			<input type="text" name="description">
+			<input type="text" name="!description">
 	</div>
 
 	<div>
@@ -34,17 +34,17 @@
 			?>
 		</select>
 		(Tip: Ctrl+Click to select multiple tags)
-		<input type="hidden" name="tags">
+		<input type="hidden" name="!tags">
 	</div>
 
 	<div>
 		<label for="input[name=datePurchased]">Date Purchased:</label>
-			<input type="date" name="datePurchased" value="<?php echo date("Y-m-d"); ?>" required>
+			<input type="date" name="!datePurchased" value="<?php echo date("Y-m-d"); ?>" required>
 	</div>
 
 	<div>
 		<label for="input[name=expectedUsage]">Expected usage:</label>
-			<select name="expectedUsage">
+			<select name="!expectedUsage">
 				<option value="One time use" selected>One time use</option>
 				<option value="More than once">More than once</option>
 				<option value="Regular">Regular</option>
@@ -54,7 +54,7 @@
 
 	<div>
 		<label for="input[name=location]">Location:</label>
-			<select name="location">
+			<select name="!location">
 				<option value="Awaiting Arrival" selected>Awaiting Arrival</option>
 				<option value="Green Inventory">Green Inventory</option>
 				<option value="Gold Inventory">Gold Inventory</option>
@@ -66,7 +66,7 @@
 
 	<div>
 		<label for="input[name=machine]">Machine:</label>
-			<select name="machine">
+			<select name="!machine">
 				<option value="Sanwa">Sanwa</option>
 				<option value="Heidelberg">Heidelberg</option>
 				<option value="Kluge">Kluge</option>
@@ -75,43 +75,43 @@
 
 	<div>
 		<label for="flat-sizes">Flat Size:</label>
-			<input type="number" name="flatWidth" placeholder="Flat Width" step="any">
+			<input type="number" name="!flatWidth" placeholder="Flat Width" min="0" step="any">
 			X
-			<input type="number" name="flatHeight" placeholder="Flat Height" step="any">
+			<input type="number" name="!flatHeight" placeholder="Flat Height" min="0" step="any">
 	</div>
 
 	<div>
 		<label for="finished-sizes">Finished Size:</label>
-			<input type="number" name="finishedWidth" placeholder="Finished Width" step="any">
+			<input type="number" name="!finishedWidth" placeholder="Finished Width" step="any" min="0">
 			X
-			<input type="number" name="finishedHeight" placeholder="Finished Height" step="any">
+			<input type="number" name="!finishedHeight" placeholder="Finished Height" step="any" min="0">
 	</div>
 
 	<div>
 		<label for="input[name=numPockets]">Pockets:</label>
-			<input type="number" name="numPockets" max="10">
+			<input type="number" name="!numPockets" max="10" min="0">
 	</div>
 
 	<div>
 		<label for="input[name=pocketSize]">Pocket Size:</label>
-			<input type="number" name="pocketSize"  step="any">
+			<input type="number" name="!pocketSize" step="any" min="0">
 	</div>
 
 	<div>
 		<label for="input[name=numberUp]"># Up:</label>
-			<input type="number" name="numberUp" min="0" max="100">
+			<input type="number" name="!numberUp" min="0" max="100">
 	</div>
 
 	<div>
 		<label for="input[name=dieReviewed]">Die Reviewed:</label>
-			<select name="dieReviewed">
+			<select name="!dieReviewed">
 				<option value="false" selected>false</option>
 				<option value="true">true</option>
 			</select>
 	</div>
 
 	<div>
-		<label for="input[name=pdfFile]">Upload PDF:</label> <input id="file-upload" type="file">
+		<label for="input[name=pdfFile]">Upload PDF:</label> <input name="pdfFile" type="file">
 	</div>
 
 	<input type="submit" value="Create Die">

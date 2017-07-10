@@ -4,31 +4,33 @@
 
 	// for each POST, add it to the respective array, ignoring entries in unwantedFields
 	foreach ($_POST as $col => $value) {
-		// avoid sending unwanted data, unwanted fields start with "?" in the forms
-		if ($col{0} == "!" || $col{0} == "?")
-			continue;
-		
-		$cols[] = $col;
-		$values[] = $value;
+		// avoid sending unwanted data, unwanted fields have no markers, ! is for dies, ? is for jobs
+		if ($col{0} == "!") {
+			$dieArr[substr($col, 1)] = $value;
+		} else if ($col{0} == "?") {
+			$jobArr[substr($col, 1)] = $value;
+		}
 	}
-
-	// switch tables depending on the entry type determined by the html form
-	$type = $_POST["!type"];
-
-	if ($type == "die")
-		$table = DIE_TABLE;
-	else if ($type == "job")
-		$table = JOB_TABLE;
 
 	// connect to the database
 	$db = new Database();
 	$db->connect(/*$updateUser, $updateUserPass*/);
 
-	// adding new entry or editing an existing one?
-	$function = $_POST["!function"];
+	// "add" or "edit" for each type of data (jobs only have "add")
+	if (isset($_POST["dieFunction"]))
+		$dieFunction = $_POST["dieFunction"];
 
-	if ($function == "add") {
-		$db->insert($table, $values, $cols);
+	if (isset($_POST["jobFunction"]))
+		$jobFunction = $_POST["jobFunction"];
+
+	// init vars so they are in a greater scope
+	$qID = -1;
+
+	// dies
+	$table = DIE_TABLE;
+
+	if ($dieFunction == "add") {
+		$db->insert($table, array_values($dieArr), array_keys($dieArr));
 
 		// grab the id of the query that just went through
 		$qID = $db->getQueryID();
@@ -47,19 +49,24 @@
 		} else {
 			echo "No File Uploaded";
 		}
-
-		// if there are job form elements in a die form
-		if (isset($_POST["?jobNumber"])) {
-			// job number, die id, customer name, new die?, job date
-			$values = [ $_POST["?jobNumber"], $qID, $_POST["?customerName"], "yes", $_POST["?jobDate"] ];
-
-			$db->insert(JOB_TABLE, $values);
+	} else if ($dieFunction == "edit") {
+		// if the marker for dieID (not to be submited normally) is set, update where the ID is matched
+		if (isset($_POST["dieID"])) {
+			$db->update($table, array_values($dieArr), array_keys($dieArr), "dieID", $_POST["dieID"]);
+		} else {
+			echo "No Die ID set for update...";
 		}
+	}
 
-	} else if ($function == "edit") {
-		$where = "dieID";
-		$in = $_POST["!dieID"];
-		$db->update($table, $values, $cols, $where, $in);
+	// jobs
+	$table = JOB_TABLE;
+
+	if ($jobFunction == "add") {
+		// add the dieID for the job if it is not already set
+		if (!array_key_exists("dieID", $jobArr))
+			$jobArr["dieID"] = $qID;
+
+		$db->insert($table, array_values($jobArr), array_keys($jobArr));
 	}
 
 	$db->disconnect();

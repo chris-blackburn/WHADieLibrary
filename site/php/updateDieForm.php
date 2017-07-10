@@ -11,21 +11,20 @@
 <form action="../php/submitForm.php">
 
 	<!-- use this to store other data and switch between adding/updating -->
-	<input type="hidden" name="!dieID">
-	<input type="hidden" name="!function" value="edit">
-	<input type="hidden" name="!type" value="die">
+	<input type="hidden" name="dieID">
+	<input type="hidden" name="dieFunction" value="edit">
 
 	<div class="field">
 		<label for="input[name=description]">Description:</label>
 		<div class="field-input">	
-			<input type="text" name="description">
+			<input type="text" name="!description">
 		</div>
 	</div>
 
 	<div class="field">
 		<label for="input[name=expectedUsage]">Expected usage:</label>
 		<div class="field-input">
-			<select name="expectedUsage">
+			<select name="!expectedUsage">
 				<option value="One time use">One time use</option>
 				<option value="More than once">More than once</option>
 				<option value="Regular">Regular</option>
@@ -37,7 +36,7 @@
 	<div class="field">
 		<label for="input[name=location]">Location:</label>
 		<div class="field-input">
-			<select name="location">
+			<select name="!location">
 				<option value="Awaiting Arrival">Awaiting Arrival</option>
 				<option value="Green Inventory">Green Inventory</option>
 				<option value="Gold Inventory">Gold Inventory</option>
@@ -51,46 +50,46 @@
 	<div class="field sizes">
 		<label for="flat-sizes">Flat Size:</label>
 		<div class="field-input" id="flat-sizes">
-			<input type="number" name="flatWidth" placeholder="Flat Width" step="any">
+			<input type="number" name="!flatWidth" placeholder="Flat Width" step="any" min="0">
 			X
-			<input type="number" name="flatHeight" placeholder="Flat Height" step="any">
+			<input type="number" name="!flatHeight" placeholder="Flat Height" step="any" min="0">
 		</div>	
 	</div>
 		
 	<div class="field sizes">
 		<label for="finished-sizes">Finished Size:</label>
 		<div class="field-input" id="finished-sizes">
-			<input type="number" name="finishedWidth" placeholder="Finished Width" step="any">
+			<input type="number" name="!finishedWidth" placeholder="Finished Width" step="any" min="0">
 			X
-			<input type="number" name="finishedHeight" placeholder="Finished Height" step="any">
+			<input type="number" name="!finishedHeight" placeholder="Finished Height" step="any" min="0">
 		</div>	
 	</div>
 
 	<div class="field">
 		<label for="input[name=numPockets]">Pockets:</label>
 		<div class="field-input">
-			<input type="number" name="numPockets" min="0" max="10">
+			<input type="number" name="!numPockets" min="0" max="10">
 		</div>	
 	</div>
 
 	<div class="field">
 		<label for="input[name=pocketSize]">Pocket Size:</label>
 		<div class="field-input">
-			<input type="number" name="pocketSize" step="any">
+			<input type="number" name="!pocketSize" step="any" min="0">
 		</div>	
 	</div>
 	
 	<div class="field">
 		<label for="input[name=numberUp]">Number Up:</label>
 		<div class="field-input">
-			<input type="number" name="numberUp" min="0" max="100">
+			<input type="number" name="!numberUp" min="0" max="100">
 		</div>	
 	</div>
 	
 	<div class="field">
 		<label for="input[name=dieReviewed]">Die Reviewed:</label>
 		<div class="field-input">
-			<select name="dieReviewed">
+			<select name="!dieReviewed">
 				<option value="false">false</option>
 				<option value="true">true</option>
 			</select>
