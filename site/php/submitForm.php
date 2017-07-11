@@ -17,15 +17,15 @@
 	function uploadFiles($qID) {
 		// if no files were uploaded, then return
 		if (empty($_FILES))
-			return "No Files Uploaded.";
+			return "No Files Uploaded.\n";
 
 		$targetPath;
 		// make a new folder for the die
 		if (mkdir(PDF_DIR . $qID)) {
-			echo "Directory " . $qID . " successfully created.";
+			echo "Directory " . $qID . " successfully created.\n";
 			$targetPath = PDF_DIR . $qID . "/";
 		} else {
-			echo "Could not create directory: " . $qID;
+			echo "Could not create directory: " . $qID . "\n";
 		}
 
 		// check if a die pdf file was uploaded 
@@ -39,16 +39,16 @@
 
 				// upload the file
 				if (move_uploaded_file($_FILES["pdfFile"]["tmp_name"], $targetFile))
-					echo "File Uploaded!";
+					echo "File " . $targetFile . " Uploaded!\n";
 				else
-					echo "Failed to upload file: " . $targetFile . " (" . $_FILES["pdfFile"]["error"] . ")";
+					echo "Failed to upload file: " . $targetFile . " (" . $_FILES["pdfFile"]["error"] . ")\n";
 			} else {
-				echo "Incorrect Filetype...";
+				echo "Incorrect Filetype...\n";
 			}
 
 
 		} else {
-			echo "No Die PDF File Uploaded.";
+			echo "No Die PDF File Uploaded.\n";
 		}
 
 		// for all the other files
@@ -61,12 +61,12 @@
 				$targetFile = $targetPath . $file["name"];
 
 				if (move_uploaded_file($file["tmp_name"], $targetFile))
-					echo "File Uploaded!";
+					echo "File " . $targetFile . " Uploaded!\n";
 				else
-					echo "Failed to upload file: " . $targetFile . " (" . $file["error"] . ")";
+					echo "Failed to upload file: " . $targetFile . " (" . $file["error"] . ")\n";
 			}
 		} else {
-			echo "No other files uploaded.";
+			echo "No other files uploaded.\n";
 		}
 	}
 ?>
@@ -114,7 +114,7 @@
 		if (isset($_POST["dieID"])) {
 			$db->update($table, array_values($dieArr), array_keys($dieArr), "dieID", $_POST["dieID"]);
 		} else {
-			echo "No Die ID set for update...";
+			echo "No Die ID set for update...\n";
 		}
 	}
 

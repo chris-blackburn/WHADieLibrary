@@ -33,18 +33,18 @@
 
 				// if there exists an error number (therefore it did not connect), display the error message and number
 				if ($this->conn->connect_errno) {
-					die("Connection failed: " . $this->conn->connect_error . " (" . $this->conn->connect_errno . ")");
+					die("Connection failed: " . $this->conn->connect_error . " (" . $this->conn->connect_errno . ")\n");
 				}
 
-				echo "Connected Succesfully";
+				echo "Connected Succesfully\n";
 			} else {
-				echo "Already Connected";
+				echo "Already Connected\n";
 			}
 		}
 
 		public function disconnect() {
 			$this->conn->close();
-			echo "Connection closed";
+			echo "Connection closed\n";
 		}
 
 		/*
@@ -73,10 +73,10 @@
 
 			// if the query failed, die with error message
 			if (!$result) {
-				die("Query Failed for: " . $sql . " " . $this->conn->error . " (" . $this->conn->errno . ")");
+				die("Query Failed for: " . $sql . " " . $this->conn->error . " (" . $this->conn->errno . ")\n");
 			}
 
-			echo "Success: \"" . $sql . "\"";
+			echo "Success: \"" . $sql . "\"\n";
 			return $result;
 		}
 

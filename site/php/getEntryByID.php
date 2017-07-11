@@ -13,13 +13,14 @@
 	$result = $db->select(DIE_TABLE, "*", "dieID", $dieID);
 	$row = $result->fetch_assoc();
 
+	// return json of the row data
+	echo json_encode($row);
+
 	// free the result data
 	$result->free_result();
 
 	// disconnect from the database
 	$db->disconnect();
 
-	// return json of the row data
-	echo json_encode($row);
 ?>
 

@@ -61,7 +61,7 @@ $(document).ready(function() {
 
 	// populate the table when the page loads
 	populateDieTable();
-	populateJobTable()
+	populateJobTable();
 
 	// handler for any forms
 	$(".forms form").submit(function(event) {
@@ -124,11 +124,11 @@ $(document).ready(function() {
 				dieID: $dieID
 			},
 			success: function(data, status) {
-				console.log("Status: " + status + "\nData: " + data);
+				data = trimJSON(data);
+				console.log("Status: " + status + "\nData: " + data[0]);
 
 				// extract the json object from the returned data
-				$json = data.substring(data.indexOf("{"), data.indexOf("}") + 1);
-				$json = $.parseJSON($json);
+				$json = $.parseJSON(data[1]);
 
 				for (var name in $json) {
 					// any element in the div with name attribute ending with name string
@@ -217,6 +217,18 @@ $(document).ready(function() {
 	*****************************************************************************
 */
 
+function trimJSON(data) {
+	// extract the text to put in the console log
+	var $regex = /\[?({(("[a-zA-Z_$][a-zA-Z_$0-9]*"):(".*"|null),?)+},?)+\]?/g;
+
+	var str = [
+		data.replace($regex, ""),
+		data.match($regex)
+	];
+
+	return str;
+}
+
 function populateDieTable() {
 	var $url = "../php/getTable.php";
 
@@ -226,43 +238,32 @@ function populateDieTable() {
 		data: { table: "die" },
 		success: function(data, status) {
 			// add ignore json data
-			console.log("Status: " + status + "\nData: " + data);
-
-			// used to loop through each JSON object (they are separated by '~')
-			$begin = data.indexOf("{");
-			$end = data.indexOf("}");
+			var data = trimJSON(data);
+			console.log("Status: " + status + "\nData: " + data[0]);
 
 			// prime the json data
-			$json = $.parseJSON(data.substring($begin, $end + 1));
+			$json = $.parseJSON(data[1]);
 
 			// empty the existing data
 			$("#die-table tbody").empty();
 
 			// while there is another json object
-			while ($begin > 0 && $end > 0) {
+			for (var $index in $json) {
 				// create the row element
-				$row =  "<tr class=\"table-rows\" name=\"" + $json['dieID'] + "\">";
-				$row +=		"<td class=\"dieID-row\">" + $json['dieID'] + " </td>";
-				$row +=		"<td class=\"datePurchased-row\">" + $json['datePurchased'] + " </td>";
-				$row +=		"<td class=\"machine-row\">" + $json['machine'] + " </td>";
-				$row +=		"<td class=\"location-row\">" + $json['location'] + " </td>";
-				$row +=		"<td class=\"description-row\">" + $json['description'] + " </td>";
-				$row +=		"<td class=\"pull-row\"><button class=\"pull-btn\">Pull </button></td>";
-				$row +=		"<td hidden>" + $json['tags'] + " </td>";
-				$row +=	"</tr>";
+				$row =  "<tr class=\"table-rows\" name=\"" + $json[$index]['dieID'] + "\">";
+				$row +=	"<td class=\"dieID-row\">" + $json[$index]['dieID'] + " </td>";
+				$row +=	"<td class=\"datePurchased-row\">" + $json[$index]['datePurchased'] + " </td>";
+				$row +=	"<td class=\"machine-row\">" + $json[$index]['machine'] + " </td>";
+				$row +=	"<td class=\"location-row\">" + $json[$index]['location'] + " </td>";
+				$row +=	"<td class=\"description-row\">" + $json[$index]['description'] + " </td>";
+				$row +=	"<td class=\"pull-row\"><button class=\"pull-btn\"><img style=\"height: 3em; width: auto;\" src=\"../img/pull.png\"></button></td>";
+				$row +=	"<td hidden>" + $json[$index]['tags'] + " </td>";
+				$row += "</tr>";
 
 				// add the row to the table
 				$("#die-table tbody").append($row);
-
-
-				// grab the next json object
-				$begin = data.indexOf("{", $end + 1);
-				$end = data.indexOf("}", $begin);
-
-				if ($begin > 0 && $end > 0)
-					$json = $.parseJSON(data.substring($begin, $end + 1));
 			}
-
+					
 			// update sorting
 			$(".tablesorter").trigger("update");
 		
@@ -282,38 +283,27 @@ function populateJobTable() {
 		data: { table: "job" },
 		success: function(data, status) {
 			// add ignore json data
-			console.log("Status: " + status + "\nData: " + data);
-
-			// used to loop through each JSON object (they are separated by '~')
-			$begin = data.indexOf("{");
-			$end = data.indexOf("}");
+			data = trimJSON(data);
+			console.log("Status: " + status + "\nData: " + data[0]);
 
 			// prime the json data
-			$json = $.parseJSON(data.substring($begin, $end + 1));
+			$json = $.parseJSON(data[1]);
 
 			// empty the existing data
 			$("#job-table tbody").empty();
 
 			// while there is another json object
-			while ($begin > 0 && $end > 0) {
+			for (var $index in $json) {
 				// create the row element
-				$row =  "<tr class=\"table-rows\" name=\"" + $json['dieID'] + "\">";
-				$row +=		"<td>" + $json['jobNumber'] + "</td> "
-				$row +=		"<td>" + $json['dieID'] + "</td> "
-				$row +=		"<td>" + $json['customerName'] + "</td> "
-				$row +=		"<td>" + $json['jobDate'] + "</td> "
+				$row =  "<tr class=\"table-rows\" name=\"" + $json[$index]['dieID'] + "\">";
+				$row +=		"<td>" + $json[$index]['jobNumber'] + "</td> "
+				$row +=		"<td>" + $json[$index]['dieID'] + "</td> "
+				$row +=		"<td>" + $json[$index]['customerName'] + "</td> "
+				$row +=		"<td>" + $json[$index]['jobDate'] + "</td> "
 				$row +=	"</tr>";
 
 				// add the row to the table
 				$("#job-table tbody").append($row);
-
-
-				// grab the next json object
-				$begin = data.indexOf("{", $end + 1);
-				$end = data.indexOf("}", $begin);
-
-				if ($begin > 0 && $end > 0)
-					$json = $.parseJSON(data.substring($begin, $end + 1));
 			}
 
 			// update sorting
