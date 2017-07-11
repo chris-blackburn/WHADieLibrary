@@ -19,7 +19,7 @@
 
 	<div>
 		<label for="tags">Tags:</label>
-		<select style="height: 10em;" id="tags" multiple="multiple" class="multi-select">
+		<select style="height: 10em;" multiple="multiple" class="tags multi-select">
 			<?php
 				$productTags = [ "Business Card", "Brochure", "Booklet/Catalog", "Box", "Coupon", "Coaster", "CD/DVD Holder", "Door Hanger", "Envelope", "Hang Tag", "Invitation/Greeting Card", "Pocket", "Sticker/Label", "Tent" ];
 

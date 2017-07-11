@@ -66,12 +66,12 @@ $(document).ready(function() {
 	// handler for any forms
 	$(".forms form").submit(function(event) {
 		// change the way the tag select sends data
-		if ($(this).has("#tags")) {
-			var selMulti = $.map($("#tags option:selected"), function (el, i) {
+		if ($(this).has(".tags")) {
+			var selMulti = $.map($(this).find(".tags option:selected"), function (el, i) {
 		         return $(el).text();
 		    });
 
-			$("input[name=\"tags\"]").val(selMulti.join(", "));
+			$("input[name$=\"tags\"]").val(selMulti.join(", "));
 		}
 
 		var $formData;
@@ -135,6 +135,11 @@ $(document).ready(function() {
 					$("#update-form-container [name$=\"" + name + "\"").val($json[name]);
 
 				}
+
+				// for setting the multiselect tags
+				$.each($json["tags"].split(", "), function(index, tag) {
+				   $("#update-form-container").find(".tags option[value=\"" + tag + "\"]").prop("selected", true);
+				});
 
 				// for viewing the pdf of the die
 				$diePath = "../dies/" + $dieID + "/";

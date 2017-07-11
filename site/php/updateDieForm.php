@@ -4,7 +4,8 @@
 	<label for="output[name=!dieID]">Die ID:</label> <output name="!dieID"></output> | 
 	<label for="output[name=datePurchased]">Date Purchased:</label> <output name="datePurchased"></output> <br>
 	<!--<label for="output[name=jobDate]">Date Last Used:</label> <output name="jobDate"></output><br>-->
-	<label for="output[name=machine]">Machine:</label> <output name="machine"></output>
+	<label for="output[name=machine]">Machine:</label> <output name="machine"></output><br>
+	<label for="output[name=tags]">Tags:</label> <output name="tags"></output>
 </div>
 
 
@@ -45,6 +46,26 @@
 				<option value="Kluge">Kluge</option>
 			</select>
 		</div>	
+	</div>
+
+	<div>
+		<label for="tags">Tags:</label>
+		<select style="height: 10em;"" multiple="multiple" class="tags multi-select">
+			<?php
+				$productTags = [ "Business Card", "Brochure", "Booklet/Catalog", "Box", "Coupon", "Coaster", "CD/DVD Holder", "Door Hanger", "Envelope", "Hang Tag", "Invitation/Greeting Card", "Pocket", "Sticker/Label", "Tent" ];
+
+				$featuresTags = [ "BC Slit", "Corner", "Gusset", "Horizontal Pocket", "Moon BC Slits", "Perforation", "Pop Up/3D", "Shape", "Tabs", "Vertical Pocket", "Window", "Wrap" ];
+
+				$tags = array_merge($productTags, $featuresTags);
+				asort($tags);
+
+				foreach($tags as $tag) {
+					echo "<option value=\"" . $tag . "\">" . $tag . "</option>";
+				}
+			?>
+		</select>
+		(Tip: Tags that are greyed out are already associated with this die)
+		<input type="hidden" name="!tags">
 	</div>
 
 	<div class="field sizes">
