@@ -9,7 +9,7 @@
 </div>
 
 
-<form action="../php/submitForm.php">
+<form action="../php/submitForm.php" enctype="multipart/form-data">
 
 	<!-- use this to store other data and switch between adding/updating -->
 	<input type="hidden" name="dieID">
@@ -124,6 +124,14 @@
 		</div>
 	</div>
 	-->
+
+	<div>
+		<label for="input[name=pdfFile]">Overwrite PDF:</label> <input name="pdfFile" type="file" accept=".pdf,application/pdf">
+	</div>
+
+	<div>
+		<label for="input[name=otherFiles]">Upload Other Files:</label> <input name="otherFiles[]" type="file" multiple accept=".pdf,.eps,application/pdf,application/postscript">
+	</div>
 
 	<div class="center">
 		<input type="submit" value="Update">

@@ -19,13 +19,12 @@
 		if (empty($_FILES))
 			return "No Files Uploaded.\n";
 
-		$targetPath;
-		// make a new folder for the die
-		if (mkdir(PDF_DIR . $qID)) {
+		$targetPath = PDF_DIR . $qID . "/";
+		// make a new folder for the die unless it already exists
+		if (@mkdir(PDF_DIR . $qID)) {
 			echo "Directory " . $qID . " successfully created.\n";
-			$targetPath = PDF_DIR . $qID . "/";
 		} else {
-			echo "Could not create directory: " . $qID . "\n";
+			echo "Could not create directory: " . $qID . ", " . error_get_last()["message"] . "\n";
 		}
 
 		// check if a die pdf file was uploaded 
@@ -38,15 +37,13 @@
 				$targetFile = $targetPath . $qID . ".pdf";
 
 				// upload the file
-				if (move_uploaded_file($_FILES["pdfFile"]["tmp_name"], $targetFile))
+				if (@move_uploaded_file($_FILES["pdfFile"]["tmp_name"], $targetFile))
 					echo "File " . $targetFile . " Uploaded!\n";
 				else
-					echo "Failed to upload file: " . $targetFile . " (" . $_FILES["pdfFile"]["error"] . ")\n";
+					echo "Failed to upload file: " . $targetFile . " (" . error_get_last()["message"] . ")\n";
 			} else {
 				echo "Incorrect Filetype...\n";
-			}
-
-
+			} 
 		} else {
 			echo "No Die PDF File Uploaded.\n";
 		}
@@ -113,6 +110,7 @@
 		// if the marker for dieID (not to be submited normally) is set, update where the ID is matched
 		if (isset($_POST["dieID"])) {
 			$db->update($table, array_values($dieArr), array_keys($dieArr), "dieID", $_POST["dieID"]);
+			echo uploadFiles($_POST["dieID"]);
 		} else {
 			echo "No Die ID set for update...\n";
 		}

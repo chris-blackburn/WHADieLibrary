@@ -136,6 +136,8 @@ $(document).ready(function() {
 
 				}
 
+				$("#update-form-container").find(".tags option").prop("selected", false);
+
 				// for setting the multiselect tags
 				$.each($json["tags"].split(", "), function(index, tag) {
 				   $("#update-form-container").find(".tags option[value=\"" + tag + "\"]").prop("selected", true);
