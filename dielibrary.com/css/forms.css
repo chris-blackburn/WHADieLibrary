@@ -1,39 +1,83 @@
 /*
 	styling for new entry and update forms
 */
-label {
-	font-weight: bold;
-}
 
 .forms {
 	overflow: hidden;
+	display: block;
+}
+
+.entry-info {
+	float: left;
+	width: 20em;
+}
+
+.entry-info span {
+	font-weight: bold;
 }
 
 .forms form {
-	width: 50%;
+	clear: left;
+	width: 45%;
+	margin-right: 1em;
+	text-align: left;
 	float: left;
 }
 
-#pdf-obj {
+.field {
+	padding: .1em;
+	font-weight: bold;
+	width: 100%;
+	display: inline-block;
+}
+
+.field-input {
+	text-align: right;
+	float: right;
+	width: 75%
+}
+
+.field-input * {
+	width: 100%;
+}
+
+.field-input textarea {
+	height: 5em;
+	resize: none;
+}
+
+.sizes input {
+	width: 45%;
+}
+
+#preview {
+	display: block;
+	padding: 1em;
 	width: 50%;
+	float: right;
+}
+
+#pdf-obj {
+	width: 100%;
 	height: 40em;
 }
 
-.forms input, select, button {
-	 -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
 
 .forms input[type="submit"] {
 	color: white;
 	background-color: #333;
 	padding: 1em;
-	width: 20em;
+	width: 100%;
 	border: none;
 	cursor: pointer;
 	border-radius: 5px;
 	margin-top: 1em;
+}
+
+.forms input, select, textarea {
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .forms input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, textarea:focus {
@@ -46,8 +90,16 @@ label {
 	border-radius: 2px;
 }
 
+.forms select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    font-size: .8em;
+}
+
 .forms .tab-buttons-2 {
-	margin-top: -2em;
 }
 
 .forms .tab-buttons-2 button {

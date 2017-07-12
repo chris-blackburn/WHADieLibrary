@@ -191,12 +191,15 @@ $(document).ready(function() {
 	});
 
 	$("button.refresh-table").on("click", function() {
-		var $parentID = $(this).parent().attr("id");
+		// var $parentID = $(this).parent().attr("id");
 
-		if ($parentID == "die-table")
-			populateDieTable();
-		else if ($parentID == "job-table")
-			populateJobTable();
+		// if ($parentID == "die-table")
+		// 	populateDieTable();
+		// else if ($parentID == "job-table")
+		// 	populateJobTable();
+
+		populateDieTable();
+		populateJobTable();
 	});
 
 	// quick search 

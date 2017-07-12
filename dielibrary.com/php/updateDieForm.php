@@ -1,11 +1,8 @@
 <!-- Display as non-editable: job number, customer ID, customer name, die id, purchase date, machine -->
-<div id="entry-info">
-	<!--<label for="output[name=customerName]">Customer Name:</label> <output name="customerName"></output> | -->
-	<label for="output[name=!dieID]">Die ID:</label> <output name="!dieID"></output> | 
-	<label for="output[name=datePurchased]">Date Purchased:</label> <output name="datePurchased"></output> <br>
-	<!--<label for="output[name=jobDate]">Date Last Used:</label> <output name="jobDate"></output><br>-->
-	<label for="output[name=machine]">Machine:</label> <output name="machine"></output><br>
-	<label for="output[name=tags]">Tags:</label> <output name="tags"></output>
+<div class="entry-info">
+	<span>Die ID:</span> <output name="!dieID"></output> | <span>Date Purchased:</span> <output name="datePurchased"></output> <br>
+	<span>Machine:</span> <output name="machine"></output><br>
+	<span>Tags:</span> <output name="tags"></output>
 </div>
 
 
@@ -16,14 +13,15 @@
 	<input type="hidden" name="dieFunction" value="edit">
 
 	<div class="field">
-		<label for="input[name=description]">Description:</label>
+		<label>Description:
 		<div class="field-input">	
 			<textarea name="!description"></textarea>
 		</div>
+		</label>
 	</div>
 
 	<div class="field">
-		<label for="input[name=expectedUsage]">Expected usage:</label>
+		<label>Expected usage:
 		<div class="field-input">
 			<select name="!expectedUsage">
 				<option value="One time use">One time use</option>
@@ -31,11 +29,12 @@
 				<option value="Regular">Regular</option>
 				<option value="Unknown">Unknown</option>
 			</select>
-		</div>	
+		</div>
+		</label>
 	</div>
 
 	<div class="field">
-		<label for="input[name=location]">Location:</label>
+		<label>Location:
 		<div class="field-input">
 			<select name="!location">
 				<option value="Awaiting Arrival">Awaiting Arrival</option>
@@ -45,11 +44,13 @@
 				<option value="Heidelberg">Heidelberg</option>
 				<option value="Kluge">Kluge</option>
 			</select>
-		</div>	
+		</div>
+		</label>
 	</div>
 
-	<div>
-		<label for="tags">Tags:</label>
+	<div class="field">
+		<label>Tags:
+		<div class="field-input">
 		<select style="height: 10em;"" multiple="multiple" class="tags multi-select">
 			<?php
 				$productTags = [ "Business Card", "Brochure", "Booklet/Catalog", "Box", "Coupon", "Coaster", "CD/DVD Holder", "Door Hanger", "Envelope", "Hang Tag", "Invitation/Greeting Card", "Pocket", "Sticker/Label", "Tent" ];
@@ -64,73 +65,72 @@
 				}
 			?>
 		</select>
-		(Tip: Tags that are greyed out are already associated with this die)
+		</div>
+		</label>
 		<input type="hidden" name="!tags">
 	</div>
 
 	<div class="field sizes">
-		<label for="flat-sizes">Flat Size:</label>
+		<label for="flat-sizes">Flat Size:
 		<div class="field-input" id="flat-sizes">
 			<input type="number" name="!flatWidth" placeholder="Flat Width" step="any" min="0">
 			X
 			<input type="number" name="!flatHeight" placeholder="Flat Height" step="any" min="0">
-		</div>	
+		</div>
+		</label>
 	</div>
 		
 	<div class="field sizes">
-		<label for="finished-sizes">Finished Size:</label>
+		<label for="finished-sizes">Finished Size:
 		<div class="field-input" id="finished-sizes">
 			<input type="number" name="!finishedWidth" placeholder="Finished Width" step="any" min="0">
 			X
 			<input type="number" name="!finishedHeight" placeholder="Finished Height" step="any" min="0">
-		</div>	
+		</div>
+		</label>
 	</div>
 
 	<div class="field">
-		<label for="input[name=numPockets]">Pockets:</label>
+		<label>Pockets:
 		<div class="field-input">
 			<input type="number" name="!numPockets" min="0" max="10">
-		</div>	
+		</div>
+		</label>
 	</div>
 
 	<div class="field">
-		<label for="input[name=pocketSize]">Pocket Size:</label>
+		<label>Pocket Size:
 		<div class="field-input">
 			<input type="number" name="!pocketSize" step="any" min="0">
-		</div>	
+		</div>
+		</label>
 	</div>
 	
 	<div class="field">
-		<label for="input[name=numberUp]">Number Up:</label>
+		<label>Number Up:
 		<div class="field-input">
 			<input type="number" name="!numberUp" min="0" max="100">
-		</div>	
+		</div>
+		</label>
 	</div>
 	
 	<div class="field">
-		<label for="input[name=dieReviewed]">Die Reviewed:</label>
+		<label>Die Reviewed:
 		<div class="field-input">
 			<select name="!dieReviewed">
-				<option value="false">false</option>
-				<option value="true">true</option>
+				<option value="false">no</option>
+				<option value="true">yes</option>
 			</select>
 		</div>	
-	</div>
-<!--
-	<div class="field">
-		<label for="input[name=dateLastUsed]">Date Last Used:</label>
-		<div class="field-input">
-			<input type="date" name="dateLastUsed" required>
-		</div>
-	</div>
-	-->
-
-	<div>
-		<label for="input[name=pdfFile]">Overwrite PDF:</label> <input name="pdfFile" type="file" accept=".pdf,application/pdf">
+		</label>
 	</div>
 
 	<div>
-		<label for="input[name=otherFiles]">Upload Other Files:</label> <input name="otherFiles[]" type="file" multiple accept=".pdf,.eps,application/pdf,application/postscript">
+		<label>Overwrite PDF: <input name="pdfFile" type="file" accept=".pdf,application/pdf"></label>
+	</div>
+
+	<div>
+		<label>Upload Other Files: <input name="otherFiles[]" type="file" multiple accept=".pdf,.eps,application/pdf,application/postscript"></label>
 	</div>
 
 	<div class="center">
@@ -139,19 +139,21 @@
 
 </form>
 
-<div class="tab-buttons-2">
-	<button id="pdf-container-btn" name="pdf-container">Preview</button>
-	<button name="die-files">Download</button>
-</div>
+<div id="preview">
+	<div class="tab-buttons-2">
+		<button id="pdf-container-btn" name="pdf-container">Preview</button>
+		<button name="die-files">Download</button>
+	</div>
 
-<div id="pdf-container" class="tab-content-2 active-tab-2">
-	<object id="pdf-obj" type="application/pdf">
-		<iframe>If you are unable to see the pdf, your browser may not support it. Please click <a>here</a> to download it</iframe>
-	</object>
-</div>
+	<div id="pdf-container" class="tab-content-2 active-tab-2">
+		<object id="pdf-obj" type="application/pdf">
+			<iframe>If you are unable to see the pdf, your browser may not support it. Please click <a>here</a> to download it</iframe>
+		</object>
+	</div>
 
-<div id="die-files" class="tab-content-2">
-	<p id="download-links">
-		Download Links:
-	</p>
+	<div id="die-files" class="tab-content-2">
+		<p id="download-links">
+			Download Links:
+		</p>
+	</div>
 </div>
