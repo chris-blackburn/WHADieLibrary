@@ -1,5 +1,8 @@
+<div class="entry-info">
+	<span>Die ID:</span> <output name="dieID"></output><br>
+</div>
+
 <form action="../php/submitForm.php">
-	<label for="output[name=dieID]">Die ID:</label> <output name="dieID"></output><br>
 
 	<input type="hidden" name="?dieID">
 	<input type="hidden" name="dieID">

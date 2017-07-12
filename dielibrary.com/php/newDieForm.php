@@ -10,7 +10,7 @@
 	</div>
 
 	<div class="field">
-		<label for="input[name=jobDate]">Job Date:
+		<label>Job Date:
 		<div class="field-input">
 			<input type="date" name="?jobDate" value="<?php echo date("Y-m-d"); ?>">
 		</div>
@@ -48,7 +48,7 @@
 	</div>
 
 	<div class="field">
-		<label for="input[name=datePurchased]">Date Purchased:
+		<label>Date Purchased:
 		<div class="field-input">
 			<input type="date" name="!datePurchased" value="<?php echo date("Y-m-d"); ?>" required>
 		</div>
@@ -84,7 +84,7 @@
 	</div>
 
 	<div class="field">
-		<label for="input[name=machine]">Machine:
+		<label>Machine:
 		<div class="field-input">
 			<select name="!machine">
 				<option value="Sanwa">Sanwa</option>
