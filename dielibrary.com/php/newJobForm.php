@@ -9,7 +9,7 @@
 	<input type="hidden" name="jobFunction" value="add">
 	<input type="hidden" name="dieFunction" value="edit">
 
-	<div class="field">
+	<div class="field center">
 		<input type="number" name="?jobNumber" placeholder="Job number"  min="0" required>
 		<input type="text" name="?customerName" placeholder="Customer Name">
 	</div>

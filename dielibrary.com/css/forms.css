@@ -2,6 +2,16 @@
 	styling for new entry and update forms
 */
 
+#new-die-form-container form {
+	width: 100%;
+}
+
+.form-section {
+	width: 45%; 
+	float: left;
+	margin: 1em;
+}
+
 .forms {
 	overflow: hidden;
 	display: block;
@@ -51,6 +61,7 @@
 }
 
 #preview {
+	margin-top: -4.5em;
 	display: block;
 	padding: 1em;
 	width: 50%;
