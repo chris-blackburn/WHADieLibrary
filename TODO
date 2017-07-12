@@ -8,5 +8,3 @@ date last used = most recent job that used a die
 fix database() select -> columns
 
 data-
-
-add escaper for {} in json
