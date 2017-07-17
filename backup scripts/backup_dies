@@ -1,4 +1,6 @@
 #!/bin/bash
+# add mamp bin to path for access to scripts like mysqldump
+PATH=$PATH:/Applications/MAMP/Library/bin
 
 # path to dies folder
 DIES=("/Volumes/Storage II/dielibrary.com/dies")
@@ -15,5 +17,5 @@ zip -r -X "${DEST}/${DATE}.dies.zip" .
 popd
 
 # backup the mysql database
-/Applications/MAMP/Library/bin/mysqldump -uexporter -pexporter --single-transaction --databases DieLibrary > "${DEST}/sql_backup.sql"
+mysqldump -uexporter -pexporter --single-transaction --databases DieLibrary > "${DEST}/sql_backup.sql"
 zip -umXj "${DEST}/${DATE}.dies.zip" "${DEST}/sql_backup.sql"
