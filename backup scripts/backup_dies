@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# path to dies folder
+DIES=("/Volumes/Storage II/dielibrary.com/dies")
+
+# current date
+DATE=$(date +%b-%d-%y)
+
+# destination folder
+DEST=("/Volumes/Storage II/dielibrary_backup")
+
+# create the archive of the dies with the timestamp
+pushd "${DIES}"
+zip -r -X "${DEST}/${DATE}.dies.zip" .
+popd
+
+# backup the mysql database
+/Applications/MAMP/Library/bin/mysqldump -uexporter -pexporter --single-transaction --databases DieLibrary > "${DEST}/sql_backup.sql"
+zip -umXj "${DEST}/${DATE}.dies.zip" "${DEST}/sql_backup.sql"
