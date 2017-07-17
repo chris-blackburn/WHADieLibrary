@@ -28,10 +28,10 @@
 			<select name="!location">
 				<option value="Awaiting Arrival">Awaiting Arrival</option>
 				<option value="Green Inventory">Green Inventory</option>
-				<option value="Gold Inventory">Gold Inventory</option>
 				<option value="Sanwa">Sanwa</option>
 				<option value="Heidelberg">Heidelberg</option>
 				<option value="Kluge">Kluge</option>
+				<option value="Trashed">Trashed</option>
 			</select>
 		</div>
 		</label>
