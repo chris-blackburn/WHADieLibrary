@@ -267,7 +267,7 @@ function populateDieTable() {
 				$row +=	"<td class=\"location-row\">" + $json[$index]['location'] + " </td>";
 				$row +=	"<td class=\"description-row\">" + $json[$index]['description'] + " </td>";
 				$row +=	"<td class=\"pull-row\"><button class=\"pull-btn\"><img style=\"height: 3em; width: auto;\" src=\"../img/pull.png\"></button></td>";
-				$row +=	"<td hidden>" + $json[$index]['tags'] + " </td>";
+				$row +=	"<td hidden>" + $json[$index]['tags'] + " " + $json[$index]['flatWidth'] + "x" + $json[$index]['flatHeight'] + " " + $json[$index]['finishedWidth'] + "x" + $json[$index]['finishedHeight'] + " </td>"; // hidden data, used for searching
 				$row += "</tr>";
 
 				// add the row to the table

@@ -155,7 +155,7 @@
 		</div>
 
 		<div>
-			<label>Overwrite PDF: <input name="pdfFile" type="file" accept=".pdf,application/pdf"></label>
+			<label>Upload Preview PDF: <input name="pdfFile" type="file" accept=".pdf,application/pdf"></label>
 		</div>
 
 		<div>
