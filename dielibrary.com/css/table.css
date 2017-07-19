@@ -99,8 +99,8 @@
   padding: 0;
 }
 
-.pull-row button {
-    display: table-cell;
+.pull-btn {
+    display: none;
     height: 4em;
     width: 8em;
     background-color: #ccc;
@@ -110,6 +110,10 @@
     transition: 0.3s;
 }
 
-.pull-row button:hover {
+.pull-btn:hover {
   background-color: #fff;
+}
+
+.table-container tr:hover .pull-btn {
+  display: table-cell;
 }
