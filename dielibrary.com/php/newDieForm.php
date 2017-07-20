@@ -5,7 +5,7 @@
 		<input type="hidden" name="dieFunction" value="add">
 		<input type="hidden" name="jobFunction" value="add">
 
-		<input type="hidden" name="!newDie" value="yes">
+		<input type="hidden" name="?newDie" value="yes">
 
 		<div class="field center">
 			<input type="number" name="?jobNumber" placeholder="Job number"  min="0" required>
