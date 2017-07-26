@@ -95,7 +95,7 @@ $(document).ready(function() {
 			contentType: false,
     		processData: false,
 			success: function(data, status) {
-				console.log("Status: " + status + "\nData: " + data);
+				log("Status: " + status + "\nData: " + data);
 
 				// update the die table on success and switch to the table tab
 				populateDieTable();
@@ -103,7 +103,7 @@ $(document).ready(function() {
 				$("#die-table-btn").click();
 			},
 			error: function(data, status) {
-				console.log("Status: " + status + "\nData: " + data);
+				log("Status: " + status + "\nData: " + data);
 			}
 		});
 
@@ -125,7 +125,7 @@ $(document).ready(function() {
 			},
 			success: function(data, status) {
 				data = trimJSON(data);
-				console.log("Status: " + status + "\nData: " + data[0]);
+				log("Status: " + status + "\nData: " + data[0]);
 
 				// extract the json object from the returned data
 				$json = $.parseJSON(data[1]);
@@ -165,7 +165,7 @@ $(document).ready(function() {
 						$("#download-links").append("Download Links:" + data);
 					},
 					error: function(data, status) {
-						console.log("Status: " + status + "\nData: " + data);
+						log("Status: " + status + "\nData: " + data);
 					}
 				});
 
@@ -173,7 +173,7 @@ $(document).ready(function() {
 
 			},
 			error: function(data, status) {
-				console.log("Status: " + status + "\nData: " + data);
+				log("Status: " + status + "\nData: " + data);
 			}
 		})
 
@@ -227,8 +227,27 @@ $(document).ready(function() {
 	*****************************************************************************
 */
 
+function log(str) {
+	// log to console
+	console.log(str);
+
+	// ajax to php logger for log storage
+	$params = {
+		url: "../php/log.php",
+		type: "POST",
+		data: { 
+			log: str 
+		},
+		error: function(data, status) {
+			console.log(status + ": Could not log console to file\n" + data);
+		}
+	}
+
+	$.ajax($params);
+}
+
 function trimJSON(data) {
-	// extract the text to put in the console log
+	// extract the text to put in the log
 	var $regex = /\[?({(("[a-zA-Z_$][a-zA-Z_$0-9]*"):(".*"|null),?)+},?)+\]?/g;
 
 	var str = [
@@ -249,7 +268,7 @@ function populateDieTable() {
 		success: function(data, status) {
 			// add ignore json data
 			var data = trimJSON(data);
-			console.log("Status: " + status + "\nData: " + data[0]);
+			log("Status: " + status + "\nData: " + data[0]);
 
 			// prime the json data
 			$json = $.parseJSON(data[1]);
@@ -279,7 +298,7 @@ function populateDieTable() {
 		
 		},
 		error: function(data, status) {
-			console.log("Status: " + status + "\nData: " + data);
+			log("Status: " + status + "\nData: " + data);
 		}
 	})
 }
@@ -294,7 +313,7 @@ function populateJobTable() {
 		success: function(data, status) {
 			// add ignore json data
 			data = trimJSON(data);
-			console.log("Status: " + status + "\nData: " + data[0]);
+			log("Status: " + status + "\nData: " + data[0]);
 
 			// prime the json data
 			$json = $.parseJSON(data[1]);
@@ -320,7 +339,7 @@ function populateJobTable() {
 			$(".tablesorter").trigger("update");
 		},
 		error: function(data, status) {
-			console.log("Status: " + status + "\nData: " + data);
+			log("Status: " + status + "\nData: " + data);
 		}
 	})
 }
