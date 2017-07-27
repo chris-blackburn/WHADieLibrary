@@ -5,8 +5,9 @@
 .table-container {
   -moz-user-select: none; 
   -webkit-user-select: none; 
-  -ms-user-select:none; user-select:none;
-  -o-user-select:none;
+  -ms-user-select: none; user-select: none;
+  -o-user-select: none;
+  border-bottom: none;
 }
 
 .table-container table {
@@ -45,7 +46,7 @@
 
 .table-body {
   display: block;
-  height: 35em;
+  height: 40em;
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden; 
