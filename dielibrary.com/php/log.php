@@ -7,6 +7,8 @@
 	// grab the log data
 	$data = $_POST['log'];
 
+	date_default_timezone_set('America/New_York');
+
 	// grab the date and time for entry in the log file
 	$date = Date("m-d-Y H:i:s");
 
