@@ -80,14 +80,7 @@
 		} else if ($col{0} == "?") {
 			$jobArr[substr($col, 1)] = $value;
 		}
-	}
-
-	/*
-	if (@mail("krizboy12@gmail.com", "php mail test", "this is a php email test"))
-		echo "Mail sent\n";
-	else
-		echo "mail failed: " . error_get_last()["message"] . "\n";
-	*/
+	}	
 
 	// connect to the database
 	$db = new Database();
@@ -114,7 +107,12 @@
 
 		echo uploadFiles($qID);
 
-		// send email to bindery if reviewed tag is set to "no"
+
+		// send an email when a new die is created
+		if (@mail("dieapproval@whaprint.com", "Die " . $qID . " has been created", "A new die has been created, please see the die site"))
+			echo "Mail sent\n";
+		else
+			echo "mail failed: " . error_get_last()["message"] . "\n";
 	} else if ($dieFunction == "edit") {
 		// if the marker for dieID (not to be submited normally) is set, update where the ID is matched
 		if (isset($_POST["dieID"])) {
