@@ -82,6 +82,13 @@
 		}
 	}
 
+	/*
+	if (@mail("krizboy12@gmail.com", "php mail test", "this is a php email test"))
+		echo "Mail sent\n";
+	else
+		echo "mail failed: " . error_get_last()["message"] . "\n";
+	*/
+
 	// connect to the database
 	$db = new Database();
 	$db->connect(/*$updateUser, $updateUserPass*/);
@@ -106,6 +113,8 @@
 		$qID = $db->getQueryID();
 
 		echo uploadFiles($qID);
+
+		// send email to bindery if reviewed tag is set to "no"
 	} else if ($dieFunction == "edit") {
 		// if the marker for dieID (not to be submited normally) is set, update where the ID is matched
 		if (isset($_POST["dieID"])) {

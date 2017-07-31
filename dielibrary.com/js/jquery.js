@@ -276,6 +276,8 @@ function populateDieTable() {
 			// empty the existing data
 			$("#die-table tbody").empty();
 
+			$numRecords = 0;
+
 			// while there is another json object
 			for (var $index in $json) {
 				// create the row element
@@ -291,7 +293,11 @@ function populateDieTable() {
 
 				// add the row to the table
 				$("#die-table tbody").append($row);
+
+				$numRecords++;
 			}
+
+			$("#die-table .num-records").html($numRecords);
 					
 			// update sorting
 			$(".tablesorter").trigger("update");
@@ -321,6 +327,8 @@ function populateJobTable() {
 			// empty the existing data
 			$("#job-table tbody").empty();
 
+			$numRecords = 0;
+
 			// while there is another json object
 			for (var $index in $json) {
 				// create the row element
@@ -333,7 +341,11 @@ function populateJobTable() {
 
 				// add the row to the table
 				$("#job-table tbody").append($row);
+
+				$numRecords++;
 			}
+
+			$("#job-table .num-records").html($numRecords);
 
 			// update sorting
 			$(".tablesorter").trigger("update");

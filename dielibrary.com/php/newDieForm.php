@@ -65,7 +65,7 @@
 					<option value="One time use">One time use</option>
 					<option value="More than once">More than once</option>
 					<option value="Regular">Regular</option>
-					<option value="Unknown">Unknown</option>
+					<option selected value="Unknown">Unknown</option>
 				</select>
 			</div>
 			</label>
@@ -75,7 +75,7 @@
 			<label>Location:
 			<div class="field-input">
 				<select name="!location">
-					<option value="Awaiting Arrival">Awaiting Arrival</option>
+					<option selected value="Awaiting Arrival">Awaiting Arrival</option>
 					<option value="Green Inventory">Green Inventory</option>
 					<option value="Sanwa">Sanwa</option>
 					<option value="Heidelberg">Heidelberg</option>
