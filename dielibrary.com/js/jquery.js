@@ -1,6 +1,7 @@
 /*
 	This runs when the webpage is loaded, event handlers need to be here so they get initialized
 */
+
 $(document).ready(function() {
 
 	// fallback for date fields
@@ -59,9 +60,14 @@ $(document).ready(function() {
 	// make tables of class tablesorter, sortable
 	$(".tablesorter").tablesorter();
 
-	// populate the table when the page loads
+	// populate the table when the page loads and set an interval to refresh every 5 minutes
 	populateDieTable();
 	populateJobTable();
+
+	window.setInterval(function() {
+		populateDieTable();
+		populateJobTable();
+	}, 60000 * 5);
 
 	// handler for any forms
 	$(".forms form").submit(function(event) {
