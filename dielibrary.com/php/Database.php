@@ -91,7 +91,7 @@
 		public function select($table, $cols = '*', $where = null, $in = null, $order = null, $asc_desc = null) {
 
 			if ($cols != '*') {
-				$sql = "SELECT " . implode(", ", $cols) . " FROM " . $table;
+				$sql = "SELECT " . (is_array($cols) ? implode(", ", $cols) : $cols) . " FROM " . $table;
 			} else {
 				$sql = "SELECT " . $cols . " FROM " . $table;
 			}

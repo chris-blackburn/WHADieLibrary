@@ -99,7 +99,7 @@
 		</div>
 	</div>	
 
-	<div class="form-section" style="margin-top: 10em;">
+	<div class="form-section" style="margin-top: 7em;">
 
 		<div class="field sizes">
 			<label for="flat-sizes">Flat Size:

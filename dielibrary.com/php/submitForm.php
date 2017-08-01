@@ -82,6 +82,8 @@
 		}
 	}	
 
+	$mailSent = False;
+
 	// connect to the database
 	$db = new Database();
 	$db->connect(/*$updateUser, $updateUserPass*/);
@@ -107,12 +109,23 @@
 
 		echo uploadFiles($qID);
 
+		// send an email when a new job is created
+		$to = "dieapproval@whaprint.com";
+		$subject = "Die " . $qID . " has been created";
 
-		// send an email when a new die is created
-		if (@mail("dieapproval@whaprint.com", "Die " . $qID . " has been created", "A new die has been created, please see the die site"))
+		$message = "Job " . $jobArr["jobNumber"] . " references die " . $qID . "\n";
+		$message .= "\t" . ($jobArr["newDie"] == "yes" ? "Die " . $qID . " is a new die" : "Die " . $qID . " is not a new die") . "\n";
+		$message .= "\tDie " . $qID . " review status: " . ($dieArr["dieReviewed"] == "true" ? "<b>reviewed</b>" : "<b>not reviewed</b>") . "\n";
+
+		echo $subject . "\n" . $message;
+
+		if (@mail($to, $subject, $message))
 			echo "Mail sent\n";
 		else
-			echo "mail failed: " . error_get_last()["message"] . "\n";
+			echo "Could not send mail\n";
+
+		$mailSent = True;
+
 	} else if ($dieFunction == "edit") {
 		// if the marker for dieID (not to be submited normally) is set, update where the ID is matched
 		if (isset($_POST["dieID"])) {
@@ -132,6 +145,24 @@
 			$jobArr["dieID"] = $qID;
 
 		$db->insert($table, array_values($jobArr), array_keys($jobArr));
+
+		if (!$mailSent) {
+			// send an email when a new job is created
+			$to = "dieapproval@whaprint.com";
+			$subject = "Job " . $jobArr["jobNumber"] . " has been added to the die site";
+
+			$message = "Job " . $jobArr["jobNumber"] . " references die " . $jobArr["dieID"] . "\n";
+			$message .= "\t" . ($jobArr["newDie"] == "yes" ? "Die " . $jobArr["dieID"] . " is a new die" : "Die " . $jobArr["dieID"] . " is not a new die") . "\n";
+			$dieReviewed = $db->select(DIE_TABLE, "dieReviewed", "dieID", $jobArr["dieID"])->fetch_array()[0];
+			$message .= "\tDie " . $jobArr["dieID"] . " review status: " . ($dieReviewed == "true" ? "<b>reviewed</b>" : "<b>not reviewed</b>") . "\n";
+
+			echo $subject . "\n" . $message;
+
+			if (@mail($to, $subject, $message))
+				echo "Mail sent\n";
+			else
+				echo "Could not send mail\n";
+		}
 	}
 
 	$db->disconnect();
