@@ -11,7 +11,17 @@
 
 	define("PDF_DIR", "../dies/");
 
-	define("MAIL_TO", "dieapproval@whaprint.com");
-	define("MAIL_HEADERS", "MIME-Version: 1.0" . "\r\n" . "Content-type:text/html;charset=UTF-8" . "\r\n" . 'From: <dielibrary@whaprint.com>' . "\r\n");
+	define("MAIL_TO_PRODUCTION", "dieapproval@whaprint.com");
+	define("MAIL_TO_CSR", "customer.service@whaprint.com");
+
+	$headers = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+	$headers .= "From: Die Library <dielibrary@whaprint.com>" . "\r\n";
+	$headers .= "Reply-To: <" . MAIL_TO_CSR . ">" . "\r\n";
+
+	define("MAIL_HEADERS", $headers);
+
+	// customer.service@whaprint.com
+	// cvbhuy
 
 ?>

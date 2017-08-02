@@ -70,7 +70,6 @@
 	function sendMail($subject, $message, $to = MAIL_TO, $headers = MAIL_HEADERS) {
 		// message footer
 		$message .= "	<br><br>
-						<p>Please do not repy to this email</p>
 					</body>
 					</html>";
 
@@ -156,12 +155,12 @@
 
 			// check review status of the current die, if it has been changed from false to true
 			if ($dieArr["dieReviewed"] == "true" && $db->select(DIE_TABLE, "dieReviewed", "dieID", $updateID)->fetch_array()[0] == "false") {
-				$subject = sprintf("Die %d has been reviewed", $updateID);
+				$subject = sprintf("Die %d has been approved", $updateID);
 
 				$message .= sprintf("	<p>Die %d has been been approved</p>",
 									$updateID);
 
-				echo sendMail($subject, $message);
+				echo sendMail($subject, $message, MAIL_TO_CSR);
 			}
 
 			$db->update($table, array_values($dieArr), array_keys($dieArr), "dieID", $_POST["dieID"]);
