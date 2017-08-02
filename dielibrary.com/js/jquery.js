@@ -4,6 +4,11 @@
 
 $(document).ready(function() {
 
+	// set height of the tables
+	$(".table-body").css({
+		"height": "calc(" + ($(window).height() - $(".tables").position().top) + "px - 3.4em)"
+	});
+
 	// fallback for date fields
 	if ( $('input[type="date"]').prop('type') != 'date' ) {
 	    $('input[type="date"]').datepicker({
