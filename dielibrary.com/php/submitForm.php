@@ -67,7 +67,7 @@
 		}
 	}
 
-	function sendMail($subject, $message, $to = MAIL_TO, $headers = MAIL_HEADERS) {
+	function sendMail($subject, $message, $to = MAIL_TO_PRODUCTION, $headers = MAIL_HEADERS) {
 		// message footer
 		$message .= "	<br><br>
 					</body>
