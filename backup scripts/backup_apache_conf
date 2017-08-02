@@ -1,1 +1,1 @@
-zip -r -X /Volumes/Storage II/dielibrary_backup/apache_conf.bak.zip /Applications/MAMP/conf/apache/
+zip -r -X /Volumes/Storage\ II/dielibrary_backup/apache_conf.bak.zip /Applications/MAMP/conf/apache/
