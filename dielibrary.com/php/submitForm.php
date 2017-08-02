@@ -75,8 +75,8 @@
 					</html>";
 
 		if (!mail($to, $subject, $message, $headers))
-			return "Mail could not be sent, check /var/log/mail.log for details.";
-		return "Mail has been sent!";
+			return "Mail could not be sent, check /var/log/mail.log for details.\n";
+		return "Mail has been sent!\n";
 	}
 ?>
 

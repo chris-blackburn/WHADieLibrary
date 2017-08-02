@@ -90,7 +90,9 @@ $(document).ready(function() {
 			event.preventDefault();
 			$formData = $(this).serialize();
 		} else {
-			return;
+			// serialize data ignoring the file fields
+			alert("Warning: your browser does not support file uploads\nFiles will not be uploaded");
+			$formData = $('input[type!=file]', this).serialize();
 		}
 
 		// send POST to the url, where the data is handled and the entry is added
