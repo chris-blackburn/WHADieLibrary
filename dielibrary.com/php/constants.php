@@ -1,5 +1,5 @@
 <?php
-	define("SITE_HOST", "http:\\\\seefile");
+	define("SITE_HOST", "http:\\\\dielibrary.whaprint.com");
 
 	define("DB_HOST", "localhost");
 	define("DB_USER", "monty");
