@@ -1,7 +1,7 @@
-#WHA Die Library
+# WHA Die Library
 This is what I created during my summer internship at Worth Higgins & Associates.
 
-##Why?
+## Why?
 In printing, there is something called a *die*. Dies are used to cut, perforate, and fold paper in unconventional ways.
 Originally, information about these dies were being kept in an excel spreadsheet that was accessed via samba share.
 A couple weeks into my internship, we discovered that windows users were no longer able to access the share - we
