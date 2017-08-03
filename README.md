@@ -273,8 +273,8 @@ populate this line with a blowfish secret (google "blowfish secret generator" an
 
 ### Postfix
 This was a pain to play around with. This is a working configuration that I found. This is what makes the mailing system work.  
-- [main.cf](https://github.com/krizboy12/WHADieLibrary/blob/master/config/postfix/main.cf)  
-- [sasl_MAMP_passwd](https://github.com/krizboy12/WHADieLibrary/blob/master/config/postfix/sasl_MAMP_passwd)
+- [main.cf](https://github.com/krizboy12/WHADieLibrary/blob/master/configs/postfix/main.cf)  
+- [sasl_MAMP_passwd](https://github.com/krizboy12/WHADieLibrary/blob/master/configs/postfix/sasl_MAMP_passwd)
 
 Both of these files should be placed in `/etc/postfix`.
 
