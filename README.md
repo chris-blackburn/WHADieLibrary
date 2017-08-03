@@ -280,6 +280,7 @@ Both of these files should be placed in `/etc/postfix`.
 
 ## To-do
 - [ ] add login function, use Database()->connect($user, $pass)
+- [ ] add delete function through the site (need logins first)
 - [ ] add direct connection to csr emails (rather than the catch all email)
 - [ ] limit number of records the page will show by default, add "show all records"
 
