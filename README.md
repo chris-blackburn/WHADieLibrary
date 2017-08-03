@@ -10,4 +10,5 @@ we make a web portal to access the library. This would solve the access issue an
 wouldn't have to buy tons of licenses for Microsoft Office just to access one spreadsheet). This is the result of my 
 work.
 
-### Special thanks to @christianbach for his awesome client side table sorting javascript magic. Check out his work [here](http://tablesorter.com).
+### Special Thanks
+@christianbach for his awesome client side table sorting javascript magic. Check out his work [here](http://tablesorter.com).
