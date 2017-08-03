@@ -12,14 +12,16 @@ work.
 
 ## Workflow
 Here is a basic flowchart describing the target workflow
+
 ![Die Library Flowchart](https://github.com/krizboy12/WHADieLibrary/blob/master/Workflow/Workflow.png)
 
 ## Database
 This is a basic diagram of what the database looks like. It is a relational database with a many-to-many connection.
+
 ![Die Library Database](https://github.com/krizboy12/WHADieLibrary/blob/master/Workflow/Database%20Relation.png)
 
-### SQL to build the database:
-'''sql
+#### SQL to build the database:
+```sql
 CREATE DATABASE IF NOT EXISTS `DieLibrary`;
 
 USE `DieLibrary`;
@@ -65,7 +67,7 @@ CREATE TABLE `jobs` (
   KEY `dieID` (`dieID`),
   CONSTRAINT `jobs_ibfk_1` FOREIGN KEY (`dieID`) REFERENCES `dies` (`dieID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-'''
+```
 
 ## To-do
 - [ ] add login function, use Database()->connect($user, $pass)
