@@ -155,7 +155,7 @@ To create a new job with an existing die, click the pull button on the die table
 
 After any data is submitted, the die's location will change (if you selected a new location) and the transaction history table will be appended with the new entry.
 
-## Automated emails
+## Automated Emails
 There are triggers throughout the site that sends email notifications.
 - When a die is created
   1. If the die has already been reviewed
@@ -181,6 +181,102 @@ There are triggers throughout the site that sends email notifications.
 Automated emails are sent to these groups (one or the other or both depending on the email)
 1. die approvals
 2. customer service
+
+## Administration
+There were lots of configurations for apache and other services that had to be done. This is just where I'll keep all that information. Some of this stuff 
+may already be configured depending on your install method. I used MAMP to run this site off of a mac server, so a lot of things were preconfigured and many of the directory paths are specific to that installation.
+
+### Logs
+There are various log files that can be populated by the site.
+1. Site specific logs located in the site's directory under `logs/client_logs.clogs`.
+2. The mail logs for Mac are located in `/var/log/mail.log`.
+3. The virtual host-specific logs for MAMP are located in `/Applications/MAMP/Library/logs`.
+
+There are also logs for MAMP's apache, php, and sql services which can all be found in `/Applications/MAMP
+
+### Apache
+Apache configuration is all held in the `conf` directory of your apache installation. The directory path for MAMP is `/Applications/MAMP/conf/apache`.
+
+There are two main files that need to be configured:
+1. httpd.conf
+2. extra/httpd-vhosts.conf
+
+#### httpd.conf
+First, you need to enable virtual hosting. To do this, uncomment (remove the "#" at the beginning of the line) or add this line somehwere in this file:
+`Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf`.
+
+#### extra/httpd-vhosts.conf
+```
+NameVirtualHost *:80
+
+<VirtualHost *:80>
+    ServerAdmin mwilson@whaprint.com
+    DocumentRoot "/Volumes/Storage II/dielibrary.com"
+    ServerName dielibrary
+    ErrorLog "logs/dielibrary-error_log"
+    CustomLog "logs/dielibrary-access_log" common
+
+    <Directory "/Volumes/Storage II/dielibrary.com/dies">
+    Options +Indexes
+    </Directory>
+
+    <FilesMatch "\.(html|htm|js|css)$">
+      FileETag None
+      <ifModule mod_headers.c>
+          Header unset ETag
+          Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+          Header set Pragma "no-cache"
+          Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+      </ifModule>
+    </FilesMatch>
+</VirtualHost>
+```
+
+### MySQL
+I added 3 users to the sql database.
+
+1. The first user is used by the site to Read, Insert, and Update
+    - Username: **monty**
+    - Password: **some_pass**
+    - Permissions: **SELECT, INSERT, UPDATE**
+2. The second is used by one of the backup scripts to backup the database
+    - Username: **exporter**
+    - Password: **exporter**
+    - Permissions: **SELECT**
+3. The third is optional but recommended. It's just an admin account.
+    - Username: **_administrator**
+    - Password:
+    - Permissions: **ALL**
+
+#### Adjusting the Database
+If someone enters in bad data or test data into the site and it needs to be removed
+1. Login to phpmyadmin (to access phpmyadmin type in the url of the site along with `/phpmyadmin`)
+2. Navigate to the job table and delete the unwanted entries
+    - It's important to delete from the job table first because of the foreign key relationship to the die table
+3. Navigate to the die table and delete the unwanted entries
+4. Click on the Die Library database and then click on the sql tab
+    - Enter this script and run it. Put the number of the die ID that should be generated next after the equals sign (i.e. if that last valid entry is 9427, put 9428.
+    - `ALTER TABLE dies AUTO_INCREMENT=`
+
+### PHP
+MAMP allows you to choose which version of php to use. If you want to enable phpmyadmin, you must use 7.0.20 (at least with this installation of MAMP)
+
+To enable the login screen for phpmyadmin, you need to edit the file `/Applications/MAMP/bin/phpMyAdmin/config.inc.php`.
+
+Change this line from  
+`$cfg['Servers'][$i]['auth_type']     = 'config';` to  
+`$cfg['Servers'][$i]['auth_type']     = 'cookie';`
+
+(optional/recommended)
+populate this line with a blowfish secret (google "blowfish secret generator" and pop the output between the quotes, it doesn't have to be anything special. This is mainly to keep phpmyadmin from barking at you for not having it.  
+`$cfg['blowfish_secret'] = '';`
+
+### Postfix
+This was a pain to play around with. This is a working configuration that I found.  
+- [main.cf](https://github.com/krizboy12/WHADieLibrary/blob/master/config/postfix/main.cf)  
+- [sasl_MAMP_passwd](https://github.com/krizboy12/WHADieLibrary/blob/master/config/postfix/sasl_MAMP_passwd)
+
+Both of these files should be placed in `/etc/postfix`.
 
 ## To-do
 - [ ] add login function, use Database()->connect($user, $pass)
