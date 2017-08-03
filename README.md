@@ -159,18 +159,18 @@ After any data is submitted, the die's location will change (if you selected a n
 There are triggers throughout the site that sends email notifications.
 - When a die is created
   1. If the die has already been reviewed
-    - Subject: Job *[Job Number]* has been created
-    - Body: A new die (*[Die ID]*) has been created for this job  Review status: **reviewed**
+      - Subject: Job *[Job Number]* has been created
+      - Body: A new die (*[Die ID]*) has been created for this job  Review status: **reviewed**
   2. If the die has **not** been reviewed
-    - Subject: Job *[Job Number]* Needs die approval
-    - Body: A new die (*[Die ID]*) has been created  Review status: **not reviewed**
+      - Subject: Job *[Job Number]* Needs die approval
+      - Body: A new die (*[Die ID]*) has been created  Review status: **not reviewed**
 - When a die is updated
   1. If the die has been updated to being reviewed
-    - Subject: Die *[Die ID]* has been approved
-    - Body: Die *[Die ID]* has been approved
+     - Subject: Die *[Die ID]* has been approved
+     - Body: Die *[Die ID]* has been approved
   2. If the die has been set to not reviewed
-    - Subject: Die *[Die ID]* has been unapproved
-    - Body: Die *[Die ID]* has been been unapproved and needs to be reviewed
+      - Subject: Die *[Die ID]* has been unapproved
+      - Body: Die *[Die ID]* has been been unapproved and needs to be reviewed
 - When a pull request is made
   - Subject: Pull request for die *[Die ID]*
   - Body: Die *[Die ID]* needs to be pulled for job *[Job Number]*  Die review status: ***[reviewed|not reviewed]***
