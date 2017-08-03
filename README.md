@@ -14,12 +14,12 @@ work.
 ## Workflow
 Here is a basic flowchart describing the target workflow
 
-![Die Library Flowchart](https://github.com/krizboy12/WHADieLibrary/blob/master/Workflow/Workflow.png)
+![Die Library Flowchart](Workflow/Workflow.png)
 
 ## Database
 This is a basic diagram of what the database looks like. It is a relational database with a many-to-many connection.
 
-![Die Library Database](https://github.com/krizboy12/WHADieLibrary/blob/master/Workflow/Database%20Relation.png)
+![Die Library Database](Workflow/Database%20Relation.png)
 
 #### SQL to build the database:
 ```sql
@@ -84,7 +84,7 @@ For the best results, please use a supported browser
 
 Here is the first page that comes up when the site is accessed (These screenshots are populated with data the users have entered).
 
-![Die Table Page](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/DieTablePage.png)
+![Die Table Page](screenshots/DieTablePage.png)
 
 At the top, there are a few visible tabs:
 - Die Table
@@ -107,13 +107,13 @@ The content owned by the Die Table button is as follows:
   - The table is sorted by Die ID in descending order by default
   - Each of the headers are clickable and will sort the table by that header (shift+click to sort by multiple headers)
   - When hovering your mouse over a row, a button will appear, this is the pull button that opens up one of the hidden tabs I talked about earlier.
-  ![Pull Button](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/PullButton.png)
+  ![Pull Button](screenshots/PullButton.png)
   - If you double click on a row, it will open up a hidden tab that allows you to update a die and preview/upload files associated with that die.
 
 ### Transaction History
 This tab is very similar to the Die Table tab, it just accesses and displays a different table in the database
 
-![Transaction History Page](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/TransactionHistoryPage.png)
+![Transaction History Page](screenshots/TransactionHistoryPage.png)
 
 This table has all the same features as the die table, searching, refresh, record count, and sorting. It does *not* have a pull button on hover, and when you double click a
 row, it will take you to the listed die's update form. By default, the most recent jobs are at the top of the table.
@@ -121,7 +121,7 @@ row, it will take you to the listed die's update form. By default, the most rece
 ### Create New Die
 If a new die has been ordered, this is where its information goes.
 
-![Create New Die Page](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/CreateNewDie.png)
+![Create New Die Page](screenshots/CreateNewDie.png)
 
 - The only required field is the job number. 
 - Multiple tags can be selected by ctrl+click or command+click for mac
@@ -135,7 +135,7 @@ When you are done filling out the form, click the button at the bottom labeled "
 ### Update Die
 When you double click a row on the die table or transaction history table, the information about the die that row points to populates the update form.
 
-![Update Die Page](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/UpdateDiePage.png)
+![Update Die Page](screenshots/UpdateDiePage.png)
 
 To update the die, simply change the fields you want to change and click "Update". You will be brought back to the die table and any changes will have been applied.
 
@@ -145,13 +145,13 @@ that was upload when the die was created. If you wish to overwrite that file, ju
 upload new files through the other file picker (to overwrite old files, just make sure the new ones have the same name and they will be overwritten).
 - If you click on the "Download" button, the previewable pdf will be hidden and a list of links will show up. These are set to download when you click on them.
 
-![Update Die Page Download Links](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/UpdateDie-DownloadLinks.png)
+![Update Die Page Download Links](screenshots/UpdateDie-DownloadLinks.png)
   - If you would like to preview them, right click a link and select "Open link in new tab". The pdf that is named as the die ID is the pdf that is seen through the preview.
 
 ### Pull Request
 To create a new job with an existing die, click the pull button on the die table (as seen earlier). After you click the pull button, you will be brought to the "Pull Request" tab.
 
-![Pull Request Page](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/PullRequestPage.png)
+![Pull Request Page](screenshots/PullRequestPage.png)
 
 After any data is submitted, the die's location will change (if you selected a new location) and the transaction history table will be appended with the new entry.
 
@@ -273,8 +273,8 @@ populate this line with a blowfish secret (google "blowfish secret generator" an
 
 ### Postfix
 This was a pain to play around with. This is a working configuration that I found. This is what makes the mailing system work.  
-- [main.cf](https://github.com/krizboy12/WHADieLibrary/blob/master/configs/postfix/main.cf)  
-- [sasl_MAMP_passwd](https://github.com/krizboy12/WHADieLibrary/blob/master/configs/postfix/sasl_MAMP_passwd)
+- [main.cf](configs/postfix/main.cf)  
+- [sasl_MAMP_passwd](configs/postfix/sasl_MAMP_passwd)
 
 Both of these files should be placed in `/etc/postfix`.
 
