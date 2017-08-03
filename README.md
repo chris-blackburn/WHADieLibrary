@@ -178,7 +178,7 @@ There are triggers throughout the site that sends email notifications.
   - Body: Die *[Die ID]* needs to be pulled for job *[Job Number]*  
   Die review status: ***[reviewed|not reviewed]***
 
-Emails are send to these emails (one or the other or both depending on the email)
+Automated emails are sent to these groups (one or the other or both depending on the email)
 1. die approvals
 2. customer service
 
