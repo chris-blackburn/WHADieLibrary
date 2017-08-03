@@ -12,6 +12,7 @@ work.
 
 ## To-do
 - [ ] add login function, use Database()->connect($user, $pass)
+- [ ] add direct connection to csr emails (rather than the catch all email)
 
 ### Special Thanks
 @christianbach for his awesome client side table sorting javascript magic. Check out his work [here](http://tablesorter.com).
