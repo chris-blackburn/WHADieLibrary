@@ -187,7 +187,7 @@
 			$jobArr["dieID"] = $qID;
 		} else {
 			// since the key already exists, that means this is a pull request and an email has not already been sent
-			$subject = sprintf("Pull Request for die ", $jobArr["dieID"]);
+			$subject = sprintf("Pull Request for die %d", $jobArr["dieID"]);
 
 			$message = sprintf("	<p>Die %d needs to be pulled for job %d</p>
 									<p>Die review status: <b>%s</b>",
