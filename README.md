@@ -144,7 +144,7 @@ To update the die, simply change the fields you want to change and click "Update
 that was upload when the die was created. If you wish to overwrite that file, just upload a new file via the "Overwrite PDF" file picker. You can also
 upload new files through the other file picker (to overwrite old files, just make sure the new ones have the same name and they will be overwritten).
 - If you click on the "Download" button, the previewable pdf will be hidden and a list of links will show up. These are set to download when you click on them.
-![Update Die Page Download Links](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/DieTable-DownloadLinks.png)
+![Update Die Page Download Links](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/UpdateDie-DownloadLinks.png)
   - If you would like to preview them, right click a link and select "Open link in new tab". The pdf that is named as the die ID is the pdf that is seen through the preview.
 
 ### Pull Request
