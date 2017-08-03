@@ -192,7 +192,7 @@ There are various log files that can be populated by the site.
 2. The mail logs for Mac are located in `/var/log/mail.log`.
 3. The virtual host-specific logs for MAMP are located in `/Applications/MAMP/Library/logs`.
 
-There are also logs for MAMP's apache, php, and sql services which can all be found in `/Applications/MAMP
+There are also logs for MAMP's apache, php, and sql services which can all be found in `/Applications/MAMP`.
 
 ### Apache
 Apache configuration is all held in the `conf` directory of your apache installation. The directory path for MAMP is `/Applications/MAMP/conf/apache`.
@@ -272,7 +272,7 @@ populate this line with a blowfish secret (google "blowfish secret generator" an
 `$cfg['blowfish_secret'] = '';`
 
 ### Postfix
-This was a pain to play around with. This is a working configuration that I found.  
+This was a pain to play around with. This is a working configuration that I found. This is what makes the mailing system work.  
 - [main.cf](https://github.com/krizboy12/WHADieLibrary/blob/master/config/postfix/main.cf)  
 - [sasl_MAMP_passwd](https://github.com/krizboy12/WHADieLibrary/blob/master/config/postfix/sasl_MAMP_passwd)
 
