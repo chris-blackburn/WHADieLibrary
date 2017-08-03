@@ -161,6 +161,14 @@
 									$updateID);
 
 				echo sendMail($subject, $message, MAIL_TO_CSR);
+			} else if ($dieArr["dieReviewed"] == "false" && $db->select(DIE_TABLE, "dieReviewed", "dieID", $updateID)->fetch_array()[0] == "true") {
+				$subject = sprintf("Die %d has been unapproved", $updateID);
+
+				$message .= sprintf("	<p>Die %d has been been unapproved and needs to be reviewed</p>",
+									$updateID);
+
+				echo sendMail($subject, $message, MAIL_TO_CSR);
+				echo sendMail($subject, $message, MAIL_TO_PRODUCTION);
 			}
 
 			$db->update($table, array_values($dieArr), array_keys($dieArr), "dieID", $_POST["dieID"]);
@@ -179,9 +187,9 @@
 			$jobArr["dieID"] = $qID;
 		} else {
 			// since the key already exists, that means this is a pull request and an email has not already been sent
-			$subject = sprintf("Job %d has been created", $jobArr["jobNumber"]);
+			$subject = sprintf("Pull Request for die ", $jobArr["dieID"]);
 
-			$message = sprintf("	<p>Die %d has been pulled for job %d</p>
+			$message = sprintf("	<p>Die %d needs to be pulled for job %d</p>
 									<p>Die review status: <b>%s</b>",
 								$jobArr["dieID"], $jobArr["jobNumber"], $db->select(DIE_TABLE, "dieReviewed", "dieID", $jobArr["dieID"])->fetch_array()[0] == "true" ? "reviewed" : "not reviewed");
 
