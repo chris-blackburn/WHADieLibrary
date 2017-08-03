@@ -1,6 +1,6 @@
 # WHA Die Library
 This is what I created during my summer internship at Worth Higgins & Associates. This is a content management system 
-used to keep track of dies through a web portal.
+used to keep track of dies through a web portal. It is run internally at the company.
 
 ## Why?
 In printing, there is something called a *die*. Dies are used to cut, perforate, and fold paper in unconventional ways.
@@ -155,11 +155,35 @@ To create a new job with an existing die, click the pull button on the die table
 
 After any data is submitted, the die's location will change (if you selected a new location) and the transaction history table will be appended with the new entry.
 
+## Automated emails
+There are triggers throughout the site that sends email notifications.
+- When a die is created
+  1. If the die has already been reviewed
+    - Subject: Job *[Job Number]* has been created
+    - Body: A new die (*[Die ID]*) has been created for this job  Review status: **reviewed**
+  2. If the die has **not** been reviewed
+    - Subject: Job *[Job Number]* Needs die approval
+    - Body: A new die (*[Die ID]*) has been created  Review status: **not reviewed**
+- When a die is updated
+  1. If the die has been updated to being reviewed
+    - Subject: Die *[Die ID]* has been approved
+    - Body: Die *[Die ID]* has been approved
+  2. If the die has been set to not reviewed
+    - Subject: Die *[Die ID]* has been unapproved
+    - Body: Die *[Die ID]* has been been unapproved and needs to be reviewed
+- When a pull request is made
+  - Subject: Pull request for die *[Die ID]*
+  - Body: Die *[Die ID]* needs to be pulled for job *[Job Number]*  Die review status: ***[reviewed|not reviewed]***
+
+Emails are send to these emails (one or the other or both depending on the email)
+1. die approvals
+2. customer service
+
 ## To-do
 - [ ] add login function, use Database()->connect($user, $pass)
 - [ ] add direct connection to csr emails (rather than the catch all email)
 - [ ] limit number of records the page will show by default, add "show all records"
 
-### Special Thanks
+## Special Thanks
 - @christianbach for his awesome client side table sorting javascript magic. Check out his work [here](http://tablesorter.com).
 - Mike Wilson, my boss
