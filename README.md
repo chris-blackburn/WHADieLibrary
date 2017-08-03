@@ -71,10 +71,16 @@ CREATE TABLE `jobs` (
 ```
 
 ## The Site
-This is my first real attempt at web development, before this my experience was limited to a little bit of html and css, 
+This is my first real attempt at web development; before this my experience was limited to a little bit of html and css, 
 but this project was heavy on php and javascript (mostly jquery).
 
 I wanted the site to feel like a full on program - to accomplish this, I used a **ton** of ajax to prevent page reloads.
+
+For the best results, please use a supported browser
+- Chrome (recommended)
+- Firefox
+- IE > 9
+- Edge
 
 Here is the first page that comes up when the site is accessed (These screenshots are populated with data the users have entered).
 
@@ -103,11 +109,32 @@ The content owned by the Die Table button is as follows:
   ![Pull Button](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/PullButton.png)
   - If you double click on a row, it will open up a hidden tab that allows you to update a die and preview/upload files associated with that die.
 
+### Transaction History
+This tab is very similar to the Die Table tab, it just accesses and displays a different table in the database
+
+![Transaction History Page](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/TransactionHistoryPage.png)
+
+This table has all the same features as the die table, searching, refresh, record count, and sorting. It does not have a pull button on hover, and when you double click a
+row, it will take you to the listed die's update form.
+
+### Create New Die
+If a new die has been ordered, this is where its information goes.
+
+![Create New Die Page](https://github.com/krizboy12/WHADieLibrary/blob/master/screenshots/CreateNewDie.png)
+
+- The only required field is the job number. 
+- Multiple tags can be selected by ctrl+click or command+click for mac
+- The file select for upload preview pdf only allows you to select one file and it is the file that will be displayed on the update form
+- Upload other files allows you to select multiple files, it filters out anything but pdf's and illustrator files by default 
+(just select All Files in you file explorer when it pops up if you need another type of file).
+
+When you are done filling out the form, click the button at the bottom labeled "Create Die" and you will be brough back to the die table where the new die will be added!
+
 ## To-do
 - [ ] add login function, use Database()->connect($user, $pass)
 - [ ] add direct connection to csr emails (rather than the catch all email)
 - [ ] limit number of records the page will show by default, add "show all records"
 
 ### Special Thanks
-@christianbach for his awesome client side table sorting javascript magic. Check out his work [here](http://tablesorter.com).
-Mike Wilson, my boss
+- @christianbach for his awesome client side table sorting javascript magic. Check out his work [here](http://tablesorter.com).
+- Mike Wilson, my boss
