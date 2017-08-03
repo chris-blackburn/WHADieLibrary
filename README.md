@@ -285,4 +285,4 @@ Both of these files should be placed in `/etc/postfix`.
 
 ## Special Thanks
 - @christianbach for his awesome client side table sorting javascript magic. Check out his work [here](http://tablesorter.com).
-- Mike Wilson, my boss
+- Mike Wilson - my boss
