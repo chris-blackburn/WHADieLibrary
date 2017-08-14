@@ -1,4 +1,4 @@
-REATE DATABASE IF NOT EXISTS `DieLibrary`;
+CREATE DATABASE IF NOT EXISTS `DieLibrary`;
 
 USE `DieLibrary`;
 

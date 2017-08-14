@@ -278,6 +278,14 @@ This was a pain to play around with. This is a working configuration that I foun
 
 Both of these files should be placed in `/etc/postfix`.
 
+### Backup-Scripts
+There are a couple scripts to run backups for the site. One backs up the apache config and the other backs up the die files and the sql database
+- [apache backup](https://github.com/krizboy12/WHADieLibrary/blob/master/backup%20scripts/backup_apache_conf)
+- [data backup](https://github.com/krizboy12/WHADieLibrary/blob/master/backup%20scripts/backup_dies)
+
+I set up a crontab rule to run the data backup every friday at 7pm
+`0 19 * * 5 "/Volumes/Storage II/workspace/backup scripts/backup_dies" &>/dev/null`
+
 ## To-do
 - [ ] add login function, use Database()->connect($user, $pass)
 - [ ] add delete function through the site (need logins first)
