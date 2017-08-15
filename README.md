@@ -186,6 +186,23 @@ Automated emails are sent to these groups (one or the other or both depending on
 There were lots of configurations for apache and other services that had to be done. This is just where I'll keep all that information. Some of this stuff 
 may already be configured depending on your install method. I used MAMP to run this site off of a mac server, so a lot of things were preconfigured and many of the directory paths are specific to that installation.
 
+### Install Location
+I installed everything on the seefile server mac. `/Volumes/Storage\ II` was empty so I stored the site files there. There are three folders in Storage II.
+- workspace
+	- This is where I pull updates from github. To do so, you can do it one of two ways.
+		1. Open terminal and navigate to that directory: `cd /Volumes/Storage\ II/workspace`.
+		2. Type `git pull`, then the site will update in the workspace folder
+		3. copy all the new contents (files with that day's date as date modified) and copy them over in their corresponding folders in the `dielibrary.com` folder.
+	- The other way is to use the github desktop GUI
+		1. There should be the icon for the GUI on the desktop, run that.
+		2. At the top there should be a button that sais, *fetch* or *pull*. By clicking that, the site will update and you can proceed to step three in the previous method.
+	- Backup scripts are also located here in the backups folder.
+- dielibrary.com
+	- This is where apache points to for the site
+	- All the die files are in a folder called `dies` in this directory. The dies folder is also backed up via cronjob
+- dielibrary_backup
+	- This is where all the backup scripts point to. There are zipped archives of backups located here. They are named with the date of the backup.
+
 ### Logs
 There are various log files that can be populated by the site.
 1. Site specific logs located in the site's directory under `logs/client_logs.clogs`.
@@ -285,6 +302,8 @@ There are a couple scripts to run backups for the site. One backs up the apache 
 
 I set up a crontab rule to run the data backup every friday at 7pm
 `0 19 * * 5 "/Volumes/Storage II/workspace/backup scripts/backup_dies" &>/dev/null`
+
+This is where the exporter user I set up in the database comes in. This script runs a mysqldump using that user and the password is stored as plaintext, so I just made a new user that could only select for security.
 
 ## To-do
 - [ ] add login function, use Database()->connect($user, $pass)
