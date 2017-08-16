@@ -68,6 +68,10 @@
   width: 7em;
 }
 
+#dateLastUsed-header, .dateLastUsed-row {
+  width: 7em;
+}
+
 #machine-header, .machine-row {
   width: 6em;
 }

@@ -5,6 +5,7 @@
 		<tr>
 			<th id="dieID-header">Die ID</th>
 			<th id="datePurchased-header">Purchase Date</th>
+			<th id="dateLastUsed-header">Date Last Used</th>
 			<th id="machine-header">Machine</th>
 			<th id="location-header">Location</th>
 			<th id="description-header">Description</th>

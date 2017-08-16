@@ -1,7 +1,7 @@
 <!-- Display as non-editable: job number, customer ID, customer name, die id, purchase date, machine -->
 <div class="entry-info">
 	<span>Die ID:</span> <output name="!dieID"></output> | <span>Date Purchased:</span> <output name="datePurchased"></output> <br>
-	<span>Machine:</span> <output name="machine"></output><br>
+	<span>Date Last Used: </span> <output name="dateLastUsed"></output> | <span>Machine:</span> <output name="machine"></output><br>
 	<span>Tags:</span> <output name="tags"></output>
 </div>
 

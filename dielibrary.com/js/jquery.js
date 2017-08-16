@@ -127,6 +127,7 @@ $(document).ready(function() {
 	$(".tables tbody").on("dblclick", "tr", function() {
 		// grab the die id of the current entry
 		var $dieID = $(this).attr("name");
+		var $dateLastUsed = $(this).children("td.dateLastUsed-row").text().trim();
 		var $url = "../php/getEntryByID.php";
 
 		// sent a GET request to grab all the info about the clicked entry
@@ -149,6 +150,9 @@ $(document).ready(function() {
 
 				}
 
+				// set the date last used field
+				$("#update-form-container [name=\"dateLastUsed\"").text($dateLastUsed);
+				
 				$("#update-form-container").find(".tags option").prop("selected", false);
 
 				// for setting the multiselect tags
@@ -297,6 +301,7 @@ function populateDieTable() {
 				$row =  "<tr class=\"table-rows\" name=\"" + $json[$index]['dieID'] + "\">";
 				$row +=	"<td class=\"dieID-row\">" + $json[$index]['dieID'] + " </td>";
 				$row +=	"<td class=\"datePurchased-row\">" + $json[$index]['datePurchased'] + " </td>";
+				$row +=	"<td class=\"dateLastUsed-row\">" + $json[$index]['dateLastUsed'] + " </td>";
 				$row +=	"<td class=\"machine-row\">" + $json[$index]['machine'] + " </td>";
 				$row +=	"<td class=\"location-row\">" + $json[$index]['location'] + " </td>";
 				$row +=	"<td class=\"description-row\">" + $json[$index]['description'] + " </td>";

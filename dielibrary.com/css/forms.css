@@ -19,7 +19,7 @@
 
 .entry-info {
 	float: left;
-	width: 20em;
+	margin: .5em;
 }
 
 .entry-info span {
