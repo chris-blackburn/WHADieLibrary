@@ -127,7 +127,6 @@ $(document).ready(function() {
 	$(".tables tbody").on("dblclick", "tr", function() {
 		// grab the die id of the current entry
 		var $dieID = $(this).attr("name");
-		var $dateLastUsed = $(this).children("td.dateLastUsed-row").text().trim();
 		var $url = "../php/getEntryByID.php";
 
 		// sent a GET request to grab all the info about the clicked entry
@@ -149,10 +148,7 @@ $(document).ready(function() {
 					$("#update-form-container [name$=\"" + name + "\"").val($json[name]);
 
 				}
-
-				// set the date last used field
-				$("#update-form-container [name=\"dateLastUsed\"").text($dateLastUsed);
-				
+		
 				$("#update-form-container").find(".tags option").prop("selected", false);
 
 				// for setting the multiselect tags

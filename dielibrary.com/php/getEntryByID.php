@@ -10,7 +10,27 @@
 	$db->connect();
 
 	// grab the data from the database
-	$result = $db->select(DIE_TABLE, "*", "dieID", $dieID);
+	//$result = $db->select(DIE_TABLE, "*", "dieID", $dieID);
+	$sql = "SELECT
+				    d.*,
+				    jobDateMax.dateLastUsed
+				FROM
+				    dies d
+				LEFT JOIN(
+				    SELECT
+				        dieID,
+				        MAX(jobDate) AS dateLastUsed
+				    FROM
+				        jobs
+				    GROUP BY
+				        dieID
+				) jobDateMax
+				ON
+				    d.dieID = jobDateMax.dieID
+				WHERE
+					d.dieID = " . $dieID;
+
+	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
 
 	// return json of the row data
