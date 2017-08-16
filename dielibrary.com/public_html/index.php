@@ -15,6 +15,8 @@
 		<button id="insert-btn" name="new-die-form-container">Create New Die</button>
 		<button hidden id="update-btn" name="update-form-container" class="hidden">Update Die</button>
 		<button hidden id="pull-btn" name="pull-form-container" class="hidden">Pull Request</button>
+
+		<a href="user guide.html" style="font-size: .75em; float: right; padding: .75em;">help</a>
 	</div>
 
 <!-- ***************************************************** DIE TABLE ***************************************************** -->
