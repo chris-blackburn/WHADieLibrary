@@ -305,6 +305,10 @@ I set up a crontab rule to run the data backup every friday at 7pm
 
 This is where the exporter user I set up in the database comes in. This script runs a mysqldump using that user and the password is stored as plaintext, so I just made a new user that could only select for security.
 
+### Bi-annual Reports
+I set up a cron job to run a php script that grabs all the dies that have not been used in the past six months and sends an email with that list.
+`0 0 1 */6 * curl http://dielibrary.whaprint.com/php/usageReport.php >> /Volumes/Storage\ II/dielibrary.com/logs/client_logs.clogs`
+
 ## To-do
 - [ ] add login function, use Database()->connect($user, $pass)
 - [ ] add delete function through the site (need logins first)
