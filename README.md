@@ -309,6 +309,9 @@ This is where the exporter user I set up in the database comes in. This script r
 I set up a cron job to run a php script that grabs all the dies that have not been used in the past six months and sends an email with that list.
 `0 0 1 */6 * curl http://dielibrary.whaprint.com/php/usageReport.php >> /Volumes/Storage\ II/dielibrary.com/logs/client_logs.clogs`
 
+To manually run the script and pick up the usage report from the last six months, navigate to
+`http://dielibrary.whaprint.com/php/usageReport.php`
+
 ## To-do
 - [ ] add login function, use Database()->connect($user, $pass)
 - [ ] add delete function through the site (need logins first)
