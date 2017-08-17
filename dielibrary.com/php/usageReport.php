@@ -15,8 +15,8 @@
 	$tableRows;
 	// generate the table
 	while ($row = $result->fetch_assoc()) {
-		$tableRows .= "<td>" . $row["dieID"] . "</td>";
-		$tableRows .= "<td>" . $row["dateLastUsed"] . "</td>";
+		$tableRows .= "<tr><td>" . $row["dieID"] . "</td>";
+		$tableRows .= "<td>" . $row["dateLastUsed"] . "</td></tr>";
 	}
 
 	$result->free_result();
@@ -26,6 +26,7 @@
 						<html>
 						<head>
 							<title>Die Usage Report</title>
+							<link rel='stylesheet' type='text/css' href='../css/die-usage-report.css'>
 						</head>
 						<body>
 							<p>This is an automated email, Please do not reply to this email</p>
@@ -33,7 +34,8 @@
 						SITE_HOST);
 
 	// table
-	$message .= sprintf("<table>
+	$message .= sprintf("<p>These dies have not been used in the past month</p>
+						<table class='die-usage-report-table'>
 							<thead>
 								<th>Die ID</th>
 								<th>Date Last Used</th>
