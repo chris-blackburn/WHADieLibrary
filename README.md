@@ -177,6 +177,9 @@ There are triggers throughout the site that sends email notifications.
   - Subject: Pull request for die *[Die ID]*
   - Body: Die *[Die ID]* needs to be pulled for job *[Job Number]*  
   Die review status: ***[reviewed|not reviewed]***
+- Every six months, a usage report is sent to both customer service and die approvals
+  - Subject: Die Usage Report
+  - Body: Contains a table with the die id and the date last used.
 
 Automated emails are sent to these groups (one or the other or both depending on the email)
 1. die approvals
