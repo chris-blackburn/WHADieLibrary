@@ -18,6 +18,7 @@
 	// generate the table
 	while ($row = $result->fetch_assoc()) {
 		$tableRows .= "<tr><td>" . $row["dieID"] . "</td>";
+		$tableRows .= "<td>" . $row["location"] . "</td>";
 		$tableRows .= "<td>" . $row["dateLastUsed"] . "</td></tr>";
 	}
 
