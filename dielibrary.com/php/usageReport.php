@@ -26,7 +26,13 @@
 						<html>
 						<head>
 							<title>Die Usage Report</title>
-							<link rel='stylesheet' type='text/css' href='../css/die-usage-report.css'>
+							<style>
+								table, th, td {border: 1px solid black;}
+								th, td {padding: .5em;}
+								th {font-weight: bold;}
+								tr:nth-child(even) {background-color: white}
+								tr:nth-child(odd) {background-color: #f2f2f2}
+							</style>
 						</head>
 						<body>
 							<p>This is an automated email, Please do not reply to this email</p>
@@ -35,7 +41,7 @@
 
 	// table
 	$message .= sprintf("<p>These dies have not been used in the past month</p>
-						<table class='die-usage-report-table'>
+						<table>
 							<thead>
 								<th>Die ID</th>
 								<th>Date Last Used</th>
