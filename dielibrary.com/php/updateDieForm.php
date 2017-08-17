@@ -49,6 +49,18 @@
 	</div>
 
 	<div class="field">
+		<label>Machine:
+		<div class="field-input">
+			<select name="!machine">
+				<option value="Sanwa">Sanwa</option>
+				<option value="Heidelberg">Heidelberg</option>
+				<option value="Kluge">Kluge</option>
+			</select>
+		</div>
+		</label>
+	</div>
+
+	<div class="field">
 		<label>Tags:
 		<div class="field-input">
 		<select style="height: 10em;"" multiple="multiple" class="tags multi-select">
