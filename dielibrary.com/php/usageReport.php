@@ -4,7 +4,7 @@
 
 	$months = $_GET["months"];
 
-	$sql = "SELECT d.*, jobDateMax.dateLastUsed FROM dies d LEFT JOIN( SELECT dieID, MAX(jobDate) AS dateLastUsed FROM jobs GROUP BY dieID ) jobDateMax ON d.dieID = jobDateMax.dieID WHERE dateLastUsed < CURRENT_DATE() - INTERVAL " . $months . " MONTH ORDER BY d.dieID DESC";
+	$sql = "SELECT d.dieID, d.location, jobDateMax.dateLastUsed FROM dies d LEFT JOIN( SELECT dieID, MAX(jobDate) AS dateLastUsed FROM jobs GROUP BY dieID ) jobDateMax ON d.dieID = jobDateMax.dieID WHERE dateLastUsed < CURRENT_DATE() - INTERVAL " . $months . " MONTH AND location != \"Trashed\" ORDER BY d.dieID DESC";
 
 	// connect to the database and submit the query
 	$db = new Database();
