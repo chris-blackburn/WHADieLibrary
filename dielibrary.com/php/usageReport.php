@@ -47,6 +47,7 @@
 						<table>
 							<thead>
 								<th>Die ID</th>
+								<th>Location</th>
 								<th>Date Last Used</th>
 							</thead>
 							<tbody>
